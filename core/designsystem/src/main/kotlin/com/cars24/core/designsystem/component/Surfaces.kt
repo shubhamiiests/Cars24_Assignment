@@ -1,0 +1,71 @@
+package com.cars24.core.designsystem.component
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.unit.dp
+import com.cars24.core.designsystem.theme.Cars24
+import com.cars24.core.designsystem.theme.Elevations
+import com.cars24.core.designsystem.theme.Radii
+
+@Composable
+fun Cars24Card(
+    modifier: Modifier = Modifier,
+    shape: Shape = Radii.lg,
+    bordered: Boolean = true,
+    content: @Composable BoxScope.() -> Unit,
+) {
+    val colors = Cars24.colors
+    Surface(
+        modifier = modifier,
+        shape = shape,
+        color = colors.cardSurface,
+        shadowElevation = Elevations.card,
+    ) {
+        Box(
+            modifier = if (bordered) {
+                Modifier.border(1.dp, colors.divider, shape)
+            } else {
+                Modifier
+            },
+            content = content,
+        )
+    }
+}
+
+@Composable
+fun ImagePlaceholder(
+    seed: String,
+    modifier: Modifier = Modifier,
+    shape: Shape = RoundedCornerShape(12.dp),
+) {
+    Box(
+        modifier = modifier
+            .clip(shape)
+            .background(gradientFor(seed)),
+    )
+}
+
+private val PlaceholderPalettes = listOf(
+    listOf(Color(0xFF3E4A8A), Color(0xFF7A86C7)),
+    listOf(Color(0xFF1F6F63), Color(0xFF63BFAE)),
+    listOf(Color(0xFF7A4A1C), Color(0xFFD79B5A)),
+    listOf(Color(0xFF4A2A5E), Color(0xFF9A76B4)),
+    listOf(Color(0xFF25405E), Color(0xFF6D93B8)),
+    listOf(Color(0xFF5E2A34), Color(0xFFB4747F)),
+)
+
+
+fun gradientFor(seed: String): Brush {
+    val palette = PlaceholderPalettes[(seed.hashCode().and(Int.MAX_VALUE)) % PlaceholderPalettes.size]
+    return Brush.linearGradient(palette)
+}
