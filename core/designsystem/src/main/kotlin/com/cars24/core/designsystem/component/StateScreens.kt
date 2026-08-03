@@ -1,5 +1,7 @@
 package com.cars24.core.designsystem.component
 
+import com.cars24.core.designsystem.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,19 +32,12 @@ import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Radii
 import com.cars24.core.designsystem.theme.Spacing
 
-/**
- * Shown when the very first launch has no connection and there is nothing cached.
- *
- * Deliberately not a toast over an empty page: on a cold install there is no page to
- * show, so the empty state has to be the page, and it has to make the one useful action
- * obvious.
- */
 @Composable
 fun OfflineState(
     onRetry: () -> Unit,
     modifier: Modifier = Modifier,
-    title: String = "You are offline",
-    message: String = "We could not reach Cars24. Check your connection and try again - the page will load as soon as you are back.",
+    title: String = stringResource(R.string.ds_offline_title),
+    message: String = stringResource(R.string.ds_offline_message),
 ) {
     val colors = Cars24.colors
     Column(
@@ -78,32 +73,27 @@ fun OfflineState(
         )
         Spacer(Modifier.height(Spacing.xxl))
         Cars24Button(
-            text = "Try again",
+            text = stringResource(R.string.ds_action_try_again),
             onClick = onRetry,
             leadingIcon = Icons.Filled.Refresh,
         )
     }
 }
 
-/** A payload we could fetch but not understand. Distinct from offline on purpose. */
 @Composable
 fun ErrorState(
-    message: String,
     onRetry: () -> Unit,
     modifier: Modifier = Modifier,
+    message: String = stringResource(R.string.ds_error_message_default),
 ) {
     OfflineState(
         onRetry = onRetry,
         modifier = modifier,
-        title = "Something went wrong",
+        title = stringResource(R.string.ds_error_title),
         message = message,
     )
 }
 
-/**
- * Thin bar for the case that matters most in practice: we are offline but we do have a
- * cached page, so the user gets content plus an honest note about its age.
- */
 @Composable
 fun StaleBanner(
     text: String,
@@ -140,7 +130,7 @@ fun StaleBanner(
             )
             Spacer(Modifier.width(Spacing.xs))
             Text(
-                text = "RETRY",
+                text = stringResource(R.string.ds_action_retry_short),
                 style = MaterialTheme.typography.labelMedium,
                 color = colors.accent,
             )
@@ -148,11 +138,6 @@ fun StaleBanner(
     }
 }
 
-/**
- * Above-the-fold skeleton. The shapes match the real header, chip row and first card so
- * the transition to content does not jump, which keeps layout shift out of the TTR
- * numbers.
- */
 @Composable
 fun PageSkeleton(modifier: Modifier = Modifier) {
     Column(

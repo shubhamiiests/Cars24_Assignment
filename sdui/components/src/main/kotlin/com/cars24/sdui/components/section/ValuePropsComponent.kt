@@ -1,5 +1,6 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -49,7 +50,7 @@ data class ValuePropsProps(
 )
 
 class ValuePropsComponent : SduiComponent {
-    override val type = "value_props"
+    override val type = SduiComponentType.VALUE_PROPS
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {

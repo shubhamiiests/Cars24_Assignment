@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ds_offline_title">You are offline</string>
+    <string name="ds_offline_message">We could not reach Cars24. Check your connection and try again - the page will load as soon as you are back.</string>
+    <string name="ds_error_title">Something went wrong</string>
+    <string name="ds_error_message_default">We could not read the page layout.</string>
+    <string name="ds_action_try_again">Try again</string>
+    <string name="ds_action_retry_short">RETRY</string>
+    <string name="ds_cd_retry">Retry</string>
+</resources>

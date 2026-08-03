@@ -1,5 +1,9 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
+import com.cars24.sdui.components.ComponentTrigger
+import com.cars24.sdui.components.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -45,10 +49,8 @@ data class SearchHeaderProps(
     val brandName: String = "CARS24",
 )
 
-private const val TRIGGER_CITY = "onCityClick"
-
 class SearchHeaderComponent : SduiComponent {
-    override val type = "search_header"
+    override val type = SduiComponentType.SEARCH_HEADER
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -70,7 +72,7 @@ class SearchHeaderComponent : SduiComponent {
                 Row(
                     modifier = Modifier
                         .clip(Radii.sm)
-                        .clickable { scope.dispatch(node, TRIGGER_CITY) }
+                        .clickable { scope.dispatch(node, ComponentTrigger.ON_CITY_CLICK) }
                         .padding(vertical = Spacing.xxs, horizontal = Spacing.xxs),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
@@ -83,7 +85,7 @@ class SearchHeaderComponent : SduiComponent {
                 Spacer(Modifier.width(Spacing.xs))
                 Column {
                     Text(
-                        text = "Delivering to",
+                        text = stringResource(R.string.cmp_delivering_to),
                         style = MaterialTheme.typography.labelSmall,
                         color = Color.White.copy(alpha = 0.7f),
                     )
@@ -95,7 +97,7 @@ class SearchHeaderComponent : SduiComponent {
                         )
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowDown,
-                            contentDescription = "Change city",
+                            contentDescription = stringResource(R.string.cmp_cd_change_city),
                             tint = Color.White,
                             modifier = Modifier.size(16.dp),
                         )
@@ -158,7 +160,7 @@ data class SectionHeaderProps(
 )
 
 class SectionHeaderComponent : SduiComponent {
-    override val type = "section_header"
+    override val type = SduiComponentType.SECTION_HEADER
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {

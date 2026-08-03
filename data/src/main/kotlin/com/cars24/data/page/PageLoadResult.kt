@@ -16,10 +16,20 @@ data class PageEnvelope(
     val payloadBytes: Int,
 )
 
+enum class PageFailure {
+    ServerPayloadUnparseable,
+    PushedPayloadUnparseable,
+}
+
+enum class StaleReason {
+    NoConnection,
+    ServerPayloadUnusable,
+}
+
 sealed interface PageLoadResult {
 
     data class Loaded(val envelope: PageEnvelope) : PageLoadResult
-    data class Stale(val envelope: PageEnvelope, val reason: String) : PageLoadResult
+    data class Stale(val envelope: PageEnvelope, val reason: StaleReason) : PageLoadResult
     data object Offline : PageLoadResult
-    data class Failed(val message: String) : PageLoadResult
+    data class Failed(val failure: PageFailure) : PageLoadResult
 }

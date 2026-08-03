@@ -1,7 +1,8 @@
 package com.cars24.sdui.runtime.render
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.remember
 import com.cars24.sdui.runtime.action.SduiActionParser
 import com.cars24.sdui.runtime.action.SduiCommand
@@ -12,19 +13,22 @@ import com.cars24.sdui.schema.SduiTemplate
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.decodeFromJsonElement
 
-@Immutable
+val LocalSduiPageState = compositionLocalOf<Map<String, String>> { emptyMap() }
+
+@Stable
 class SduiScope(
     val registry: ComponentRegistry,
-    val state: Map<String, String>,
     val pageSchemaVersion: Int,
     val showUnknownPlaceholders: Boolean,
+    private val stateProvider: () -> Map<String, String>,
     private val onCommand: (SduiCommand) -> Unit,
     private val onUnsupportedType: (String) -> Unit,
 ) {
+    val currentState: Map<String, String> get() = stateProvider()
 
     fun dispatch(node: SduiNode, trigger: String) {
         val action = node.actions[trigger] ?: return
-        onCommand(SduiActionParser.parse(action, state))
+        onCommand(SduiActionParser.parse(action, currentState))
     }
 
     fun dispatch(command: SduiCommand) = onCommand(command)
@@ -41,13 +45,18 @@ object SduiTriggers {
 }
 
 @Composable
+fun sduiStateValue(key: String?): String? =
+    if (key == null) null else LocalSduiPageState.current[key]
+
+@Composable
 inline fun <reified T> rememberProps(node: SduiNode, scope: SduiScope): T? {
     val needsResolution = remember(node.props) { hasPlaceholder(node.props) }
-    val stateForKey = if (needsResolution) scope.state else EMPTY_STATE
 
-    val resolved = remember(node.props, stateForKey) {
+    val state = if (needsResolution) LocalSduiPageState.current else EMPTY_STATE
+
+    val resolved = remember(node.props, state) {
         if (needsResolution) {
-            SduiTemplate.resolve(node.props, stateForKey) as JsonObject
+            SduiTemplate.resolve(node.props, state) as JsonObject
         } else {
             node.props
         }
@@ -63,7 +72,6 @@ inline fun <reified T> rememberProps(node: SduiNode, scope: SduiScope): T? {
 @PublishedApi
 internal val EMPTY_STATE: Map<String, String> = emptyMap()
 
-
 @PublishedApi
 internal fun hasPlaceholder(props: JsonObject): Boolean =
-    props.isNotEmpty() && props.toString().contains("{{")
+    props.isNotEmpty() && props.toString().contains(SduiTemplate.OPEN_TOKEN)

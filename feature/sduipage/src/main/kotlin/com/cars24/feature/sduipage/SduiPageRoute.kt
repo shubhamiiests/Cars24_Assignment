@@ -17,7 +17,7 @@ fun SduiPageRoute(
     onBack: () -> Unit,
     onNavigate: (route: String, params: Map<String, String>) -> Unit,
     onOpenUrl: (String) -> Unit,
-    onMessage: (String) -> Unit,
+    onUnsupportedAction: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val viewModel: SduiPageViewModel =
@@ -26,14 +26,14 @@ fun SduiPageRoute(
 
     val currentOnNavigate by rememberUpdatedState(onNavigate)
     val currentOnOpenUrl by rememberUpdatedState(onOpenUrl)
-    val currentOnMessage by rememberUpdatedState(onMessage)
+    val currentOnUnsupported by rememberUpdatedState(onUnsupportedAction)
 
     LaunchedEffect(viewModel) {
         viewModel.effects.collect { effect ->
             when (effect) {
                 is PageEffect.Navigate -> currentOnNavigate(effect.route, effect.params)
                 is PageEffect.OpenUrl -> currentOnOpenUrl(effect.url)
-                is PageEffect.ShowMessage -> currentOnMessage(effect.message)
+                PageEffect.UnsupportedAction -> currentOnUnsupported()
             }
         }
     }

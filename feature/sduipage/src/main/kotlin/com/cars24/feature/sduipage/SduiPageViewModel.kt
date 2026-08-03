@@ -7,6 +7,7 @@ import com.cars24.core.analytics.AnalyticsParams
 import com.cars24.core.common.mvi.MviViewModel
 import com.cars24.data.page.PageEnvelope
 import com.cars24.data.page.PageLoadResult
+import com.cars24.data.page.StaleReason
 import com.cars24.data.page.PageStateStore
 import com.cars24.data.page.PersistedPageState
 import com.cars24.data.page.SduiPageRepository
@@ -43,7 +44,7 @@ class SduiPageViewModel(
             }
 
             PageIntent.Retry -> {
-                setState { copy(phase = PagePhase.Loading, failureMessage = null) }
+                setState { copy(phase = PagePhase.Loading, failure = null) }
                 load()
             }
 
@@ -68,10 +69,10 @@ class SduiPageViewModel(
         val shared = pageStateStore.readShared()
 
         when (val result = repository.loadPage(pageId)) {
-            is PageLoadResult.Loaded -> applyPage(result.envelope, restored, shared, staleMessage = null)
+            is PageLoadResult.Loaded -> applyPage(result.envelope, restored, shared, staleReason = null)
 
             is PageLoadResult.Stale ->
-                applyPage(result.envelope, restored, shared, staleMessage = result.reason)
+                applyPage(result.envelope, restored, shared, staleReason = result.reason)
 
             PageLoadResult.Offline -> {
                 setState { copy(phase = PagePhase.Offline, page = null) }
@@ -82,7 +83,7 @@ class SduiPageViewModel(
             }
 
             is PageLoadResult.Failed ->
-                setState { copy(phase = PagePhase.Failed, failureMessage = result.message) }
+                setState { copy(phase = PagePhase.Failed, failure = result.failure) }
         }
     }
 
@@ -90,7 +91,7 @@ class SduiPageViewModel(
         envelope: PageEnvelope,
         restored: PersistedPageState,
         shared: Map<String, String>,
-        staleMessage: String?,
+        staleReason: StaleReason?,
     ) {
         val page = envelope.page
         sharedKeys = page.sharedStateKeys.toSet()
@@ -108,8 +109,8 @@ class SduiPageViewModel(
                 openSheet = restored.openSheetId?.let { findSheet(page, it, mergedState) },
                 scrollIndex = restored.scrollIndex,
                 scrollOffset = restored.scrollOffset,
-                staleMessage = staleMessage,
-                failureMessage = null,
+                staleReason = staleReason,
+                failure = null,
                 origin = envelope.origin,
                 fetchMillis = envelope.fetchMillis,
                 parseMillis = envelope.parseMillis,
@@ -175,7 +176,7 @@ class SduiPageViewModel(
                     AnalyticsEvents.SDUI_ACTION_UNSUPPORTED,
                     mapOf(AnalyticsParams.ACTION_TYPE to command.type),
                 )
-                emitEffect(PageEffect.ShowMessage("Update the app to use this"))
+                emitEffect(PageEffect.UnsupportedAction)
             }
         }
     }

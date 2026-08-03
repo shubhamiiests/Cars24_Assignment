@@ -13,7 +13,8 @@ fun SduiNodeRenderer(
     scope: SduiScope,
     modifier: Modifier = Modifier,
 ) {
-    if (node.visibleWhen?.evaluate(scope.state) == false) return
+    val condition = node.visibleWhen
+    if (condition != null && !condition.evaluate(LocalSduiPageState.current)) return
 
     if (node.minSchemaVersion > SduiJson.SUPPORTED_SCHEMA_VERSION) {
         SduiLog.tooNew(node, SduiJson.SUPPORTED_SCHEMA_VERSION)

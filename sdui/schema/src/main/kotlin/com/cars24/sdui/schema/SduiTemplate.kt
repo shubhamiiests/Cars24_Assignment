@@ -7,9 +7,11 @@ import kotlinx.serialization.json.JsonPrimitive
 
 object SduiTemplate {
 
+    const val OPEN_TOKEN = "{{"
+
     private val PLACEHOLDER = Regex("""\{\{\s*state\.([A-Za-z0-9_.-]+)\s*(?:\|([^}]*))?\}\}""")
 
-    fun containsPlaceholder(text: String): Boolean = text.contains("{{")
+    fun containsPlaceholder(text: String): Boolean = text.contains(OPEN_TOKEN)
 
     fun resolve(text: String, state: Map<String, String>): String {
         if (!containsPlaceholder(text)) return text

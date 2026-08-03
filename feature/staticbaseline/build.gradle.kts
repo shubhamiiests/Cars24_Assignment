@@ -17,6 +17,7 @@ android {
 dependencies {
     implementation(project(":core:common"))
     implementation(project(":core:designsystem"))
+    implementation(project(":sdui:components"))
     implementation(libs.androidx.activity.compose)
 
     debugImplementation(libs.androidx.compose.ui.tooling)

@@ -1,5 +1,7 @@
 package com.cars24.sdui.components.layout
 
+import com.cars24.sdui.components.SduiComponentType
+import com.cars24.sdui.components.LayoutToken
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -33,7 +35,7 @@ data class StackProps(
 )
 
 class ColumnComponent : SduiComponent {
-    override val type = "column"
+    override val type = SduiComponentType.COLUMN
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -48,17 +50,17 @@ class ColumnComponent : SduiComponent {
 }
 
 class RowComponent : SduiComponent {
-    override val type = "row"
+    override val type = SduiComponentType.ROW
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
         val props = rememberProps<StackProps>(node, scope) ?: StackProps()
         Row(
             horizontalArrangement = when (props.arrangement) {
-                "center" -> Arrangement.Center
-                "end" -> Arrangement.End
-                "space_between" -> Arrangement.SpaceBetween
-                "space_around" -> Arrangement.SpaceAround
+                LayoutToken.CENTER -> Arrangement.Center
+                LayoutToken.END -> Arrangement.End
+                LayoutToken.SPACE_BETWEEN -> Arrangement.SpaceBetween
+                LayoutToken.SPACE_AROUND -> Arrangement.SpaceAround
                 else -> Arrangement.spacedBy(props.spacing.dp)
             },
             verticalAlignment = verticalAlignmentToken(props.align),
@@ -76,7 +78,7 @@ data class CarouselProps(
 )
 
 class CarouselComponent : SduiComponent {
-    override val type = "carousel"
+    override val type = SduiComponentType.CAROUSEL
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -103,7 +105,7 @@ data class GridProps(
 )
 
 class GridComponent : SduiComponent {
-    override val type = "grid"
+    override val type = SduiComponentType.GRID
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -134,7 +136,7 @@ class GridComponent : SduiComponent {
 data class SpacerProps(val size: Int = 8)
 
 class SpacerComponent : SduiComponent {
-    override val type = "spacer"
+    override val type = SduiComponentType.SPACER
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -151,7 +153,7 @@ data class DividerProps(
 )
 
 class DividerComponent : SduiComponent {
-    override val type = "divider"
+    override val type = SduiComponentType.DIVIDER
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {

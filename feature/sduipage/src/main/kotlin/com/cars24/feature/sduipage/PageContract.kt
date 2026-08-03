@@ -3,7 +3,9 @@ package com.cars24.feature.sduipage
 import com.cars24.core.common.mvi.MviEffect
 import com.cars24.core.common.mvi.MviIntent
 import com.cars24.core.common.mvi.MviState
+import com.cars24.data.page.PageFailure
 import com.cars24.data.page.PageOrigin
+import com.cars24.data.page.StaleReason
 import com.cars24.sdui.runtime.action.SduiCommand
 import com.cars24.sdui.schema.SduiNode
 import com.cars24.sdui.schema.SduiPage
@@ -27,8 +29,8 @@ data class PageUiState(
     val openSheet: OpenSheet? = null,
     val scrollIndex: Int = 0,
     val scrollOffset: Int = 0,
-    val staleMessage: String? = null,
-    val failureMessage: String? = null,
+    val staleReason: StaleReason? = null,
+    val failure: PageFailure? = null,
     val origin: PageOrigin? = null,
     val fetchMillis: Long = 0,
     val parseMillis: Long = 0,
@@ -45,5 +47,5 @@ data class OpenSheet(
 sealed interface PageEffect : MviEffect {
     data class Navigate(val route: String, val params: Map<String, String>) : PageEffect
     data class OpenUrl(val url: String) : PageEffect
-    data class ShowMessage(val message: String) : PageEffect
+    data object UnsupportedAction : PageEffect
 }

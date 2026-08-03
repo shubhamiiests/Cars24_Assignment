@@ -1,5 +1,9 @@
 package com.cars24.feature.sduipage
 
+import androidx.compose.ui.res.stringResource
+import com.cars24.data.page.PageFailure
+import com.cars24.data.page.StaleReason
+import com.cars24.feature.sduipage.R
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,7 +29,9 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -35,6 +41,7 @@ import com.cars24.core.designsystem.component.PageSkeleton
 import com.cars24.core.designsystem.component.StaleBanner
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.sdui.components.Cars24Components
+import com.cars24.sdui.runtime.render.LocalSduiPageState
 import com.cars24.sdui.runtime.render.SduiChildren
 import com.cars24.sdui.runtime.render.SduiPageHost
 import com.cars24.sdui.runtime.render.SduiScope
@@ -53,14 +60,16 @@ fun SduiPageScreen(
     val registry = remember { Cars24Components.registry() }
     val listState = rememberLazyListState()
 
-    val scope = remember(state.pageState, registry) {
+    val latestState = rememberUpdatedState(state.pageState)
+    val latestOnIntent = rememberUpdatedState(onIntent)
+    val scope = remember(registry) {
         SduiScope(
             registry = registry,
-            state = state.pageState,
-            pageSchemaVersion = state.page?.schemaVersion ?: 1,
+            pageSchemaVersion = 1,
             showUnknownPlaceholders = true,
-            onCommand = { onIntent(PageIntent.Command(it)) },
-            onUnsupportedType = { onIntent(PageIntent.UnsupportedComponent(it)) },
+            stateProvider = { latestState.value },
+            onCommand = { latestOnIntent.value(PageIntent.Command(it)) },
+            onUnsupportedType = { latestOnIntent.value(PageIntent.UnsupportedComponent(it)) },
         )
     }
 
@@ -89,8 +98,8 @@ fun SduiPageScreen(
             PagePhase.Failed -> Column(Modifier.statusBarsPadding()) {
                 if (showBackButton) PageTopBar(title = null, onBack = onBack)
                 ErrorState(
-                    message = state.failureMessage ?: "We could not read the page layout.",
                     onRetry = { onIntent(PageIntent.Retry) },
+                    message = state.failure.toMessage(),
                 )
             }
 
@@ -99,6 +108,7 @@ fun SduiPageScreen(
                 SduiPageHost(
                     page = page,
                     scope = scope,
+                    pageState = state.pageState,
                     listState = listState,
                     contentPadding = PaddingValues(bottom = 24.dp),
                     header = {
@@ -106,9 +116,10 @@ fun SduiPageScreen(
                             if (showBackButton) {
                                 PageTopBar(title = page.title, onBack = onBack)
                             }
-                            if (state.staleMessage != null) {
+                            val staleReason = state.staleReason
+                            if (staleReason != null) {
                                 StaleBanner(
-                                    text = state.staleMessage,
+                                    text = staleReason.toMessage(),
                                     onRetry = { onIntent(PageIntent.Retry) },
                                 )
                             }
@@ -128,12 +139,30 @@ fun SduiPageScreen(
             containerColor = Cars24.colors.cardSurface,
         ) {
             Column(Modifier.navigationBarsPadding()) {
-                SduiChildren(sheet.content, scope)
+                CompositionLocalProvider(LocalSduiPageState provides state.pageState) {
+                    SduiChildren(sheet.content, scope)
+                }
                 Spacer(Modifier.height(8.dp))
             }
         }
     }
 }
+
+@Composable
+private fun StaleReason.toMessage(): String = stringResource(
+    when (this) {
+        StaleReason.NoConnection -> R.string.page_stale_no_connection
+        StaleReason.ServerPayloadUnusable -> R.string.page_stale_server_unusable
+    },
+)
+
+@Composable
+private fun PageFailure?.toMessage(): String = stringResource(
+    when (this) {
+        PageFailure.PushedPayloadUnparseable -> R.string.page_failed_pushed_payload
+        else -> R.string.page_failed_server_payload
+    },
+)
 
 @Composable
 private fun PageTopBar(title: String?, onBack: () -> Unit) {
@@ -147,7 +176,7 @@ private fun PageTopBar(title: String?, onBack: () -> Unit) {
         IconButton(onClick = onBack) {
             Icon(
                 imageVector = Icons.Filled.ArrowBack,
-                contentDescription = "Back",
+                contentDescription = stringResource(R.string.page_cd_back),
                 tint = Cars24.colors.textPrimary,
             )
         }

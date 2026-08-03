@@ -1,5 +1,7 @@
 package com.cars24.sdui.components.atom
 
+import com.cars24.sdui.components.SduiComponentType
+import com.cars24.sdui.components.ButtonVariant
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,6 +27,7 @@ import com.cars24.sdui.runtime.action.SduiCommand
 import com.cars24.sdui.runtime.registry.SduiComponent
 import com.cars24.sdui.runtime.render.SduiScope
 import com.cars24.sdui.runtime.render.SduiTriggers
+import com.cars24.sdui.runtime.render.sduiStateValue
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.runtime.render.resolveColor
 import com.cars24.sdui.schema.SduiAction
@@ -42,7 +45,7 @@ data class TextProps(
 )
 
 class TextComponent : SduiComponent {
-    override val type = "text"
+    override val type = SduiComponentType.TEXT
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -69,7 +72,7 @@ data class ImageProps(
 )
 
 class ImageComponent : SduiComponent {
-    override val type = "image"
+    override val type = SduiComponentType.IMAGE
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -93,7 +96,7 @@ data class ButtonProps(
 )
 
 class ButtonComponent : SduiComponent {
-    override val type = "button"
+    override val type = SduiComponentType.BUTTON
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -104,8 +107,8 @@ class ButtonComponent : SduiComponent {
             onClick = { scope.dispatch(node, SduiTriggers.ON_CLICK) },
             modifier = if (props.fillWidth) Modifier.fillMaxWidth() else Modifier,
             style = when (props.variant) {
-                "accent" -> Cars24ButtonStyle.Accent
-                "outline" -> Cars24ButtonStyle.Outline
+                ButtonVariant.ACCENT -> Cars24ButtonStyle.Accent
+                ButtonVariant.OUTLINE -> Cars24ButtonStyle.Outline
                 else -> Cars24ButtonStyle.Primary
             },
         )
@@ -128,16 +131,16 @@ data class ChipGroupProps(
 )
 
 class ChipGroupComponent : SduiComponent {
-    override val type = "chip_group"
+    override val type = SduiComponentType.CHIP_GROUP
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
         val props = rememberProps<ChipGroupProps>(node, scope) ?: return
-        val selected = scope.state[props.stateKey]
+        val selected = sduiStateValue(props.stateKey)
 
         val onSelect: (ChipOption) -> Unit = { option ->
             val command = option.action
-                ?.let { SduiActionParser.parse(it, scope.state) }
+                ?.let { SduiActionParser.parse(it, scope.currentState) }
                 ?: SduiCommand.SetState(props.stateKey, option.value)
             scope.dispatch(command)
             scope.dispatch(node, SduiTriggers.ON_SELECT)
@@ -184,7 +187,7 @@ data class TagRowProps(
 )
 
 class TagRowComponent : SduiComponent {
-    override val type = "tag_row"
+    override val type = SduiComponentType.TAG_ROW
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {

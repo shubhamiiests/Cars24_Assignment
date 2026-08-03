@@ -1,5 +1,10 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
+import com.cars24.sdui.components.ComponentTrigger
+import com.cars24.sdui.components.CardLayout
+import com.cars24.sdui.components.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -41,6 +46,7 @@ import com.cars24.sdui.runtime.action.SduiCommand
 import com.cars24.sdui.runtime.registry.SduiComponent
 import com.cars24.sdui.runtime.render.SduiScope
 import com.cars24.sdui.runtime.render.SduiTriggers
+import com.cars24.sdui.runtime.render.sduiStateValue
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
@@ -54,7 +60,7 @@ data class CarCardProps(
     val badge: String? = null,
     val savings: String? = null,
     val assured: Boolean = false,
-    val layout: String = "vertical",
+    val layout: String = CardLayout.VERTICAL,
     val width: Int = 220,
     val fillWidth: Boolean = false,
     val imageUrl: String? = null,
@@ -64,22 +70,21 @@ data class CarCardProps(
 private val CardTopShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
 private val SavedHeart = Color(0xFFFF4D5E)
 private const val WISHLISTED = "1"
-private const val TRIGGER_WISHLIST = "onWishlist"
 
 class CarCardComponent : SduiComponent {
-    override val type = "car_card"
+    override val type = SduiComponentType.CAR_CARD
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
         val props = rememberProps<CarCardProps>(node, scope) ?: return
-        val horizontal = props.layout == "horizontal"
+        val horizontal = props.layout == CardLayout.HORIZONTAL
         val stretch = horizontal || props.fillWidth
 
-        val saved = props.wishKey?.let { scope.state[it] } == WISHLISTED
+        val saved = sduiStateValue(props.wishKey) == WISHLISTED
         val onWishlistTap: (() -> Unit)? = props.wishKey?.let { key ->
             {
-                if (scope.hasAction(node, TRIGGER_WISHLIST)) {
-                    scope.dispatch(node, TRIGGER_WISHLIST)
+                if (scope.hasAction(node, ComponentTrigger.ON_WISHLIST)) {
+                    scope.dispatch(node, ComponentTrigger.ON_WISHLIST)
                 } else {
                     scope.dispatch(SduiCommand.ToggleState(key, WISHLISTED, ""))
                 }
@@ -167,7 +172,10 @@ private fun CarThumbnail(
             ) {
                 Icon(
                     imageVector = if (saved) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
-                    contentDescription = if (saved) "Remove from wishlist" else "Save to wishlist",
+                    contentDescription = stringResource(
+                        if (saved) R.string.cmp_cd_remove_from_wishlist
+                        else R.string.cmp_cd_save_to_wishlist,
+                    ),
                     tint = if (saved) SavedHeart else Color.White,
                     modifier = Modifier.size(20.dp),
                 )
@@ -204,7 +212,7 @@ private fun CarDetails(props: CarCardProps) {
             Spacer(Modifier.width(Spacing.xs))
             Icon(
                 imageVector = Icons.Filled.CheckCircle,
-                contentDescription = "Cars24 assured",
+                contentDescription = stringResource(R.string.cmp_cd_assured),
                 tint = colors.success,
                 modifier = Modifier.size(14.dp),
             )

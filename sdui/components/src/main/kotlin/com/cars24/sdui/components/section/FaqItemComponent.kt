@@ -1,5 +1,8 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
+import com.cars24.sdui.components.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
@@ -42,7 +45,7 @@ data class FaqItemProps(
 )
 
 class FaqItemComponent : SduiComponent {
-    override val type = "faq_item"
+    override val type = SduiComponentType.FAQ_ITEM
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -69,7 +72,9 @@ class FaqItemComponent : SduiComponent {
                     )
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowDown,
-                        contentDescription = if (expanded) "Collapse" else "Expand",
+                        contentDescription = stringResource(
+                            if (expanded) R.string.cmp_cd_collapse else R.string.cmp_cd_expand,
+                        ),
                         tint = colors.textSecondary,
                         modifier = Modifier
                             .size(22.dp)

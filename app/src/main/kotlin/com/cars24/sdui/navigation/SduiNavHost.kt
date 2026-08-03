@@ -8,6 +8,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -16,6 +17,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.cars24.feature.sduipage.SduiPageRoute
+import com.cars24.sdui.R
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 
@@ -28,6 +30,9 @@ fun SduiNavHost(
     navController: NavHostController = rememberNavController(),
 ) {
     val coroutineScope = rememberCoroutineScope()
+    val unsupportedActionMessage = stringResource(R.string.page_unsupported_action)
+    val noPayloadTemplate = stringResource(R.string.app_no_payload_for_route)
+    val noPayloadMessage: (String) -> String = { route -> noPayloadTemplate.format(route) }
 
     NavHost(
         navController = navController,
@@ -57,16 +62,15 @@ fun SduiNavHost(
                         navController.navigate(pageRoute(route, params))
                     } else {
                         coroutineScope.launch {
-                            val detail = if (params.isEmpty()) "" else " $params"
-                            snackbarHostState.showSnackbar(
-                                "No payload for '$route' yet$detail",
-                            )
+                            snackbarHostState.showSnackbar(noPayloadMessage(route))
                         }
                     }
                 },
                 onOpenUrl = onOpenUrl,
-                onMessage = { message ->
-                    coroutineScope.launch { snackbarHostState.showSnackbar(message) }
+                onUnsupportedAction = {
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(unsupportedActionMessage)
+                    }
                 },
             )
         }

@@ -9,7 +9,9 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import com.cars24.core.common.perf.StartupTrace
@@ -22,6 +24,7 @@ import kotlinx.coroutines.flow.first
 fun SduiPageHost(
     page: SduiPage,
     scope: SduiScope,
+    pageState: Map<String, String>,
     modifier: Modifier = Modifier,
     listState: LazyListState = rememberLazyListState(),
     contentPadding: PaddingValues = PaddingValues(),
@@ -31,21 +34,25 @@ fun SduiPageHost(
         ?.let { resolveColor(it, Cars24.colors) }
         ?: Cars24.colors.pageBackground
 
-    val visibleSections = page.sections.filter { section ->
-        section.visibleWhen?.evaluate(scope.state) != false
+    val visibleSections = remember(page.sections, pageState) {
+        page.sections.filter { section ->
+            section.visibleWhen?.evaluate(pageState) != false
+        }
     }
 
-    LazyColumn(
-        modifier = modifier
-            .fillMaxSize()
-            .background(background),
-        state = listState,
-        contentPadding = contentPadding,
-    ) {
-        item(key = "sdui_header") { header() }
+    CompositionLocalProvider(LocalSduiPageState provides pageState) {
+        LazyColumn(
+            modifier = modifier
+                .fillMaxSize()
+                .background(background),
+            state = listState,
+            contentPadding = contentPadding,
+        ) {
+            item(key = "sdui_header") { header() }
 
-        items(items = visibleSections, key = SduiNode::id) { section ->
-            SduiNodeRenderer(node = section, scope = scope)
+            items(items = visibleSections, key = SduiNode::id) { section ->
+                SduiNodeRenderer(node = section, scope = scope)
+            }
         }
     }
 

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="sdui_unsupported_section">Section not supported yet</string>
+    <string name="sdui_schema_too_new">Update the app to see this</string>
+    <string name="sdui_unsupported_type">type: %1$s</string>
+</resources>

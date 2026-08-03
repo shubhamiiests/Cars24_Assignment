@@ -1,5 +1,6 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -43,7 +44,7 @@ data class EmiSummaryProps(
 )
 
 class EmiSummaryComponent : SduiComponent {
-    override val type = "emi_summary"
+    override val type = SduiComponentType.EMI_SUMMARY
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {

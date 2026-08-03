@@ -1,5 +1,8 @@
 package com.cars24.sdui.components.atom
 
+import com.cars24.sdui.components.SduiComponentType
+import com.cars24.sdui.components.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +31,7 @@ import com.cars24.core.designsystem.theme.Spacing
 import com.cars24.sdui.runtime.registry.SduiComponent
 import com.cars24.sdui.runtime.render.SduiScope
 import com.cars24.sdui.runtime.render.SduiTriggers
+import com.cars24.sdui.runtime.render.sduiStateValue
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
@@ -44,7 +48,7 @@ data class ListItemProps(
 )
 
 class ListItemComponent : SduiComponent {
-    override val type = "list_item"
+    override val type = SduiComponentType.LIST_ITEM
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -52,7 +56,7 @@ class ListItemComponent : SduiComponent {
         val colors = Cars24.colors
 
         val selected = props.selectedWhenKey != null &&
-            scope.state[props.selectedWhenKey] == props.selectedWhenValue
+            sduiStateValue(props.selectedWhenKey) == props.selectedWhenValue
 
         Row(
             modifier = Modifier
@@ -100,7 +104,7 @@ class ListItemComponent : SduiComponent {
                     Spacer(Modifier.width(Spacing.sm))
                     Icon(
                         imageVector = Icons.Filled.Check,
-                        contentDescription = "Selected",
+                        contentDescription = stringResource(R.string.cmp_cd_selected),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp),
                     )

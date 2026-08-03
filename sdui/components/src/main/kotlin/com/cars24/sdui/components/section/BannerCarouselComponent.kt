@@ -1,5 +1,6 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -51,7 +52,7 @@ data class BannerCarouselProps(
 )
 
 class BannerCarouselComponent : SduiComponent {
-    override val type = "banner_carousel"
+    override val type = SduiComponentType.BANNER_CAROUSEL
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -73,7 +74,7 @@ class BannerCarouselComponent : SduiComponent {
                         slide = slide,
                         height = props.height,
                         onClick = slide.action?.let { action ->
-                            { scope.dispatch(SduiActionParser.parse(action, scope.state)) }
+                            { scope.dispatch(SduiActionParser.parse(action, scope.currentState)) }
                         },
                     )
                 }

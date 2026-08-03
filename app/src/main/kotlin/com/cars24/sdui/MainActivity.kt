@@ -26,6 +26,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Cars24Theme
 import com.cars24.data.page.SduiPageRepository
@@ -60,6 +61,7 @@ private fun Cars24App(renderStatic: Boolean) {
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
     val repository: SduiPageRepository = koinInject()
+    val cannotOpenTemplate = stringResource(R.string.app_cannot_open_url)
 
     val knownPages by produceState(initialValue = emptySet<String>(), repository) {
         value = repository.availablePages()
@@ -84,7 +86,7 @@ private fun Cars24App(renderStatic: Boolean) {
                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
                         }.onFailure {
                             coroutineScope.launch {
-                                snackbarHostState.showSnackbar("Nothing on this device can open $url")
+                                snackbarHostState.showSnackbar(cannotOpenTemplate.format(url))
                             }
                         }
                     },

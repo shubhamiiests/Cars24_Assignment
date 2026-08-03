@@ -1,5 +1,6 @@
 package com.cars24.feature.staticbaseline
 
+import androidx.compose.ui.res.stringResource
 import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
@@ -62,7 +63,7 @@ import com.cars24.core.designsystem.component.Cars24Button
 import com.cars24.core.designsystem.component.Cars24ButtonStyle
 import com.cars24.core.designsystem.component.Cars24Card
 import com.cars24.core.designsystem.component.Cars24Tag
-import com.cars24.core.designsystem.component.gradientFor
+import com.cars24.core.designsystem.component.NetworkImage
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.PriceTextStyle
 import com.cars24.core.designsystem.theme.Radii
@@ -212,7 +213,7 @@ private fun StaticHeader(modifier: Modifier = Modifier) {
             Spacer(Modifier.width(Spacing.xs))
             Column {
                 Text(
-                    "Delivering to",
+                    stringResource(com.cars24.sdui.components.R.string.cmp_delivering_to),
                     style = MaterialTheme.typography.labelSmall,
                     color = Color.White.copy(alpha = 0.7f),
                 )
@@ -481,9 +482,14 @@ private fun StaticCarCard(car: StaticCar, fillWidth: Boolean = false) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(140.dp)
-                    .background(gradientFor(car.name), RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
+                    .height(150.dp),
             ) {
+                NetworkImage(
+                    url = car.imageUrl,
+                    seed = car.name,
+                    shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+                    modifier = Modifier.matchParentSize(),
+                )
                 if (car.badge != null) {
                     Surface(
                         modifier = Modifier.padding(Spacing.sm),
@@ -500,7 +506,7 @@ private fun StaticCarCard(car: StaticCar, fillWidth: Boolean = false) {
                 }
                 Icon(
                     Icons.Filled.FavoriteBorder,
-                    "Save",
+                    stringResource(com.cars24.sdui.components.R.string.cmp_cd_save_to_wishlist),
                     tint = Color.White,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
@@ -531,7 +537,7 @@ private fun StaticCarCard(car: StaticCar, fillWidth: Boolean = false) {
                         Spacer(Modifier.width(Spacing.xs))
                         Icon(
                             Icons.Filled.CheckCircle,
-                            "Cars24 assured",
+                            stringResource(com.cars24.sdui.components.R.string.cmp_cd_assured),
                             tint = Cars24.colors.success,
                             modifier = Modifier.size(14.dp),
                         )
@@ -684,7 +690,10 @@ private fun StaticFaqRow(faq: StaticFaq, startExpanded: Boolean) {
                 )
                 Icon(
                     Icons.Filled.KeyboardArrowDown,
-                    if (expanded) "Collapse" else "Expand",
+                    stringResource(
+                        if (expanded) com.cars24.sdui.components.R.string.cmp_cd_collapse
+                        else com.cars24.sdui.components.R.string.cmp_cd_expand,
+                    ),
                     tint = Cars24.colors.textSecondary,
                     modifier = Modifier.size(22.dp).rotate(rotation),
                 )

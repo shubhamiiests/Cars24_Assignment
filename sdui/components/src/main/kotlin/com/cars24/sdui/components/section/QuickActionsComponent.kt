@@ -1,5 +1,6 @@
 package com.cars24.sdui.components.section
 
+import com.cars24.sdui.components.SduiComponentType
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -50,7 +51,7 @@ data class QuickAction(
 data class QuickActionsProps(val actions: List<QuickAction>)
 
 class QuickActionsComponent : SduiComponent {
-    override val type = "quick_actions"
+    override val type = SduiComponentType.QUICK_ACTIONS
 
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
@@ -69,7 +70,7 @@ class QuickActionsComponent : SduiComponent {
                         action = action,
                         modifier = Modifier.weight(1f),
                         onClick = {
-                            action.action?.let { scope.dispatch(SduiActionParser.parse(it, scope.state)) }
+                            action.action?.let { scope.dispatch(SduiActionParser.parse(it, scope.currentState)) }
                         },
                     )
                 }

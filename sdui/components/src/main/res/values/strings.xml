@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cmp_delivering_to">Delivering to</string>
+    <string name="cmp_cd_change_city">Change city</string>
+    <string name="cmp_cd_save_to_wishlist">Save to wishlist</string>
+    <string name="cmp_cd_remove_from_wishlist">Remove from wishlist</string>
+    <string name="cmp_cd_assured">Cars24 assured</string>
+    <string name="cmp_cd_selected">Selected</string>
+    <string name="cmp_cd_expand">Expand</string>
+    <string name="cmp_cd_collapse">Collapse</string>
+</resources>

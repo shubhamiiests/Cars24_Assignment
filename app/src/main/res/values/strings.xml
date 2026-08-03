@@ -1,3 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cars24</string>
+    <string name="app_no_payload_for_route">No payload for \'%1$s\' yet</string>
+    <string name="app_cannot_open_url">Nothing on this device can open %1$s</string>
+    <string name="page_unsupported_action">Update the app to use this</string>
 </resources>

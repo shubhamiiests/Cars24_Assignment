@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="page_cd_back">Back</string>
+    <string name="page_stale_no_connection">You are offline - showing the last saved layout</string>
+    <string name="page_stale_server_unusable">Latest layout could not be loaded</string>
+    <string name="page_failed_server_payload">The server sent a layout this app could not read.</string>
+    <string name="page_failed_pushed_payload">The payload pushed to this device could not be read.</string>
+</resources>

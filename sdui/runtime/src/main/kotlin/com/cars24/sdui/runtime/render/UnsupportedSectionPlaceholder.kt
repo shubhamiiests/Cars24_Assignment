@@ -1,5 +1,7 @@
 package com.cars24.sdui.runtime.render
 
+import com.cars24.sdui.runtime.R
+import androidx.compose.ui.res.stringResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -24,10 +26,12 @@ internal fun UnsupportedSectionPlaceholder(
     modifier: Modifier = Modifier,
 ) {
     val colors = Cars24.colors
-    val headline = when (reason) {
-        DegradeReason.UnknownType -> "Section not supported yet"
-        DegradeReason.SchemaTooNew -> "Update the app to see this"
-    }
+    val headline = stringResource(
+        when (reason) {
+            DegradeReason.UnknownType -> R.string.sdui_unsupported_section
+            DegradeReason.SchemaTooNew -> R.string.sdui_schema_too_new
+        },
+    )
 
     Column(
         modifier = modifier
@@ -46,7 +50,7 @@ internal fun UnsupportedSectionPlaceholder(
         )
         Spacer(Modifier.height(Spacing.xxs))
         Text(
-            text = "type: $type",
+            text = stringResource(R.string.sdui_unsupported_type, type),
             style = MaterialTheme.typography.labelSmall,
             color = colors.textTertiary,
             modifier = Modifier.fillMaxWidth(),

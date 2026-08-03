@@ -24,16 +24,16 @@ class SduiPageRepositoryImpl(
     override suspend fun loadPage(pageId: String): PageLoadResult = withContext(dispatchers.io) {
         if (override.hasOverride(pageId)) {
             return@withContext load(pageId, override, PageOrigin.Override, cache = false)
-                ?: PageLoadResult.Failed("Pushed payload for '$pageId' could not be parsed")
+                ?: PageLoadResult.Failed(PageFailure.PushedPayloadUnparseable)
         }
 
         if (connectivity.isOnline) {
             load(pageId, remote, PageOrigin.Network, cache = true)?.let { return@withContext it }
-            return@withContext fromCache(pageId, "Latest layout could not be loaded")
-                ?: PageLoadResult.Failed("Server payload for '$pageId' could not be parsed")
+            return@withContext fromCache(pageId, StaleReason.ServerPayloadUnusable)
+                ?: PageLoadResult.Failed(PageFailure.ServerPayloadUnparseable)
         }
 
-        fromCache(pageId, "You are offline - showing the last saved layout")
+        fromCache(pageId, StaleReason.NoConnection)
             ?: PageLoadResult.Offline
     }
 
@@ -56,7 +56,7 @@ class SduiPageRepositoryImpl(
         return PageLoadResult.Loaded(envelope)
     }
 
-    private suspend fun fromCache(pageId: String, reason: String): PageLoadResult? {
+    private suspend fun fromCache(pageId: String, reason: StaleReason): PageLoadResult? {
         val cached = payloadCache.read(pageId) ?: return null
         val envelope = parse(cached, PageOrigin.Cache, fetchMillis = 0) ?: return null
         return PageLoadResult.Stale(envelope, reason)

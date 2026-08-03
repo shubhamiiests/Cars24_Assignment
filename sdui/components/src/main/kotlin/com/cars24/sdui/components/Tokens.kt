@@ -39,20 +39,20 @@ fun fontWeightToken(token: String?): FontWeight? = when (token) {
 }
 
 fun textAlignToken(token: String?): TextAlign? = when (token) {
-    "start" -> TextAlign.Start
-    "center" -> TextAlign.Center
-    "end" -> TextAlign.End
+    LayoutToken.START -> TextAlign.Start
+    LayoutToken.CENTER -> TextAlign.Center
+    LayoutToken.END -> TextAlign.End
     else -> null
 }
 
 fun horizontalAlignmentToken(token: String?): Alignment.Horizontal = when (token) {
-    "center" -> Alignment.CenterHorizontally
-    "end" -> Alignment.End
+    LayoutToken.CENTER -> Alignment.CenterHorizontally
+    LayoutToken.END -> Alignment.End
     else -> Alignment.Start
 }
 
 fun verticalAlignmentToken(token: String?): Alignment.Vertical = when (token) {
-    "center" -> Alignment.CenterVertically
-    "bottom" -> Alignment.Bottom
+    LayoutToken.CENTER -> Alignment.CenterVertically
+    LayoutToken.BOTTOM -> Alignment.Bottom
     else -> Alignment.Top
 }
