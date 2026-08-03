@@ -51,6 +51,7 @@ data class CarCardProps(
     val assured: Boolean = false,
     val layout: String = "vertical",
     val width: Int = 220,
+    val fillWidth: Boolean = false,
 )
 
 class CarCardComponent : SduiComponent {
@@ -60,10 +61,11 @@ class CarCardComponent : SduiComponent {
     override fun Render(node: SduiNode, scope: SduiScope) {
         val props = rememberProps<CarCardProps>(node, scope) ?: return
         val horizontal = props.layout == "horizontal"
+        val stretch = horizontal || props.fillWidth
 
         Cars24Card(
             modifier = Modifier
-                .then(if (horizontal) Modifier.fillMaxWidth() else Modifier.width(props.width.dp))
+                .then(if (stretch) Modifier.fillMaxWidth() else Modifier.width(props.width.dp))
                 .clickable { scope.dispatch(node, SduiTriggers.ON_CLICK) },
         ) {
             if (horizontal) {
