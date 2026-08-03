@@ -1,4 +1,4 @@
-package com.cars24.feature.home
+package com.cars24.feature.sduipage
 
 import com.cars24.core.common.mvi.MviEffect
 import com.cars24.core.common.mvi.MviIntent
@@ -8,20 +8,20 @@ import com.cars24.sdui.runtime.action.SduiCommand
 import com.cars24.sdui.schema.SduiNode
 import com.cars24.sdui.schema.SduiPage
 
-sealed interface HomeIntent : MviIntent {
+sealed interface PageIntent : MviIntent {
 
-    data object Load : HomeIntent
-    data object Retry : HomeIntent
-    data class Command(val command: SduiCommand) : HomeIntent
-    data class UnsupportedComponent(val type: String) : HomeIntent
-    data class ScrollChanged(val index: Int, val offset: Int) : HomeIntent
-    data object DismissSheet : HomeIntent
+    data object Load : PageIntent
+    data object Retry : PageIntent
+    data class Command(val command: SduiCommand) : PageIntent
+    data class UnsupportedComponent(val type: String) : PageIntent
+    data class ScrollChanged(val index: Int, val offset: Int) : PageIntent
+    data object DismissSheet : PageIntent
 }
 
-enum class HomePhase { Loading, Content, Offline, Failed }
+enum class PagePhase { Loading, Content, Offline, Failed }
 
-data class HomeState(
-    val phase: HomePhase = HomePhase.Loading,
+data class PageUiState(
+    val phase: PagePhase = PagePhase.Loading,
     val page: SduiPage? = null,
     val pageState: Map<String, String> = emptyMap(),
     val openSheet: OpenSheet? = null,
@@ -42,8 +42,8 @@ data class OpenSheet(
     val content: List<SduiNode>,
 )
 
-sealed interface HomeEffect : MviEffect {
-    data class Navigate(val route: String, val params: Map<String, String>) : HomeEffect
-    data class OpenUrl(val url: String) : HomeEffect
-    data class ShowMessage(val message: String) : HomeEffect
+sealed interface PageEffect : MviEffect {
+    data class Navigate(val route: String, val params: Map<String, String>) : PageEffect
+    data class OpenUrl(val url: String) : PageEffect
+    data class ShowMessage(val message: String) : PageEffect
 }

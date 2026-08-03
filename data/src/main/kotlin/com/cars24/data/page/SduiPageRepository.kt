@@ -9,6 +9,8 @@ import kotlinx.coroutines.withContext
 
 interface SduiPageRepository {
     suspend fun loadPage(pageId: String): PageLoadResult
+
+    suspend fun availablePages(): Set<String>
 }
 
 class SduiPageRepositoryImpl(
@@ -33,6 +35,10 @@ class SduiPageRepositoryImpl(
 
         fromCache(pageId, "You are offline - showing the last saved layout")
             ?: PageLoadResult.Offline
+    }
+
+    override suspend fun availablePages(): Set<String> = withContext(dispatchers.io) {
+        runCatching { override.availablePages() }.getOrDefault(emptySet())
     }
 
     private suspend fun load(

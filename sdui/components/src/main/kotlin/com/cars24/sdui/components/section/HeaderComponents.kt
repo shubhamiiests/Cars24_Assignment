@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Search
@@ -22,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
@@ -43,6 +45,8 @@ data class SearchHeaderProps(
     val brandName: String = "CARS24",
 )
 
+private const val TRIGGER_CITY = "onCityClick"
+
 class SearchHeaderComponent : SduiComponent {
     override val type = "search_header"
 
@@ -63,6 +67,13 @@ class SearchHeaderComponent : SduiComponent {
                 ),
         ) {
             Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    modifier = Modifier
+                        .clip(Radii.sm)
+                        .clickable { scope.dispatch(node, TRIGGER_CITY) }
+                        .padding(vertical = Spacing.xxs, horizontal = Spacing.xxs),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
                 Icon(
                     imageVector = Icons.Filled.LocationOn,
                     contentDescription = null,
@@ -83,12 +94,13 @@ class SearchHeaderComponent : SduiComponent {
                             color = Color.White,
                         )
                         Icon(
-                            imageVector = Icons.Filled.KeyboardArrowRight,
-                            contentDescription = null,
+                            imageVector = Icons.Filled.KeyboardArrowDown,
+                            contentDescription = "Change city",
                             tint = Color.White,
                             modifier = Modifier.size(16.dp),
                         )
                     }
+                }
                 }
                 Spacer(Modifier.weight(1f))
                 Text(

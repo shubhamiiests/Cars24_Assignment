@@ -1,0 +1,637 @@
+{
+  "pageId": "car_detail",
+  "schemaVersion": 2,
+  "title": "Car details",
+  "analyticsName": "car_detail",
+  "background": "page",
+  "initialState": {
+    "tenure": "48",
+    "emi_monthly": "Rs 14,820",
+    "emi_total": "Rs 7,11,360",
+    "emi_tenure_label": "48 mo"
+  },
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "detail_image",
+      "type": "image",
+      "props": {
+        "seed": "{{state.name|Cars24}}",
+        "url": "{{state.image}}",
+        "cornerRadius": 0,
+        "height": 240
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "detail_name",
+      "type": "text",
+      "props": {
+        "value": "{{state.name|Your next car}}",
+        "style": "headline_small"
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      }
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 4
+      }
+    },
+    {
+      "id": "detail_specs",
+      "type": "text",
+      "props": {
+        "value": "{{state.specs|Inspected on 140 points}}",
+        "style": "body_small",
+        "color": "text_secondary"
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      }
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "detail_price_panel",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 20
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "detail_price",
+          "type": "text",
+          "props": {
+            "value": "{{state.price|Rs 6.85 L}}",
+            "style": "price"
+          }
+        },
+        {
+          "id": "detail_emi",
+          "type": "text",
+          "props": {
+            "value": "or {{state.emi|Rs 14,820/mo}} with zero down payment",
+            "style": "body_small",
+            "color": "text_secondary"
+          }
+        },
+        {
+          "id": "detail_price_gap",
+          "type": "spacer",
+          "props": {
+            "size": 12
+          }
+        },
+        {
+          "id": "detail_tags",
+          "type": "tag_row",
+          "props": {
+            "tags": [
+              "Cars24 Assured",
+              "Fixed price",
+              "Free RC transfer"
+            ],
+            "emphasisedFirst": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "detail_trust",
+      "type": "value_props",
+      "props": {
+        "heading": "Every Cars24 car comes with",
+        "items": [
+          {
+            "title": "140-point",
+            "caption": "inspection",
+            "icon": "inspection"
+          },
+          {
+            "title": "7-day",
+            "caption": "money back",
+            "icon": "return"
+          },
+          {
+            "title": "Free RC",
+            "caption": "transfer",
+            "icon": "paperwork"
+          },
+          {
+            "title": "1-year",
+            "caption": "warranty",
+            "icon": "warranty"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_5",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "detail_emi_header",
+      "type": "section_header",
+      "props": {
+        "title": "Make it monthly"
+      }
+    },
+    {
+      "id": "gap_6",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "detail_tenure_chips",
+      "type": "chip_group",
+      "props": {
+        "stateKey": "tenure",
+        "scrollable": false,
+        "options": [
+          {
+            "label": "36 mo",
+            "value": "36",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "36"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 18,240"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 6,56,640"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "36 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "36"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "label": "48 mo",
+            "value": "48",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "48"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 14,820"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 7,11,360"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "48 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "48"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "label": "60 mo",
+            "value": "60",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "60"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 12,410"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 7,44,600"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "60 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "60"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "label": "72 mo",
+            "value": "72",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "72"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 10,780"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 7,76,160"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "72 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "72"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      }
+    },
+    {
+      "id": "gap_7",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "detail_emi_card",
+      "type": "emi_summary",
+      "props": {
+        "heading": "Your monthly EMI",
+        "monthly": "{{state.emi_monthly}}",
+        "monthlyCaption": "for {{state.emi_tenure_label}}",
+        "rows": [
+          {
+            "label": "Total payable",
+            "value": "{{state.emi_total}}"
+          },
+          {
+            "label": "Interest rate",
+            "value": "9.7% p.a."
+          }
+        ],
+        "ctaLabel": "See full breakdown"
+      },
+      "actions": {
+        "onClick": {
+          "type": "open_bottom_sheet",
+          "params": {
+            "sheetId": "emi_breakdown",
+            "title": "EMI breakdown"
+          },
+          "content": [
+            {
+              "id": "sheet_title",
+              "type": "text",
+              "props": {
+                "value": "EMI breakdown",
+                "style": "headline_small"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "top": 4
+                }
+              }
+            },
+            {
+              "id": "sheet_sub",
+              "type": "text",
+              "props": {
+                "value": "For {{state.emi_tenure_label}} at 9.7% p.a.",
+                "style": "body_small",
+                "color": "text_secondary"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "top": 4
+                }
+              }
+            },
+            {
+              "id": "sheet_gap_1",
+              "type": "spacer",
+              "props": {
+                "size": 20
+              }
+            },
+            {
+              "id": "sheet_rows",
+              "type": "emi_summary",
+              "props": {
+                "heading": "Monthly instalment",
+                "monthly": "{{state.emi_monthly}}",
+                "monthlyCaption": "x {{state.emi_tenure_label}}",
+                "rows": [
+                  {
+                    "label": "Total payable",
+                    "value": "{{state.emi_total}}"
+                  },
+                  {
+                    "label": "Down payment",
+                    "value": "Rs 1,20,000"
+                  },
+                  {
+                    "label": "Interest rate",
+                    "value": "9.7% p.a."
+                  },
+                  {
+                    "label": "Processing fee",
+                    "value": "Rs 3,499"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sheet_gap_2",
+              "type": "spacer",
+              "props": {
+                "size": 16
+              }
+            },
+            {
+              "id": "sheet_note",
+              "type": "text",
+              "props": {
+                "value": "Rates are indicative and depend on your credit profile. Final terms are shared by the lending partner before you sign.",
+                "style": "label_small",
+                "color": "text_tertiary"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20
+                }
+              }
+            },
+            {
+              "id": "sheet_gap_3",
+              "type": "spacer",
+              "props": {
+                "size": 16
+              }
+            },
+            {
+              "id": "sheet_cta",
+              "type": "button",
+              "props": {
+                "label": "Apply for this loan",
+                "variant": "accent",
+                "fillWidth": true
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20
+                }
+              },
+              "actions": {
+                "onClick": {
+                  "type": "navigate",
+                  "params": {
+                    "route": "loan_application"
+                  },
+                  "then": [
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_gap_4",
+              "type": "spacer",
+              "props": {
+                "size": 12
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gap_8",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "detail_faq_header",
+      "type": "section_header",
+      "props": {
+        "title": "Before you book"
+      }
+    },
+    {
+      "id": "gap_9",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "detail_faq_1",
+      "type": "faq_item",
+      "props": {
+        "question": "Can I take a test drive?",
+        "answer": "Yes. Book a free home test drive and we bring the car to you, or visit any hub seven days a week.",
+        "startExpanded": true
+      }
+    },
+    {
+      "id": "detail_faq_gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "detail_faq_2",
+      "type": "faq_item",
+      "props": {
+        "question": "What if I find a problem after delivery?",
+        "answer": "The 7-day return window covers exactly that. Return the car for a full refund, or let us fix it under the one-year warranty.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "detail_faq_gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "gap_10",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "detail_book",
+      "type": "button",
+      "props": {
+        "label": "Book a free test drive",
+        "variant": "accent",
+        "fillWidth": true
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "sell_flow"
+          }
+        }
+      }
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

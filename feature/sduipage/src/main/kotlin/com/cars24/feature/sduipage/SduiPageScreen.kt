@@ -1,5 +1,15 @@
-package com.cars24.feature.home
+package com.cars24.feature.sduipage
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.ui.Alignment
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -7,6 +17,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,9 +43,11 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(
-    state: HomeState,
-    onIntent: (HomeIntent) -> Unit,
+fun SduiPageScreen(
+    state: PageUiState,
+    onIntent: (PageIntent) -> Unit,
+    showBackButton: Boolean = false,
+    onBack: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
     val registry = remember { Cars24Components.registry() }
@@ -46,8 +59,8 @@ fun HomeScreen(
             state = state.pageState,
             pageSchemaVersion = state.page?.schemaVersion ?: 1,
             showUnknownPlaceholders = true,
-            onCommand = { onIntent(HomeIntent.Command(it)) },
-            onUnsupportedType = { onIntent(HomeIntent.UnsupportedComponent(it)) },
+            onCommand = { onIntent(PageIntent.Command(it)) },
+            onUnsupportedType = { onIntent(PageIntent.UnsupportedComponent(it)) },
         )
     }
 
@@ -61,21 +74,27 @@ fun HomeScreen(
         snapshotFlow { listState.firstVisibleItemIndex to listState.firstVisibleItemScrollOffset }
             .distinctUntilChanged()
             .debounce(SCROLL_PERSIST_DEBOUNCE_MS)
-            .collect { (index, offset) -> onIntent(HomeIntent.ScrollChanged(index, offset)) }
+            .collect { (index, offset) -> onIntent(PageIntent.ScrollChanged(index, offset)) }
     }
 
     Box(modifier = modifier.fillMaxSize()) {
         when (state.phase) {
-            HomePhase.Loading -> PageSkeleton(Modifier.statusBarsPadding())
+            PagePhase.Loading -> PageSkeleton(Modifier.statusBarsPadding())
 
-            HomePhase.Offline -> OfflineState(onRetry = { onIntent(HomeIntent.Retry) })
+            PagePhase.Offline -> Column(Modifier.statusBarsPadding()) {
+                if (showBackButton) PageTopBar(title = null, onBack = onBack)
+                OfflineState(onRetry = { onIntent(PageIntent.Retry) })
+            }
 
-            HomePhase.Failed -> ErrorState(
-                message = state.failureMessage ?: "We could not read the page layout.",
-                onRetry = { onIntent(HomeIntent.Retry) },
-            )
+            PagePhase.Failed -> Column(Modifier.statusBarsPadding()) {
+                if (showBackButton) PageTopBar(title = null, onBack = onBack)
+                ErrorState(
+                    message = state.failureMessage ?: "We could not read the page layout.",
+                    onRetry = { onIntent(PageIntent.Retry) },
+                )
+            }
 
-            HomePhase.Content -> {
+            PagePhase.Content -> {
                 val page = state.page ?: return@Box
                 SduiPageHost(
                     page = page,
@@ -84,10 +103,13 @@ fun HomeScreen(
                     contentPadding = PaddingValues(bottom = 24.dp),
                     header = {
                         Column(Modifier.statusBarsPadding()) {
+                            if (showBackButton) {
+                                PageTopBar(title = page.title, onBack = onBack)
+                            }
                             if (state.staleMessage != null) {
                                 StaleBanner(
                                     text = state.staleMessage,
-                                    onRetry = { onIntent(HomeIntent.Retry) },
+                                    onRetry = { onIntent(PageIntent.Retry) },
                                 )
                             }
                         }
@@ -101,7 +123,7 @@ fun HomeScreen(
     if (sheet != null) {
         val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
         ModalBottomSheet(
-            onDismissRequest = { onIntent(HomeIntent.DismissSheet) },
+            onDismissRequest = { onIntent(PageIntent.DismissSheet) },
             sheetState = sheetState,
             containerColor = Cars24.colors.cardSurface,
         ) {
@@ -110,6 +132,30 @@ fun HomeScreen(
                 Spacer(Modifier.height(8.dp))
             }
         }
+    }
+}
+
+@Composable
+private fun PageTopBar(title: String?, onBack: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Cars24.colors.cardSurface)
+            .padding(horizontal = 4.dp, vertical = 4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        IconButton(onClick = onBack) {
+            Icon(
+                imageVector = Icons.Filled.ArrowBack,
+                contentDescription = "Back",
+                tint = Cars24.colors.textPrimary,
+            )
+        }
+        Text(
+            text = title.orEmpty(),
+            style = MaterialTheme.typography.titleMedium,
+            color = Cars24.colors.textPrimary,
+        )
     }
 }
 

@@ -3,6 +3,8 @@ package com.cars24.sdui.components.atom
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.Text
@@ -13,7 +15,7 @@ import com.cars24.core.designsystem.component.Cars24Button
 import com.cars24.core.designsystem.component.Cars24ButtonStyle
 import com.cars24.core.designsystem.component.Cars24Chip
 import com.cars24.core.designsystem.component.Cars24Tag
-import com.cars24.core.designsystem.component.ImagePlaceholder
+import com.cars24.core.designsystem.component.NetworkImage
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.sdui.components.fontWeightToken
 import com.cars24.sdui.components.textAlignToken
@@ -61,7 +63,9 @@ class TextComponent : SduiComponent {
 @Serializable
 data class ImageProps(
     val seed: String,
+    val url: String? = null,
     val cornerRadius: Int = 12,
+    val height: Int? = null,
 )
 
 class ImageComponent : SduiComponent {
@@ -70,10 +74,13 @@ class ImageComponent : SduiComponent {
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
         val props = rememberProps<ImageProps>(node, scope) ?: return
-        ImagePlaceholder(
+        NetworkImage(
+            url = props.url,
             seed = props.seed,
-            modifier = Modifier.fillMaxWidth(),
-            shape = androidx.compose.foundation.shape.RoundedCornerShape(props.cornerRadius.dp),
+            shape = RoundedCornerShape(props.cornerRadius.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(props.height?.let { Modifier.height(it.dp) } ?: Modifier),
         )
     }
 }

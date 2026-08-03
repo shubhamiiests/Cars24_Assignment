@@ -12,6 +12,25 @@
     "emi_total": "Rs 7,11,360",
     "emi_tenure_label": "48 mo"
   },
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
   "sections": [
     {
       "id": "hero_header",
@@ -27,6 +46,300 @@
           "params": {
             "route": "search"
           }
+        },
+        "onCityClick": {
+          "type": "open_bottom_sheet",
+          "params": {
+            "sheetId": "city_picker",
+            "title": "Choose your city"
+          },
+          "content": [
+            {
+              "id": "sheet_city_title",
+              "type": "text",
+              "props": {
+                "value": "Choose your city",
+                "style": "headline_small"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "top": 4,
+                  "bottom": 8
+                }
+              }
+            },
+            {
+              "id": "sheet_city_note",
+              "type": "text",
+              "props": {
+                "value": "Delivery charges and stock vary by city.",
+                "style": "body_small",
+                "color": "text_secondary"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "bottom": 8
+                }
+              }
+            },
+            {
+              "id": "sheet_city_gurgaon",
+              "type": "list_item",
+              "props": {
+                "title": "Gurgaon",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Gurgaon"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Gurgaon"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Gurgaon"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_delhi",
+              "type": "list_item",
+              "props": {
+                "title": "Delhi",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Delhi"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Delhi"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Delhi"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_noida",
+              "type": "list_item",
+              "props": {
+                "title": "Noida",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Noida"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Noida"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Noida"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_mumbai",
+              "type": "list_item",
+              "props": {
+                "title": "Mumbai",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Mumbai"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Mumbai"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Mumbai"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_bengaluru",
+              "type": "list_item",
+              "props": {
+                "title": "Bengaluru",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Bengaluru"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Bengaluru"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Bengaluru"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_hyderabad",
+              "type": "list_item",
+              "props": {
+                "title": "Hyderabad",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Hyderabad"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Hyderabad"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Hyderabad"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_pune",
+              "type": "list_item",
+              "props": {
+                "title": "Pune",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Pune"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Pune"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Pune"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_jaipur",
+              "type": "list_item",
+              "props": {
+                "title": "Jaipur",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Jaipur"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Jaipur"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Jaipur"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_end",
+              "type": "spacer",
+              "props": {
+                "size": 16
+              }
+            }
+          ]
         }
       }
     },
@@ -239,7 +552,7 @@
       },
       "children": [
         {
-          "id": "swift_vxi",
+          "id": "card_swift_vxi_all",
           "type": "car_card",
           "props": {
             "name": "Maruti Swift VXi",
@@ -251,6 +564,8 @@
               "Petrol",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_swift_vxi",
             "savings": "Save 38k",
             "assured": true
           },
@@ -260,13 +575,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "swift_vxi",
-                "name": "Maruti Swift VXi"
+                "name": "Maruti Swift VXi",
+                "price": "Rs 5.24 L",
+                "emi": "Rs 11,400/mo",
+                "specs": "2019 | 42,150 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "i20_sportz",
+          "id": "card_i20_sportz_all",
           "type": "car_card",
           "props": {
             "name": "Hyundai i20 Sportz",
@@ -278,6 +597,8 @@
               "Petrol",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i20_sportz",
             "badge": "Popular",
             "assured": true
           },
@@ -287,13 +608,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "i20_sportz",
-                "name": "Hyundai i20 Sportz"
+                "name": "Hyundai i20 Sportz",
+                "price": "Rs 6.85 L",
+                "emi": "Rs 14,820/mo",
+                "specs": "2020 | 31,900 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "nexon_xz",
+          "id": "card_nexon_xz_all",
           "type": "car_card",
           "props": {
             "name": "Tata Nexon XZ+",
@@ -304,7 +629,9 @@
               "55,600 km",
               "Diesel",
               "Manual"
-            ]
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_nexon_xz"
           },
           "actions": {
             "onClick": {
@@ -312,13 +639,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "nexon_xz",
-                "name": "Tata Nexon XZ+"
+                "name": "Tata Nexon XZ+",
+                "price": "Rs 7.95 L",
+                "emi": "Rs 17,190/mo",
+                "specs": "2019 | 55,600 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "wagonr_cng",
+          "id": "card_wagonr_lxi_all",
           "type": "car_card",
           "props": {
             "name": "Maruti WagonR LXi",
@@ -330,6 +661,8 @@
               "CNG",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_wagonr_lxi",
             "badge": "Low km"
           },
           "actions": {
@@ -337,8 +670,12 @@
               "type": "navigate",
               "params": {
                 "route": "car_detail",
-                "carId": "wagonr_cng",
-                "name": "Maruti WagonR LXi"
+                "carId": "wagonr_lxi",
+                "name": "Maruti WagonR LXi",
+                "price": "Rs 4.60 L",
+                "emi": "Rs 9,950/mo",
+                "specs": "2021 | 28,400 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
@@ -357,7 +694,7 @@
       },
       "children": [
         {
-          "id": "swift_vxi_p",
+          "id": "card_swift_vxi_petrol",
           "type": "car_card",
           "props": {
             "name": "Maruti Swift VXi",
@@ -369,6 +706,8 @@
               "Petrol",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_swift_vxi",
             "savings": "Save 38k",
             "assured": true
           },
@@ -377,14 +716,51 @@
               "type": "navigate",
               "params": {
                 "route": "car_detail",
-                "carId": "swift_vxi_p",
-                "name": "Maruti Swift VXi"
+                "carId": "swift_vxi",
+                "name": "Maruti Swift VXi",
+                "price": "Rs 5.24 L",
+                "emi": "Rs 11,400/mo",
+                "specs": "2019 | 42,150 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "baleno_zeta",
+          "id": "card_i20_sportz_petrol",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai i20 Sportz",
+            "price": "Rs 6.85 L",
+            "emi": "Rs 14,820/mo",
+            "specs": [
+              "2020",
+              "31,900 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i20_sportz",
+            "badge": "Popular",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "i20_sportz",
+                "name": "Hyundai i20 Sportz",
+                "price": "Rs 6.85 L",
+                "emi": "Rs 14,820/mo",
+                "specs": "2020 | 31,900 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_baleno_zeta_petrol",
           "type": "car_card",
           "props": {
             "name": "Maruti Baleno Zeta",
@@ -396,6 +772,8 @@
               "Petrol",
               "AMT"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_baleno_zeta",
             "assured": true
           },
           "actions": {
@@ -404,13 +782,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "baleno_zeta",
-                "name": "Maruti Baleno Zeta"
+                "name": "Maruti Baleno Zeta",
+                "price": "Rs 6.40 L",
+                "emi": "Rs 13,850/mo",
+                "specs": "2020 | 36,800 km | Petrol | AMT",
+                "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "i10_nios",
+          "id": "card_i10_nios_petrol",
           "type": "car_card",
           "props": {
             "name": "Hyundai Grand i10 Nios",
@@ -422,6 +804,8 @@
               "Petrol",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i10_nios",
             "badge": "Low km"
           },
           "actions": {
@@ -430,7 +814,11 @@
               "params": {
                 "route": "car_detail",
                 "carId": "i10_nios",
-                "name": "Hyundai Grand i10 Nios"
+                "name": "Hyundai Grand i10 Nios",
+                "price": "Rs 5.10 L",
+                "emi": "Rs 11,040/mo",
+                "specs": "2021 | 22,300 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
@@ -449,7 +837,7 @@
       },
       "children": [
         {
-          "id": "nexon_xz_d",
+          "id": "card_nexon_xz_diesel",
           "type": "car_card",
           "props": {
             "name": "Tata Nexon XZ+",
@@ -460,21 +848,27 @@
               "55,600 km",
               "Diesel",
               "Manual"
-            ]
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_nexon_xz"
           },
           "actions": {
             "onClick": {
               "type": "navigate",
               "params": {
                 "route": "car_detail",
-                "carId": "nexon_xz_d",
-                "name": "Tata Nexon XZ+"
+                "carId": "nexon_xz",
+                "name": "Tata Nexon XZ+",
+                "price": "Rs 7.95 L",
+                "emi": "Rs 17,190/mo",
+                "specs": "2019 | 55,600 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "ecosport_titanium",
+          "id": "card_ecosport_titanium_diesel",
           "type": "car_card",
           "props": {
             "name": "Ford EcoSport Titanium",
@@ -486,6 +880,8 @@
               "Diesel",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_ecosport_titanium",
             "savings": "Save 52k"
           },
           "actions": {
@@ -494,7 +890,11 @@
               "params": {
                 "route": "car_detail",
                 "carId": "ecosport_titanium",
-                "name": "Ford EcoSport Titanium"
+                "name": "Ford EcoSport Titanium",
+                "price": "Rs 6.75 L",
+                "emi": "Rs 14,600/mo",
+                "specs": "2018 | 68,200 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
@@ -513,7 +913,7 @@
       },
       "children": [
         {
-          "id": "wagonr_cng_c",
+          "id": "card_wagonr_lxi_cng",
           "type": "car_card",
           "props": {
             "name": "Maruti WagonR LXi",
@@ -525,6 +925,8 @@
               "CNG",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_wagonr_lxi",
             "badge": "Low km"
           },
           "actions": {
@@ -532,14 +934,18 @@
               "type": "navigate",
               "params": {
                 "route": "car_detail",
-                "carId": "wagonr_cng_c",
-                "name": "Maruti WagonR LXi"
+                "carId": "wagonr_lxi",
+                "name": "Maruti WagonR LXi",
+                "price": "Rs 4.60 L",
+                "emi": "Rs 9,950/mo",
+                "specs": "2021 | 28,400 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "alto_cng",
+          "id": "card_alto_k10_cng",
           "type": "car_card",
           "props": {
             "name": "Maruti Alto K10 VXi",
@@ -551,6 +957,8 @@
               "CNG",
               "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_alto_k10",
             "assured": true
           },
           "actions": {
@@ -558,8 +966,12 @@
               "type": "navigate",
               "params": {
                 "route": "car_detail",
-                "carId": "alto_cng",
-                "name": "Maruti Alto K10 VXi"
+                "carId": "alto_k10",
+                "name": "Maruti Alto K10 VXi",
+                "price": "Rs 3.85 L",
+                "emi": "Rs 8,330/mo",
+                "specs": "2022 | 19,700 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
@@ -982,6 +1394,52 @@
       "id": "gap_after_trust",
       "type": "spacer",
       "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "saved_entry",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 4
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "saved_row",
+          "type": "list_item",
+          "props": {
+            "title": "Saved cars",
+            "subtitle": "Everything you tapped the heart on",
+            "icon": "check",
+            "showChevron": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "wishlist"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_after_saved",
+      "type": "spacer",
+      "props": {
         "size": 28
       }
     },
@@ -1025,7 +1483,7 @@
       },
       "children": [
         {
-          "id": "creta_sx",
+          "id": "card_creta_sx_grid",
           "type": "car_card",
           "props": {
             "name": "Hyundai Creta SX",
@@ -1034,8 +1492,11 @@
             "specs": [
               "2020",
               "44,100 km",
-              "Petrol"
+              "Petrol",
+              "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_creta_sx",
             "assured": true,
             "fillWidth": true
           },
@@ -1045,13 +1506,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "creta_sx",
-                "name": "Hyundai Creta SX"
+                "name": "Hyundai Creta SX",
+                "price": "Rs 11.40 L",
+                "emi": "Rs 24,650/mo",
+                "specs": "2020 | 44,100 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "venue_s",
+          "id": "card_venue_s_grid",
           "type": "car_card",
           "props": {
             "name": "Hyundai Venue S",
@@ -1060,8 +1525,11 @@
             "specs": [
               "2021",
               "29,600 km",
-              "Petrol"
+              "Petrol",
+              "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1517672651691-24622a91b550?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_venue_s",
             "badge": "New",
             "fillWidth": true
           },
@@ -1071,13 +1539,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "venue_s",
-                "name": "Hyundai Venue S"
+                "name": "Hyundai Venue S",
+                "price": "Rs 8.20 L",
+                "emi": "Rs 17,740/mo",
+                "specs": "2021 | 29,600 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1517672651691-24622a91b550?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "brezza_zxi",
+          "id": "card_brezza_zxi_grid",
           "type": "car_card",
           "props": {
             "name": "Maruti Brezza ZXi",
@@ -1086,8 +1558,11 @@
             "specs": [
               "2020",
               "38,500 km",
-              "Petrol"
+              "Petrol",
+              "AMT"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_brezza_zxi",
             "assured": true,
             "fillWidth": true
           },
@@ -1097,13 +1572,17 @@
               "params": {
                 "route": "car_detail",
                 "carId": "brezza_zxi",
-                "name": "Maruti Brezza ZXi"
+                "name": "Maruti Brezza ZXi",
+                "price": "Rs 9.65 L",
+                "emi": "Rs 20,880/mo",
+                "specs": "2020 | 38,500 km | Petrol | AMT",
+                "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
         },
         {
-          "id": "kwid_rxt",
+          "id": "card_kwid_rxt_grid",
           "type": "car_card",
           "props": {
             "name": "Renault Kwid RXT",
@@ -1112,8 +1591,11 @@
             "specs": [
               "2019",
               "51,200 km",
-              "Petrol"
+              "Petrol",
+              "Manual"
             ],
+            "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_kwid_rxt",
             "savings": "Save 24k",
             "fillWidth": true
           },
@@ -1123,7 +1605,11 @@
               "params": {
                 "route": "car_detail",
                 "carId": "kwid_rxt",
-                "name": "Renault Kwid RXT"
+                "name": "Renault Kwid RXT",
+                "price": "Rs 3.40 L",
+                "emi": "Rs 7,360/mo",
+                "specs": "2019 | 51,200 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=900&q=72&auto=format&fit=crop"
               }
             }
           }
@@ -1203,7 +1689,7 @@
       }
     },
     {
-      "id": "gap_faq_1",
+      "id": "faq_gap_1",
       "type": "spacer",
       "props": {
         "size": 8
@@ -1219,7 +1705,7 @@
       }
     },
     {
-      "id": "gap_faq_2",
+      "id": "faq_gap_2",
       "type": "spacer",
       "props": {
         "size": 8
@@ -1235,7 +1721,7 @@
       }
     },
     {
-      "id": "gap_faq_3",
+      "id": "faq_gap_3",
       "type": "spacer",
       "props": {
         "size": 8

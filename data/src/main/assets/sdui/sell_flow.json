@@ -1,0 +1,249 @@
+{
+  "pageId": "sell_flow",
+  "schemaVersion": 2,
+  "title": "Sell your car",
+  "analyticsName": "sell_flow",
+  "background": "page",
+  "initialState": {},
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "top",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "sell_header",
+      "type": "section_header",
+      "props": {
+        "title": "Sell in a single visit",
+        "subtitle": "Free evaluation, payment the same day"
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "sell_steps",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 8
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "sell_step_1",
+          "type": "list_item",
+          "props": {
+            "title": "1. Tell us about the car",
+            "subtitle": "Make, model, year and kilometres - two minutes",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "sell_step_2",
+          "type": "list_item",
+          "props": {
+            "title": "2. Free inspection",
+            "subtitle": "At your home or any Cars24 hub, 140 checkpoints",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "sell_step_3",
+          "type": "list_item",
+          "props": {
+            "title": "3. Accept the price",
+            "subtitle": "Fixed, no haggling, valid for seven days",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "sell_step_4",
+          "type": "list_item",
+          "props": {
+            "title": "4. Get paid the same day",
+            "subtitle": "We handle the RC transfer and the loan closure",
+            "icon": "check"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "sell_props",
+      "type": "value_props",
+      "props": {
+        "heading": "Why people sell to us",
+        "items": [
+          {
+            "title": "Same-day",
+            "caption": "payment",
+            "icon": "return"
+          },
+          {
+            "title": "Free",
+            "caption": "RC transfer",
+            "icon": "paperwork"
+          },
+          {
+            "title": "No",
+            "caption": "hidden charges",
+            "icon": "inspection"
+          },
+          {
+            "title": "5,000+",
+            "caption": "cars a week",
+            "icon": "warranty"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "sell_faq_header",
+      "type": "section_header",
+      "props": {
+        "title": "Common questions"
+      }
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "sell_faq_1",
+      "type": "faq_item",
+      "props": {
+        "question": "Is the evaluation really free?",
+        "answer": "Yes, and there is no obligation to sell. If the price does not work for you, walk away at no cost.",
+        "startExpanded": true
+      }
+    },
+    {
+      "id": "sell_faq_gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "sell_faq_2",
+      "type": "faq_item",
+      "props": {
+        "question": "What if the car still has a loan on it?",
+        "answer": "We settle the outstanding amount with your lender directly and pay you the balance. It adds a couple of days for the NOC.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "sell_faq_gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "sell_faq_3",
+      "type": "faq_item",
+      "props": {
+        "question": "What documents do I need?",
+        "answer": "RC, insurance, both keys, and a photo ID. Bring the service history if you have it - it usually improves the price.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "sell_faq_gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "gap_5",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "sell_cta_button",
+      "type": "button",
+      "props": {
+        "label": "Get my free quote",
+        "variant": "accent",
+        "fillWidth": true
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "loan_application"
+          }
+        }
+      }
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

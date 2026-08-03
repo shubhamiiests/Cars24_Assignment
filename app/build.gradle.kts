@@ -52,7 +52,7 @@ dependencies {
     implementation(project(":core:designsystem"))
     implementation(project(":core:analytics"))
     implementation(project(":data"))
-    implementation(project(":feature:home"))
+    implementation(project(":feature:sduipage"))
     implementation(project(":feature:staticbaseline"))
     implementation(project(":sdui:components"))
 

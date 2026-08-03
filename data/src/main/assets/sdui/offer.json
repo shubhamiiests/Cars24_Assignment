@@ -1,0 +1,233 @@
+{
+  "pageId": "offer",
+  "schemaVersion": 2,
+  "title": "Zero down payment",
+  "analyticsName": "offer",
+  "background": "page",
+  "initialState": {},
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "top",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "offer_hero",
+      "type": "banner_carousel",
+      "props": {
+        "height": 170,
+        "slides": [
+          {
+            "title": "Zero down payment",
+            "subtitle": "On 2,000+ assured cars",
+            "ctaLabel": "Valid until 31 March",
+            "gradient": [
+              "#1B2065",
+              "#5865C4"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "offer_header",
+      "type": "section_header",
+      "props": {
+        "title": "How zero down payment works"
+      }
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "offer_steps",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 8
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "offer_step_1",
+          "type": "list_item",
+          "props": {
+            "title": "1. Pick any assured car",
+            "subtitle": "Look for the green tick on the card",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "offer_step_2",
+          "type": "list_item",
+          "props": {
+            "title": "2. Get approved",
+            "subtitle": "Soft check, no effect on your credit score",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "offer_step_3",
+          "type": "list_item",
+          "props": {
+            "title": "3. Drive away",
+            "subtitle": "We fund the full on-road price, you pay only the EMI",
+            "icon": "check"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "offer_terms_header",
+      "type": "section_header",
+      "props": {
+        "title": "The fine print"
+      }
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "offer_terms",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 8
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "term_1",
+          "type": "list_item",
+          "props": {
+            "title": "Subject to lender approval",
+            "subtitle": "Not everyone qualifies"
+          }
+        },
+        {
+          "id": "term_2",
+          "type": "list_item",
+          "props": {
+            "title": "Interest from 9.7% p.a.",
+            "subtitle": "Depends on your profile"
+          }
+        },
+        {
+          "id": "term_3",
+          "type": "list_item",
+          "props": {
+            "title": "Processing fee Rs 3,499",
+            "subtitle": "Charged once, upfront"
+          }
+        },
+        {
+          "id": "term_4",
+          "type": "list_item",
+          "props": {
+            "title": "Cars24 assured stock only",
+            "subtitle": "2,000+ cars right now"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_5",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "offer_cta",
+      "type": "button",
+      "props": {
+        "label": "Check my eligibility",
+        "variant": "accent",
+        "fillWidth": true
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "loan_application"
+          }
+        }
+      }
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

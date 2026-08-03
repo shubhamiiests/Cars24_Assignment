@@ -35,7 +35,7 @@ include(":sdui:components")
 
 include(":data")
 
-include(":feature:home")
+include(":feature:sduipage")
 include(":feature:staticbaseline")
 
 include(":benchmark")

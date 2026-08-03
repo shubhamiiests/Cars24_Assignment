@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cars24.feature.home"
+    namespace = "com.cars24.feature.sduipage"
     compileSdk { version = release(libs.versions.compileSdk.get().toInt()) }
     defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }
     compileOptions {

@@ -1,5 +1,6 @@
 package com.cars24.sdui.runtime.render
 
+import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -49,6 +50,8 @@ fun SduiPageHost(
     }
 
     RecordRenderMarks(listState = listState, sectionCount = visibleSections.size)
+
+    ReportDrawnWhen { visibleSections.isNotEmpty() }
 }
 
 

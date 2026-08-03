@@ -1,0 +1,848 @@
+{
+  "pageId": "buy_listing",
+  "schemaVersion": 2,
+  "title": "Buy a car",
+  "analyticsName": "buy_listing",
+  "background": "page",
+  "initialState": {
+    "budget": "u8"
+  },
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "top",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "listing_header",
+      "type": "section_header",
+      "props": {
+        "title": "12,400 cars in {{state.city|Gurgaon}}",
+        "subtitle": "Every one inspected on 140 points"
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "budget_chips",
+      "type": "chip_group",
+      "props": {
+        "stateKey": "budget",
+        "options": [
+          {
+            "label": "Under 5L",
+            "value": "u5"
+          },
+          {
+            "label": "5-8L",
+            "value": "u8"
+          },
+          {
+            "label": "8-12L",
+            "value": "u12"
+          },
+          {
+            "label": "12L+",
+            "value": "o12"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "grid_u5",
+      "type": "grid",
+      "props": {
+        "columns": 2,
+        "itemSpacing": 12,
+        "rowSpacing": 12
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "visibleWhen": {
+        "key": "budget",
+        "equals": "u5"
+      },
+      "children": [
+        {
+          "id": "card_wagonr_lxi_u5",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti WagonR LXi",
+            "price": "Rs 4.60 L",
+            "emi": "Rs 9,950/mo",
+            "specs": [
+              "2021",
+              "28,400 km",
+              "CNG",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_wagonr_lxi",
+            "badge": "Low km",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "wagonr_lxi",
+                "name": "Maruti WagonR LXi",
+                "price": "Rs 4.60 L",
+                "emi": "Rs 9,950/mo",
+                "specs": "2021 | 28,400 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_alto_k10_u5",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Alto K10 VXi",
+            "price": "Rs 3.85 L",
+            "emi": "Rs 8,330/mo",
+            "specs": [
+              "2022",
+              "19,700 km",
+              "CNG",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_alto_k10",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "alto_k10",
+                "name": "Maruti Alto K10 VXi",
+                "price": "Rs 3.85 L",
+                "emi": "Rs 8,330/mo",
+                "specs": "2022 | 19,700 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_kwid_rxt_u5",
+          "type": "car_card",
+          "props": {
+            "name": "Renault Kwid RXT",
+            "price": "Rs 3.40 L",
+            "emi": "Rs 7,360/mo",
+            "specs": [
+              "2019",
+              "51,200 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_kwid_rxt",
+            "savings": "Save 24k",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "kwid_rxt",
+                "name": "Renault Kwid RXT",
+                "price": "Rs 3.40 L",
+                "emi": "Rs 7,360/mo",
+                "specs": "2019 | 51,200 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_tiago_xt_u5",
+          "type": "car_card",
+          "props": {
+            "name": "Tata Tiago XT",
+            "price": "Rs 4.95 L",
+            "emi": "Rs 10,710/mo",
+            "specs": [
+              "2020",
+              "33,400 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1493238792000-8113da705763?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_tiago_xt",
+            "savings": "Save 19k",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "tiago_xt",
+                "name": "Tata Tiago XT",
+                "price": "Rs 4.95 L",
+                "emi": "Rs 10,710/mo",
+                "specs": "2020 | 33,400 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1493238792000-8113da705763?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "grid_u8",
+      "type": "grid",
+      "props": {
+        "columns": 2,
+        "itemSpacing": 12,
+        "rowSpacing": 12
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "visibleWhen": {
+        "key": "budget",
+        "equals": "u8"
+      },
+      "children": [
+        {
+          "id": "card_swift_vxi_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Swift VXi",
+            "price": "Rs 5.24 L",
+            "emi": "Rs 11,400/mo",
+            "specs": [
+              "2019",
+              "42,150 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_swift_vxi",
+            "savings": "Save 38k",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "swift_vxi",
+                "name": "Maruti Swift VXi",
+                "price": "Rs 5.24 L",
+                "emi": "Rs 11,400/mo",
+                "specs": "2019 | 42,150 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_i20_sportz_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai i20 Sportz",
+            "price": "Rs 6.85 L",
+            "emi": "Rs 14,820/mo",
+            "specs": [
+              "2020",
+              "31,900 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i20_sportz",
+            "badge": "Popular",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "i20_sportz",
+                "name": "Hyundai i20 Sportz",
+                "price": "Rs 6.85 L",
+                "emi": "Rs 14,820/mo",
+                "specs": "2020 | 31,900 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_nexon_xz_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Tata Nexon XZ+",
+            "price": "Rs 7.95 L",
+            "emi": "Rs 17,190/mo",
+            "specs": [
+              "2019",
+              "55,600 km",
+              "Diesel",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_nexon_xz",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "nexon_xz",
+                "name": "Tata Nexon XZ+",
+                "price": "Rs 7.95 L",
+                "emi": "Rs 17,190/mo",
+                "specs": "2019 | 55,600 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_baleno_zeta_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Baleno Zeta",
+            "price": "Rs 6.40 L",
+            "emi": "Rs 13,850/mo",
+            "specs": [
+              "2020",
+              "36,800 km",
+              "Petrol",
+              "AMT"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_baleno_zeta",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "baleno_zeta",
+                "name": "Maruti Baleno Zeta",
+                "price": "Rs 6.40 L",
+                "emi": "Rs 13,850/mo",
+                "specs": "2020 | 36,800 km | Petrol | AMT",
+                "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_i10_nios_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Grand i10 Nios",
+            "price": "Rs 5.10 L",
+            "emi": "Rs 11,040/mo",
+            "specs": [
+              "2021",
+              "22,300 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i10_nios",
+            "badge": "Low km",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "i10_nios",
+                "name": "Hyundai Grand i10 Nios",
+                "price": "Rs 5.10 L",
+                "emi": "Rs 11,040/mo",
+                "specs": "2021 | 22,300 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_ecosport_titanium_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Ford EcoSport Titanium",
+            "price": "Rs 6.75 L",
+            "emi": "Rs 14,600/mo",
+            "specs": [
+              "2018",
+              "68,200 km",
+              "Diesel",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_ecosport_titanium",
+            "savings": "Save 52k",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "ecosport_titanium",
+                "name": "Ford EcoSport Titanium",
+                "price": "Rs 6.75 L",
+                "emi": "Rs 14,600/mo",
+                "specs": "2018 | 68,200 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_altroz_xz_u8",
+          "type": "car_card",
+          "props": {
+            "name": "Tata Altroz XZ",
+            "price": "Rs 6.95 L",
+            "emi": "Rs 15,040/mo",
+            "specs": [
+              "2021",
+              "24,900 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_altroz_xz",
+            "badge": "Popular",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "altroz_xz",
+                "name": "Tata Altroz XZ",
+                "price": "Rs 6.95 L",
+                "emi": "Rs 15,040/mo",
+                "specs": "2021 | 24,900 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "grid_u12",
+      "type": "grid",
+      "props": {
+        "columns": 2,
+        "itemSpacing": 12,
+        "rowSpacing": 12
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "visibleWhen": {
+        "key": "budget",
+        "equals": "u12"
+      },
+      "children": [
+        {
+          "id": "card_creta_sx_u12",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Creta SX",
+            "price": "Rs 11.40 L",
+            "emi": "Rs 24,650/mo",
+            "specs": [
+              "2020",
+              "44,100 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_creta_sx",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "creta_sx",
+                "name": "Hyundai Creta SX",
+                "price": "Rs 11.40 L",
+                "emi": "Rs 24,650/mo",
+                "specs": "2020 | 44,100 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_venue_s_u12",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Venue S",
+            "price": "Rs 8.20 L",
+            "emi": "Rs 17,740/mo",
+            "specs": [
+              "2021",
+              "29,600 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1517672651691-24622a91b550?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_venue_s",
+            "badge": "New",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "venue_s",
+                "name": "Hyundai Venue S",
+                "price": "Rs 8.20 L",
+                "emi": "Rs 17,740/mo",
+                "specs": "2021 | 29,600 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1517672651691-24622a91b550?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_brezza_zxi_u12",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Brezza ZXi",
+            "price": "Rs 9.65 L",
+            "emi": "Rs 20,880/mo",
+            "specs": [
+              "2020",
+              "38,500 km",
+              "Petrol",
+              "AMT"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_brezza_zxi",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "brezza_zxi",
+                "name": "Maruti Brezza ZXi",
+                "price": "Rs 9.65 L",
+                "emi": "Rs 20,880/mo",
+                "specs": "2020 | 38,500 km | Petrol | AMT",
+                "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_city_vx_u12",
+          "type": "car_card",
+          "props": {
+            "name": "Honda City VX",
+            "price": "Rs 9.10 L",
+            "emi": "Rs 19,690/mo",
+            "specs": [
+              "2019",
+              "47,300 km",
+              "Petrol",
+              "CVT"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_city_vx",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "city_vx",
+                "name": "Honda City VX",
+                "price": "Rs 9.10 L",
+                "emi": "Rs 19,690/mo",
+                "specs": "2019 | 47,300 km | Petrol | CVT",
+                "image": "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "grid_o12",
+      "type": "grid",
+      "props": {
+        "columns": 2,
+        "itemSpacing": 12,
+        "rowSpacing": 12
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "visibleWhen": {
+        "key": "budget",
+        "equals": "o12"
+      },
+      "children": [
+        {
+          "id": "card_seltos_htk_o12",
+          "type": "car_card",
+          "props": {
+            "name": "Kia Seltos HTK+",
+            "price": "Rs 12.75 L",
+            "emi": "Rs 27,580/mo",
+            "specs": [
+              "2020",
+              "41,700 km",
+              "Diesel",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_seltos_htk",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "seltos_htk",
+                "name": "Kia Seltos HTK+",
+                "price": "Rs 12.75 L",
+                "emi": "Rs 27,580/mo",
+                "specs": "2020 | 41,700 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_creta_sx_o12",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Creta SX",
+            "price": "Rs 11.40 L",
+            "emi": "Rs 24,650/mo",
+            "specs": [
+              "2020",
+              "44,100 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_creta_sx",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "creta_sx",
+                "name": "Hyundai Creta SX",
+                "price": "Rs 11.40 L",
+                "emi": "Rs 24,650/mo",
+                "specs": "2020 | 44,100 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "listing_trust",
+      "type": "value_props",
+      "props": {
+        "heading": "Every Cars24 car comes with",
+        "items": [
+          {
+            "title": "140-point",
+            "caption": "inspection",
+            "icon": "inspection"
+          },
+          {
+            "title": "7-day",
+            "caption": "money back",
+            "icon": "return"
+          },
+          {
+            "title": "Free RC",
+            "caption": "transfer",
+            "icon": "paperwork"
+          },
+          {
+            "title": "1-year",
+            "caption": "warranty",
+            "icon": "warranty"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "listing_help",
+      "type": "section_header",
+      "props": {
+        "title": "Need help choosing?"
+      }
+    },
+    {
+      "id": "gap_5",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "listing_help_panel",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 4
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "help_emi",
+          "type": "list_item",
+          "props": {
+            "title": "Work out an EMI",
+            "subtitle": "Pick a tenure that fits",
+            "icon": "check",
+            "showChevron": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "loan"
+              }
+            }
+          }
+        },
+        {
+          "id": "help_saved",
+          "type": "list_item",
+          "props": {
+            "title": "See your saved cars",
+            "subtitle": "Compare side by side",
+            "icon": "check",
+            "showChevron": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "wishlist"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

@@ -33,5 +33,20 @@ class PageStateStore(private val dataStore: DataStore<Preferences>) {
         dataStore.edit { it.remove(keyFor(pageId)) }
     }
 
+    suspend fun readShared(): Map<String, String> {
+        val raw = dataStore.data.first()[SHARED_KEY] ?: return emptyMap()
+        return runCatching { SduiJson.format.decodeFromString<Map<String, String>>(raw) }
+            .getOrDefault(emptyMap())
+    }
+
+    suspend fun writeShared(state: Map<String, String>) {
+        val encoded = SduiJson.format.encodeToString(state)
+        dataStore.edit { it[SHARED_KEY] = encoded }
+    }
+
     private fun keyFor(pageId: String) = stringPreferencesKey("ui_state_$pageId")
+
+    private companion object {
+        val SHARED_KEY = stringPreferencesKey("ui_state_shared")
+    }
 }

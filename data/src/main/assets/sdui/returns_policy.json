@@ -1,0 +1,249 @@
+{
+  "pageId": "returns_policy",
+  "schemaVersion": 2,
+  "title": "7-day money back",
+  "analyticsName": "returns_policy",
+  "background": "page",
+  "initialState": {},
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "top",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "ret_header",
+      "type": "section_header",
+      "props": {
+        "title": "7-day money back",
+        "subtitle": "Up to 7 days or 350 km, whichever comes first"
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "ret_steps",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 8
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "ret_step_1",
+          "type": "list_item",
+          "props": {
+            "title": "1. Drive it properly",
+            "subtitle": "Take it to work, to the in-laws, up a hill",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "ret_step_2",
+          "type": "list_item",
+          "props": {
+            "title": "2. Changed your mind?",
+            "subtitle": "Tell us within 7 days or 350 km",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "ret_step_3",
+          "type": "list_item",
+          "props": {
+            "title": "3. Bring it back",
+            "subtitle": "Any Cars24 hub, no explanation needed",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "ret_step_4",
+          "type": "list_item",
+          "props": {
+            "title": "4. Full refund",
+            "subtitle": "Same account, within five working days",
+            "icon": "check"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "ret_props",
+      "type": "value_props",
+      "props": {
+        "heading": "Every Cars24 car comes with",
+        "items": [
+          {
+            "title": "140-point",
+            "caption": "inspection",
+            "icon": "inspection"
+          },
+          {
+            "title": "7-day",
+            "caption": "money back",
+            "icon": "return"
+          },
+          {
+            "title": "Free RC",
+            "caption": "transfer",
+            "icon": "paperwork"
+          },
+          {
+            "title": "1-year",
+            "caption": "warranty",
+            "icon": "warranty"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "ret_faq_header",
+      "type": "section_header",
+      "props": {
+        "title": "What people ask"
+      }
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "ret_faq_1",
+      "type": "faq_item",
+      "props": {
+        "question": "Do I get the registration charges back too?",
+        "answer": "The car price and the Cars24 fee are refunded in full. Statutory charges already paid to the RTO are not refundable, and we tell you the exact figure before you sign.",
+        "startExpanded": true
+      }
+    },
+    {
+      "id": "ret_faq_gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "ret_faq_2",
+      "type": "faq_item",
+      "props": {
+        "question": "What if I have driven 400 km?",
+        "answer": "Past 350 km the return window closes, but the one-year warranty still covers mechanical faults.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "ret_faq_gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "ret_faq_3",
+      "type": "faq_item",
+      "props": {
+        "question": "Can I exchange instead of refunding?",
+        "answer": "Yes, and most people do. Pick anything else in stock and we adjust the difference.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "ret_faq_gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "gap_5",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "ret_cta",
+      "type": "button",
+      "props": {
+        "label": "Browse assured cars",
+        "variant": "primary",
+        "fillWidth": true
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "buy_listing"
+          }
+        }
+      }
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

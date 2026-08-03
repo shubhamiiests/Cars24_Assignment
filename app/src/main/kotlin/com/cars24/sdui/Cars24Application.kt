@@ -4,7 +4,7 @@ import android.app.Application
 import com.cars24.core.analytics.di.analyticsModule
 import com.cars24.core.common.perf.StartupTrace
 import com.cars24.data.di.dataModule
-import com.cars24.feature.home.di.homeModule
+import com.cars24.feature.sduipage.di.sduiPageModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +20,7 @@ class Cars24Application : Application() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@Cars24Application)
-            modules(dataModule, analyticsModule, homeModule)
+            modules(dataModule, analyticsModule, sduiPageModule)
         }
     }
 

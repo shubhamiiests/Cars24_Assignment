@@ -11,6 +11,7 @@ data class SduiPage(
     val analyticsName: String? = null,
     val background: String? = null,
     val initialState: Map<String, String> = emptyMap(),
+    val sharedStateKeys: List<String> = emptyList(),
     val sections: List<SduiNode> = emptyList(),
 )
 

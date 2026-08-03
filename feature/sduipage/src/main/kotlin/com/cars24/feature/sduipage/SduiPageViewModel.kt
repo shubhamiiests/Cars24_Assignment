@@ -1,4 +1,4 @@
-package com.cars24.feature.home
+package com.cars24.feature.sduipage
 
 import androidx.lifecycle.viewModelScope
 import com.cars24.core.analytics.AnalyticsEvents
@@ -19,41 +19,44 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class HomeViewModel(
+class SduiPageViewModel(
+    private val pageId: String,
+    private val routeParams: Map<String, String> = emptyMap(),
     private val repository: SduiPageRepository,
     private val pageStateStore: PageStateStore,
     private val analytics: AnalyticsLogger,
-) : MviViewModel<HomeIntent, HomeState, HomeEffect>(HomeState()) {
+) : MviViewModel<PageIntent, PageUiState, PageEffect>(PageUiState()) {
 
     private var persistJob: Job? = null
     private var loaded = false
+    private var sharedKeys: Set<String> = emptySet()
 
     init {
-        dispatch(HomeIntent.Load)
+        dispatch(PageIntent.Load)
     }
 
-    override suspend fun handleIntent(intent: HomeIntent) {
+    override suspend fun handleIntent(intent: PageIntent) {
         when (intent) {
-            HomeIntent.Load -> if (!loaded) {
+            PageIntent.Load -> if (!loaded) {
                 loaded = true
                 load()
             }
 
-            HomeIntent.Retry -> {
-                setState { copy(phase = HomePhase.Loading, failureMessage = null) }
+            PageIntent.Retry -> {
+                setState { copy(phase = PagePhase.Loading, failureMessage = null) }
                 load()
             }
 
-            is HomeIntent.Command -> execute(intent.command)
+            is PageIntent.Command -> execute(intent.command)
 
-            is HomeIntent.UnsupportedComponent -> onUnsupportedComponent(intent.type)
+            is PageIntent.UnsupportedComponent -> onUnsupportedComponent(intent.type)
 
-            is HomeIntent.ScrollChanged -> {
+            is PageIntent.ScrollChanged -> {
                 setState { copy(scrollIndex = intent.index, scrollOffset = intent.offset) }
                 schedulePersist()
             }
 
-            HomeIntent.DismissSheet -> {
+            PageIntent.DismissSheet -> {
                 setState { copy(openSheet = null) }
                 schedulePersist()
             }
@@ -61,38 +64,45 @@ class HomeViewModel(
     }
 
     private suspend fun load() {
-        val restored = pageStateStore.read(PAGE_ID)
+        val restored = pageStateStore.read(pageId)
+        val shared = pageStateStore.readShared()
 
-        when (val result = repository.loadPage(PAGE_ID)) {
-            is PageLoadResult.Loaded -> applyPage(result.envelope, restored, staleMessage = null)
+        when (val result = repository.loadPage(pageId)) {
+            is PageLoadResult.Loaded -> applyPage(result.envelope, restored, shared, staleMessage = null)
 
             is PageLoadResult.Stale ->
-                applyPage(result.envelope, restored, staleMessage = result.reason)
+                applyPage(result.envelope, restored, shared, staleMessage = result.reason)
 
             PageLoadResult.Offline -> {
-                setState { copy(phase = HomePhase.Offline, page = null) }
+                setState { copy(phase = PagePhase.Offline, page = null) }
                 analytics.logEvent(
                     AnalyticsEvents.SDUI_PAGE_OFFLINE,
-                    mapOf(AnalyticsParams.PAGE_ID to PAGE_ID),
+                    mapOf(AnalyticsParams.PAGE_ID to pageId),
                 )
             }
 
             is PageLoadResult.Failed ->
-                setState { copy(phase = HomePhase.Failed, failureMessage = result.message) }
+                setState { copy(phase = PagePhase.Failed, failureMessage = result.message) }
         }
     }
 
     private fun applyPage(
         envelope: PageEnvelope,
         restored: PersistedPageState,
+        shared: Map<String, String>,
         staleMessage: String?,
     ) {
         val page = envelope.page
-        val mergedState = page.initialState + restored.localState
+        sharedKeys = page.sharedStateKeys.toSet()
+
+        val mergedState = page.initialState +
+            restored.localState +
+            routeParams +
+            shared.filterKeys { it in sharedKeys }
 
         setState {
             copy(
-                phase = HomePhase.Content,
+                phase = PagePhase.Content,
                 page = page,
                 pageState = mergedState,
                 openSheet = restored.openSheetId?.let { findSheet(page, it, mergedState) },
@@ -107,7 +117,7 @@ class HomeViewModel(
             )
         }
 
-        analytics.logScreenView(page.analyticsName ?: PAGE_ID)
+        analytics.logScreenView(page.analyticsName ?: pageId)
         analytics.logEvent(
             AnalyticsEvents.SDUI_PAGE_RENDERED,
             mapOf(
@@ -125,10 +135,16 @@ class HomeViewModel(
         when (command) {
             is SduiCommand.Batch -> command.commands.forEach { execute(it) }
 
-            is SduiCommand.SetState -> {
-                setState { copy(pageState = pageState + (command.key to command.value)) }
-                schedulePersist()
-            }
+            is SduiCommand.SetState -> putState(command.key, command.value)
+
+            is SduiCommand.ToggleState -> putState(
+                key = command.key,
+                value = if (currentState.pageState[command.key] == command.onValue) {
+                    command.offValue
+                } else {
+                    command.onValue
+                },
+            )
 
             is SduiCommand.OpenSheet -> {
                 setState {
@@ -143,14 +159,14 @@ class HomeViewModel(
             }
 
             is SduiCommand.Navigate ->
-                emitEffect(HomeEffect.Navigate(command.route, command.params))
+                emitEffect(PageEffect.Navigate(command.route, command.params))
 
-            is SduiCommand.OpenUrl -> emitEffect(HomeEffect.OpenUrl(command.url))
+            is SduiCommand.OpenUrl -> emitEffect(PageEffect.OpenUrl(command.url))
 
             is SduiCommand.Track -> analytics.logEvent(command.event, command.params)
 
             SduiCommand.Refresh -> {
-                setState { copy(phase = HomePhase.Loading) }
+                setState { copy(phase = PagePhase.Loading) }
                 load()
             }
 
@@ -159,7 +175,7 @@ class HomeViewModel(
                     AnalyticsEvents.SDUI_ACTION_UNSUPPORTED,
                     mapOf(AnalyticsParams.ACTION_TYPE to command.type),
                 )
-                emitEffect(HomeEffect.ShowMessage("Update the app to use this"))
+                emitEffect(PageEffect.ShowMessage("Update the app to use this"))
             }
         }
     }
@@ -171,9 +187,14 @@ class HomeViewModel(
             AnalyticsEvents.SDUI_UNSUPPORTED_COMPONENT,
             mapOf(
                 AnalyticsParams.COMPONENT_TYPE to type,
-                AnalyticsParams.PAGE_ID to PAGE_ID,
+                AnalyticsParams.PAGE_ID to pageId,
             ),
         )
+    }
+
+    private fun putState(key: String, value: String) {
+        setState { copy(pageState = pageState + (key to value)) }
+        schedulePersist()
     }
 
     private fun schedulePersist() {
@@ -182,19 +203,24 @@ class HomeViewModel(
             delay(PERSIST_DEBOUNCE_MS)
             val snapshot = currentState
             pageStateStore.write(
-                PAGE_ID,
+                pageId,
                 PersistedPageState(
-                    localState = snapshot.pageState,
+                    localState = snapshot.pageState.filterKeys { it !in sharedKeys },
                     scrollIndex = snapshot.scrollIndex,
                     scrollOffset = snapshot.scrollOffset,
                     openSheetId = snapshot.openSheet?.sheetId,
                 ),
             )
+            if (sharedKeys.isNotEmpty()) {
+                pageStateStore.writeShared(
+                    pageStateStore.readShared() +
+                        snapshot.pageState.filterKeys { it in sharedKeys },
+                )
+            }
         }
     }
 
     private companion object {
-        const val PAGE_ID = "home"
         const val PERSIST_DEBOUNCE_MS = 250L
     }
 }

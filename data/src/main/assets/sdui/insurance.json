@@ -1,0 +1,373 @@
+{
+  "pageId": "insurance",
+  "schemaVersion": 2,
+  "title": "Car insurance",
+  "analyticsName": "insurance",
+  "background": "page",
+  "initialState": {
+    "plan": "comp"
+  },
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "top",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "ins_header",
+      "type": "section_header",
+      "props": {
+        "title": "Renew in three minutes",
+        "subtitle": "Instant policy, no inspection for most cars"
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "ins_plans",
+      "type": "chip_group",
+      "props": {
+        "stateKey": "plan",
+        "scrollable": false,
+        "options": [
+          {
+            "label": "Third party",
+            "value": "tp"
+          },
+          {
+            "label": "Comprehensive",
+            "value": "comp"
+          },
+          {
+            "label": "Zero dep",
+            "value": "zd"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "plan_tp",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 20
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "visibleWhen": {
+        "key": "plan",
+        "equals": "tp"
+      },
+      "children": [
+        {
+          "id": "plan_tp_price",
+          "type": "text",
+          "props": {
+            "value": "Rs 3,416",
+            "style": "price"
+          }
+        },
+        {
+          "id": "plan_tp_tag",
+          "type": "text",
+          "props": {
+            "value": "Mandatory cover",
+            "style": "body_small",
+            "color": "success"
+          }
+        },
+        {
+          "id": "plan_tp_gap",
+          "type": "spacer",
+          "props": {
+            "size": 12
+          }
+        },
+        {
+          "id": "plan_tp_row_1",
+          "type": "list_item",
+          "props": {
+            "title": "Third-party damage",
+            "trailing": "Up to Rs 7.5 lakh"
+          }
+        },
+        {
+          "id": "plan_tp_row_2",
+          "type": "list_item",
+          "props": {
+            "title": "Personal accident",
+            "trailing": "Rs 15 lakh owner cover"
+          }
+        },
+        {
+          "id": "plan_tp_row_3",
+          "type": "list_item",
+          "props": {
+            "title": "Own damage",
+            "trailing": "Not covered"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan_comp",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 20
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "visibleWhen": {
+        "key": "plan",
+        "equals": "comp"
+      },
+      "children": [
+        {
+          "id": "plan_comp_price",
+          "type": "text",
+          "props": {
+            "value": "Rs 8,940",
+            "style": "price"
+          }
+        },
+        {
+          "id": "plan_comp_tag",
+          "type": "text",
+          "props": {
+            "value": "Most popular",
+            "style": "body_small",
+            "color": "success"
+          }
+        },
+        {
+          "id": "plan_comp_gap",
+          "type": "spacer",
+          "props": {
+            "size": 12
+          }
+        },
+        {
+          "id": "plan_comp_row_1",
+          "type": "list_item",
+          "props": {
+            "title": "Third-party damage",
+            "trailing": "Up to Rs 7.5 lakh"
+          }
+        },
+        {
+          "id": "plan_comp_row_2",
+          "type": "list_item",
+          "props": {
+            "title": "Own damage",
+            "trailing": "Covered at IDV"
+          }
+        },
+        {
+          "id": "plan_comp_row_3",
+          "type": "list_item",
+          "props": {
+            "title": "Roadside assistance",
+            "trailing": "24x7, unlimited km"
+          }
+        }
+      ]
+    },
+    {
+      "id": "plan_zd",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 20
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "visibleWhen": {
+        "key": "plan",
+        "equals": "zd"
+      },
+      "children": [
+        {
+          "id": "plan_zd_price",
+          "type": "text",
+          "props": {
+            "value": "Rs 12,480",
+            "style": "price"
+          }
+        },
+        {
+          "id": "plan_zd_tag",
+          "type": "text",
+          "props": {
+            "value": "Nothing deducted",
+            "style": "body_small",
+            "color": "success"
+          }
+        },
+        {
+          "id": "plan_zd_gap",
+          "type": "spacer",
+          "props": {
+            "size": 12
+          }
+        },
+        {
+          "id": "plan_zd_row_1",
+          "type": "list_item",
+          "props": {
+            "title": "Everything in comprehensive",
+            "trailing": "Included"
+          }
+        },
+        {
+          "id": "plan_zd_row_2",
+          "type": "list_item",
+          "props": {
+            "title": "Zero depreciation",
+            "trailing": "Full claim on plastic and rubber"
+          }
+        },
+        {
+          "id": "plan_zd_row_3",
+          "type": "list_item",
+          "props": {
+            "title": "Engine protection",
+            "trailing": "Included"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "ins_props",
+      "type": "value_props",
+      "props": {
+        "heading": "Claims, handled",
+        "items": [
+          {
+            "title": "98%",
+            "caption": "claim ratio",
+            "icon": "inspection"
+          },
+          {
+            "title": "7,200+",
+            "caption": "garages",
+            "icon": "warranty"
+          },
+          {
+            "title": "3 min",
+            "caption": "to renew",
+            "icon": "return"
+          },
+          {
+            "title": "Zero",
+            "caption": "paperwork",
+            "icon": "paperwork"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "ins_cta",
+      "type": "button",
+      "props": {
+        "label": "Renew my policy",
+        "variant": "accent",
+        "fillWidth": true
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "loan_application"
+          }
+        }
+      }
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

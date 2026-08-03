@@ -18,6 +18,7 @@ dependencies {
     api(project(":sdui:schema"))
     api(project(":core:designsystem"))
     implementation(project(":core:common"))
+    implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.tracing.ktx)
 
     testImplementation(libs.junit)

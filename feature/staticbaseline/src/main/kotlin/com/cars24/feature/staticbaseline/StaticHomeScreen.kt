@@ -1,5 +1,6 @@
 package com.cars24.feature.staticbaseline
 
+import androidx.activity.compose.ReportDrawnWhen
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateFloatAsState
@@ -190,6 +191,8 @@ fun StaticHomeScreen(modifier: Modifier = Modifier) {
             .first { it >= listState.layoutInfo.totalItemsCount - 1 }
         StartupTrace.mark(StartupTrace.MARK_FULL_PAGE)
     }
+
+    ReportDrawnWhen { listState.layoutInfo.totalItemsCount > 0 }
 
     if (sheetOpen) {
         StaticEmiSheet(tenure = tenure, onDismiss = { sheetOpen = false })

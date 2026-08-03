@@ -19,6 +19,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -26,9 +28,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Cars24Theme
-import com.cars24.feature.home.HomeRoute
+import com.cars24.data.page.SduiPageRepository
 import com.cars24.feature.staticbaseline.StaticHomeScreen
+import com.cars24.sdui.navigation.SduiNavHost
 import kotlinx.coroutines.launch
+import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {
 
@@ -55,6 +59,11 @@ private fun Cars24App(renderStatic: Boolean) {
     val snackbarHostState = remember { SnackbarHostState() }
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
+    val repository: SduiPageRepository = koinInject()
+
+    val knownPages by produceState(initialValue = emptySet<String>(), repository) {
+        value = repository.availablePages()
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -67,22 +76,19 @@ private fun Cars24App(renderStatic: Boolean) {
             if (renderStatic) {
                 StaticHomeScreen(modifier = contentModifier)
             } else {
-                HomeRoute(
-                    modifier = contentModifier,
-                    onNavigate = { route, params ->
-                        coroutineScope.launch {
-                            val detail = if (params.isEmpty()) "" else " $params"
-                            snackbarHostState.showSnackbar("navigate -> $route$detail")
-                        }
-                    },
+                SduiNavHost(
+                    knownPages = knownPages,
+                    snackbarHostState = snackbarHostState,
                     onOpenUrl = { url ->
                         runCatching {
                             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                        }.onFailure {
+                            coroutineScope.launch {
+                                snackbarHostState.showSnackbar("Nothing on this device can open $url")
+                            }
                         }
                     },
-                    onMessage = { message ->
-                        coroutineScope.launch { snackbarHostState.showSnackbar(message) }
-                    },
+                    modifier = contentModifier,
                 )
             }
 

@@ -1,0 +1,259 @@
+{
+  "pageId": "loan_application",
+  "schemaVersion": 2,
+  "title": "Loan application",
+  "analyticsName": "loan_application",
+  "background": "page",
+  "initialState": {
+    "emi_monthly": "Rs 14,820",
+    "emi_tenure_label": "48 mo"
+  },
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "top",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "app_header",
+      "type": "section_header",
+      "props": {
+        "title": "You are almost there",
+        "subtitle": "One form, 15 lenders, no effect on your credit score"
+      }
+    },
+    {
+      "id": "gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "app_summary",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 20
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "app_emi_label",
+          "type": "text",
+          "props": {
+            "value": "Applying for",
+            "style": "label_medium",
+            "color": "text_secondary"
+          }
+        },
+        {
+          "id": "app_emi",
+          "type": "text",
+          "props": {
+            "value": "{{state.emi_monthly|Rs 14,820}} x {{state.emi_tenure_label|48 mo}}",
+            "style": "price"
+          }
+        },
+        {
+          "id": "app_summary_gap",
+          "type": "spacer",
+          "props": {
+            "size": 12
+          }
+        },
+        {
+          "id": "app_row_1",
+          "type": "list_item",
+          "props": {
+            "title": "Down payment",
+            "trailing": "Rs 1,20,000"
+          }
+        },
+        {
+          "id": "app_row_2",
+          "type": "list_item",
+          "props": {
+            "title": "Interest rate",
+            "trailing": "9.7% p.a."
+          }
+        },
+        {
+          "id": "app_row_3",
+          "type": "list_item",
+          "props": {
+            "title": "Processing fee",
+            "trailing": "Rs 3,499"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "app_next_header",
+      "type": "section_header",
+      "props": {
+        "title": "What happens next"
+      }
+    },
+    {
+      "id": "gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "app_steps",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 8
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "app_step_1",
+          "type": "list_item",
+          "props": {
+            "title": "1. Soft eligibility check",
+            "subtitle": "Instant, and it does not touch your score",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "app_step_2",
+          "type": "list_item",
+          "props": {
+            "title": "2. Upload three documents",
+            "subtitle": "PAN, Aadhaar, and income proof",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "app_step_3",
+          "type": "list_item",
+          "props": {
+            "title": "3. Offers from partners",
+            "subtitle": "Usually within a working day",
+            "icon": "check"
+          }
+        },
+        {
+          "id": "app_step_4",
+          "type": "list_item",
+          "props": {
+            "title": "4. Pick one and sign",
+            "subtitle": "Digitally, from wherever you are",
+            "icon": "check"
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_4",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "app_note",
+      "type": "text",
+      "props": {
+        "value": "This demo stops here - there is no real lender behind it, and nothing you tap sends data anywhere.",
+        "style": "label_small",
+        "color": "text_tertiary",
+        "align": "center"
+      },
+      "style": {
+        "padding": {
+          "horizontal": 32
+        }
+      }
+    },
+    {
+      "id": "gap_5",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "app_cta",
+      "type": "button",
+      "props": {
+        "label": "Back to browsing",
+        "variant": "primary",
+        "fillWidth": true
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "buy_listing"
+          }
+        }
+      }
+    },
+    {
+      "id": "bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

@@ -3,6 +3,7 @@ package com.cars24.sdui.components
 import com.cars24.sdui.components.atom.ButtonComponent
 import com.cars24.sdui.components.atom.ChipGroupComponent
 import com.cars24.sdui.components.atom.ImageComponent
+import com.cars24.sdui.components.atom.ListItemComponent
 import com.cars24.sdui.components.atom.TagRowComponent
 import com.cars24.sdui.components.atom.TextComponent
 import com.cars24.sdui.components.layout.CarouselComponent
@@ -36,6 +37,7 @@ object Cars24Components {
         ButtonComponent(),
         ChipGroupComponent(),
         TagRowComponent(),
+        ListItemComponent(),
     )
 
     val sections: List<SduiComponent> = listOf(

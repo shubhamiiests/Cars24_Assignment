@@ -18,6 +18,12 @@ sealed interface SduiCommand {
 
     data class SetState(val key: String, val value: String) : SduiCommand
 
+    data class ToggleState(
+        val key: String,
+        val onValue: String,
+        val offValue: String,
+    ) : SduiCommand
+
     data class Track(val event: String, val params: Map<String, String>) : SduiCommand
 
     data class OpenUrl(val url: String) : SduiCommand
@@ -34,6 +40,7 @@ object SduiActionType {
     const val OPEN_BOTTOM_SHEET = "open_bottom_sheet"
     const val DISMISS_BOTTOM_SHEET = "dismiss_bottom_sheet"
     const val SET_STATE = "set_state"
+    const val TOGGLE_STATE = "toggle_state"
     const val TRACK_EVENT = "track_event"
     const val OPEN_URL = "open_url"
     const val REFRESH = "refresh"
@@ -65,6 +72,19 @@ object SduiActionParser {
                     SduiCommand.Unsupported("${action.type}(malformed)")
                 } else {
                     SduiCommand.SetState(key, value)
+                }
+            }
+
+            SduiActionType.TOGGLE_STATE -> {
+                val key = params["key"]
+                if (key.isNullOrEmpty()) {
+                    SduiCommand.Unsupported("${action.type}(malformed)")
+                } else {
+                    SduiCommand.ToggleState(
+                        key = key,
+                        onValue = params["onValue"] ?: "1",
+                        offValue = params["offValue"] ?: "",
+                    )
                 }
             }
 
