@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.FavoriteBorder
@@ -54,6 +55,8 @@ data class CarCardProps(
     val fillWidth: Boolean = false,
 )
 
+private val CardTopShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
+
 class CarCardComponent : SduiComponent {
     override val type = "car_card"
 
@@ -75,6 +78,7 @@ class CarCardComponent : SduiComponent {
                         modifier = Modifier
                             .width(120.dp)
                             .height(90.dp),
+                        shape = RoundedCornerShape(12.dp),
                     )
                     Spacer(Modifier.width(Spacing.md))
                     Column(Modifier.weight(1f)) { CarDetails(props) }
@@ -86,6 +90,7 @@ class CarCardComponent : SduiComponent {
                         modifier = Modifier
                             .fillMaxWidth()
                             .height(140.dp),
+                        shape = CardTopShape,
                     )
                     Column(Modifier.padding(Spacing.md)) { CarDetails(props) }
                 }
@@ -95,8 +100,8 @@ class CarCardComponent : SduiComponent {
 }
 
 @Composable
-private fun CarThumbnail(props: CarCardProps, modifier: Modifier) {
-    Box(modifier = modifier.background(gradientFor(props.name), RoundedCornerShape(12.dp))) {
+private fun CarThumbnail(props: CarCardProps, modifier: Modifier, shape: Shape) {
+    Box(modifier = modifier.background(gradientFor(props.name), shape)) {
         if (props.badge != null) {
             Surface(
                 modifier = Modifier.padding(Spacing.sm),

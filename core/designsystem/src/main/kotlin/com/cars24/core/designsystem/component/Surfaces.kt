@@ -62,10 +62,19 @@ private val PlaceholderPalettes = listOf(
     listOf(Color(0xFF4A2A5E), Color(0xFF9A76B4)),
     listOf(Color(0xFF25405E), Color(0xFF6D93B8)),
     listOf(Color(0xFF5E2A34), Color(0xFFB4747F)),
+    listOf(Color(0xFF2F5E3A), Color(0xFF77B487)),
+    listOf(Color(0xFF6B2F4E), Color(0xFFC17FA0)),
+    listOf(Color(0xFF404A55), Color(0xFF8D9AA8)),
+    listOf(Color(0xFF1B5C6E), Color(0xFF63A9BC)),
 )
 
 
-fun gradientFor(seed: String): Brush {
-    val palette = PlaceholderPalettes[(seed.hashCode().and(Int.MAX_VALUE)) % PlaceholderPalettes.size]
-    return Brush.linearGradient(palette)
+fun gradientFor(seed: String): Brush = Brush.linearGradient(paletteFor(seed))
+
+private fun paletteFor(seed: String): List<Color> {
+    var hash = seed.hashCode()
+    hash = hash xor (hash ushr 16)
+    hash *= 0x7feb352d
+    hash = hash xor (hash ushr 15)
+    return PlaceholderPalettes[(hash and Int.MAX_VALUE) % PlaceholderPalettes.size]
 }
