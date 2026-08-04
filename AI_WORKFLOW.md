@@ -53,8 +53,8 @@ Kotlin
   the line below it.
 ```
 
-The last two blocks did the most work. The honesty block is why PERF.md contains "I have no
-jank numbers" instead of an invented percentage - and it is why §3 story 2 below ends the
+The last two blocks did the most work. The honesty block is why PERF.md carries both a
+device and an emulator column instead of quietly keeping whichever looked better - and it is why §3 story 2 below ends the
 way it does.
 
 
@@ -115,9 +115,16 @@ against. Result: **3 decodes both ways.** The optimisation I had written up as t
 win does nothing measurable on this screen, because `LazyColumn` already bounds the working
 set to what is on screen and Kotlin 2.x strong skipping handles the rest.
 
-So I kept digging and found the optimisation that *does* matter - a page-wide recomposition
-I had caused myself by putting the state map on `SduiScope` - and measured it properly:
+So I kept digging and found the optimisation that *does* matter - a page-wide recomposition I
+had caused myself by putting the state map on `SduiScope` - and measured it properly:
 **18 section renders per tap down to 1.**
+
+The same instinct is what saved the headline number later. I had written up "+31% startup
+overhead" from emulator runs. When a physical device became available I re-ran everything, and
+the overhead was **-8 ms, i.e. none**; the emulator had also been reporting 90% janky frames in
+*both* builds, which is the tell that it was measuring itself rather than the app. PERF.md now
+publishes both columns. Had I not re-measured, the entire performance section would have been
+confidently wrong in the direction that made my architecture look worse.
 
 PERF.md §4 now leads with the real win and has a subsection titled *"Tried, and it turned
 out to be redundant"* for the one I had been about to take credit for.

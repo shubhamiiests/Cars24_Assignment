@@ -3,10 +3,17 @@
 A server-driven UI system for Android. The server sends JSON, the client renders the page.
 Eleven Cars24 screens are built with it; the client contains one screen composable.
 
-- [PERF.md](PERF.md):- SDUI vs a hardcoded build of the same screen, measured
+- [PERF.md](PERF.md):- SDUI vs a hardcoded build, measured on a physical device and an emulator
 - [COVERAGE.md](COVERAGE.md):- the registry, the coverage claim, and what the schema cannot do
 - [AI_WORKFLOW.md](AI_WORKFLOW.md):- how it was built, including where the AI was wrong
 
+
+**Performance, up front:** on a physical device (vivo V2561, Android 16, Dimensity 9400)
+there is **no measurable startup cost to SDUI** - 186 ms to first content against 194 ms for
+the hardcoded build, ranges overlapping. JSON parsing is 8 ms of that. Scroll is jank-free in
+both builds (0.25% vs 0.24% janky frames). The same code on an emulator reports +31% overhead
+and 90% jank in *both* builds, which is an emulator artefact; [PERF.md](PERF.md) reports both
+columns and explains the gap.
 
 ## The screen I chose, and why
 

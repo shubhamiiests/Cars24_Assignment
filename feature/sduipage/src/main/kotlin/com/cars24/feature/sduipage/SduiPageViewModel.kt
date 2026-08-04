@@ -5,6 +5,7 @@ import com.cars24.core.analytics.AnalyticsEvents
 import com.cars24.core.analytics.AnalyticsLogger
 import com.cars24.core.analytics.AnalyticsParams
 import com.cars24.core.common.mvi.MviViewModel
+import com.cars24.core.common.perf.StartupTrace
 import com.cars24.data.page.PageEnvelope
 import com.cars24.data.page.PageLoadResult
 import com.cars24.data.page.StaleReason
@@ -123,6 +124,13 @@ class SduiPageViewModel(
                 payloadBytes = envelope.payloadBytes,
             )
         }
+
+        android.util.Log.i(
+            StartupTrace.LOG_TAG,
+            "payload origin=${envelope.origin} bytes=${envelope.payloadBytes} " +
+                "fetch=${envelope.fetchMillis}ms parse=${envelope.parseMillis}ms " +
+                "sections=${page.sections.size}",
+        )
 
         analytics.logScreenView(page.analyticsName ?: pageId)
         analytics.logEvent(
