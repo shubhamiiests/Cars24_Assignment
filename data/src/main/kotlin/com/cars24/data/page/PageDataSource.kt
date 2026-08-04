@@ -46,8 +46,8 @@ class FileOverridePageDataSource(
     fun hasOverride(pageId: String): Boolean = overrideFile(pageId)?.canRead() == true
 
     override suspend fun availablePages(): Set<String> {
-        val pushed = context.getExternalFilesDir(null)
-            ?.let { File(it, "sdui").listFiles() }
+        val pushed = overrideDir()
+            ?.listFiles()
             .orEmpty()
             .filter { it.isFile && it.name.endsWith(".json") }
             .map { it.name.removeSuffix(".json") }
@@ -55,5 +55,14 @@ class FileOverridePageDataSource(
     }
 
     private fun overrideFile(pageId: String): File? =
-        context.getExternalFilesDir(null)?.let { File(it, "sdui/$pageId.json") }
+        overrideDir()?.let { File(it, "$pageId.json") }
+
+    private fun overrideDir(): File? =
+        context.getExternalFilesDir(null)?.let { base ->
+            File(base, OVERRIDE_DIR).also { if (!it.exists()) it.mkdirs() }
+        }
+
+    private companion object {
+        const val OVERRIDE_DIR = "sdui"
+    }
 }

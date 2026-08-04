@@ -48,6 +48,12 @@ class SduiPageViewModel(
                 load()
             }
 
+            PageIntent.Refresh -> {
+                setState { copy(isRefreshing = true) }
+                load()
+                setState { copy(isRefreshing = false) }
+            }
+
             is PageIntent.Command -> execute(intent.command)
 
             is PageIntent.UnsupportedComponent -> onUnsupportedComponent(intent.type)
@@ -166,10 +172,7 @@ class SduiPageViewModel(
 
             is SduiCommand.Track -> analytics.logEvent(command.event, command.params)
 
-            SduiCommand.Refresh -> {
-                setState { copy(phase = PagePhase.Loading) }
-                load()
-            }
+            SduiCommand.Refresh -> handleIntent(PageIntent.Refresh)
 
             is SduiCommand.Unsupported -> {
                 analytics.logEvent(

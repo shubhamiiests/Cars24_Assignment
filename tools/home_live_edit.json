@@ -1,0 +1,1814 @@
+{
+  "pageId": "home",
+  "schemaVersion": 2,
+  "title": "Cars24",
+  "analyticsName": "home_landing",
+  "background": "page",
+  "initialState": {
+    "city": "Gurgaon",
+    "fuel": "all",
+    "tenure": "48",
+    "emi_monthly": "Rs 14,820",
+    "emi_total": "Rs 7,11,360",
+    "emi_tenure_label": "48 mo"
+  },
+  "sharedStateKeys": [
+    "city",
+    "wish_swift_vxi",
+    "wish_i20_sportz",
+    "wish_nexon_xz",
+    "wish_wagonr_lxi",
+    "wish_baleno_zeta",
+    "wish_i10_nios",
+    "wish_ecosport_titanium",
+    "wish_alto_k10",
+    "wish_creta_sx",
+    "wish_venue_s",
+    "wish_brezza_zxi",
+    "wish_kwid_rxt",
+    "wish_city_vx",
+    "wish_altroz_xz",
+    "wish_seltos_htk",
+    "wish_tiago_xt"
+  ],
+  "sections": [
+    {
+      "id": "hero_header",
+      "type": "search_header",
+      "props": {
+        "city": "{{state.city|Gurgaon}}",
+        "greeting": "Edited live from JSON",
+        "searchHint": "This text came from a pushed file"
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "search"
+          }
+        },
+        "onCityClick": {
+          "type": "open_bottom_sheet",
+          "params": {
+            "sheetId": "city_picker",
+            "title": "Choose your city"
+          },
+          "content": [
+            {
+              "id": "sheet_city_title",
+              "type": "text",
+              "props": {
+                "value": "Choose your city",
+                "style": "headline_small"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "top": 4,
+                  "bottom": 8
+                }
+              }
+            },
+            {
+              "id": "sheet_city_note",
+              "type": "text",
+              "props": {
+                "value": "Delivery charges and stock vary by city.",
+                "style": "body_small",
+                "color": "text_secondary"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "bottom": 8
+                }
+              }
+            },
+            {
+              "id": "sheet_city_gurgaon",
+              "type": "list_item",
+              "props": {
+                "title": "Gurgaon",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Gurgaon"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Gurgaon"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Gurgaon"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_delhi",
+              "type": "list_item",
+              "props": {
+                "title": "Delhi",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Delhi"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Delhi"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Delhi"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_noida",
+              "type": "list_item",
+              "props": {
+                "title": "Noida",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Noida"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Noida"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Noida"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_mumbai",
+              "type": "list_item",
+              "props": {
+                "title": "Mumbai",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Mumbai"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Mumbai"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Mumbai"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_bengaluru",
+              "type": "list_item",
+              "props": {
+                "title": "Bengaluru",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Bengaluru"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Bengaluru"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Bengaluru"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_hyderabad",
+              "type": "list_item",
+              "props": {
+                "title": "Hyderabad",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Hyderabad"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Hyderabad"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Hyderabad"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_pune",
+              "type": "list_item",
+              "props": {
+                "title": "Pune",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Pune"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Pune"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Pune"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_jaipur",
+              "type": "list_item",
+              "props": {
+                "title": "Jaipur",
+                "icon": "location",
+                "selectedWhenKey": "city",
+                "selectedWhenValue": "Jaipur"
+              },
+              "actions": {
+                "onClick": {
+                  "type": "set_state",
+                  "params": {
+                    "key": "city",
+                    "value": "Jaipur"
+                  },
+                  "then": [
+                    {
+                      "type": "track_event",
+                      "params": {
+                        "name": "city_changed",
+                        "city": "Jaipur"
+                      }
+                    },
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_city_end",
+              "type": "spacer",
+              "props": {
+                "size": 16
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gap_after_header",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "quick_actions",
+      "type": "quick_actions",
+      "props": {
+        "actions": [
+          {
+            "label": "Buy car",
+            "icon": "buy",
+            "caption": "12,400 cars",
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "buy_listing"
+              }
+            }
+          },
+          {
+            "label": "Sell car",
+            "icon": "sell",
+            "caption": "Best price",
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "sell_flow"
+              }
+            }
+          },
+          {
+            "label": "Car loan",
+            "icon": "loan",
+            "caption": "From 9.7%",
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "loan"
+              }
+            }
+          },
+          {
+            "label": "Insurance",
+            "icon": "insurance",
+            "caption": "Renew fast",
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "insurance"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_after_quick",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "offer_banners",
+      "type": "banner_carousel",
+      "props": {
+        "height": 150,
+        "slides": [
+          {
+            "title": "New banner, zero code",
+            "subtitle": "Added by editing the payload only",
+            "ctaLabel": "Proof",
+            "gradient": [
+              "#C0392B",
+              "#FF7A6B"
+            ]
+          },
+          {
+            "title": "Zero down payment",
+            "subtitle": "On 2,000+ assured cars this month",
+            "ctaLabel": "Check eligibility",
+            "gradient": [
+              "#1B2065",
+              "#5865C4"
+            ],
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "offer",
+                "offerId": "zero_dp"
+              }
+            }
+          },
+          {
+            "title": "Sell in a single visit",
+            "subtitle": "Instant payment, free RC transfer",
+            "ctaLabel": "Get a quote",
+            "gradient": [
+              "#0B8A6B",
+              "#3FCFA8"
+            ],
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "sell_flow"
+              }
+            }
+          },
+          {
+            "title": "7-day money back",
+            "subtitle": "Not in love with it? Return it.",
+            "ctaLabel": "How it works",
+            "gradient": [
+              "#E8890C",
+              "#FFC46B"
+            ],
+            "action": {
+              "type": "navigate",
+              "params": {
+                "route": "returns_policy"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_after_banners",
+      "type": "spacer",
+      "props": {
+        "size": 24
+      }
+    },
+    {
+      "id": "budget_header",
+      "type": "section_header",
+      "props": {
+        "title": "LIVE EDIT: no rebuild, no reinstall",
+        "subtitle": "Same APK, different JSON",
+        "actionLabel": "View all"
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "buy_listing",
+            "filter": "budget"
+          }
+        }
+      }
+    },
+    {
+      "id": "gap_before_fuel_tabs",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "fuel_tabs",
+      "type": "chip_group",
+      "props": {
+        "stateKey": "fuel",
+        "options": [
+          {
+            "label": "All",
+            "value": "all",
+            "supporting": "412"
+          },
+          {
+            "label": "Petrol",
+            "value": "petrol",
+            "supporting": "268"
+          },
+          {
+            "label": "Diesel",
+            "value": "diesel",
+            "supporting": "91"
+          },
+          {
+            "label": "CNG",
+            "value": "cng",
+            "supporting": "53"
+          }
+        ]
+      },
+      "actions": {
+        "onSelect": {
+          "type": "track_event",
+          "params": {
+            "name": "home_fuel_filter_changed"
+          }
+        }
+      }
+    },
+    {
+      "id": "gap_after_fuel_tabs",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "rail_all",
+      "type": "carousel",
+      "props": {
+        "itemSpacing": 12
+      },
+      "visibleWhen": {
+        "key": "fuel",
+        "equals": "all"
+      },
+      "children": [
+        {
+          "id": "card_swift_vxi_all",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Swift VXi",
+            "price": "Rs 5.24 L",
+            "emi": "Rs 11,400/mo",
+            "specs": [
+              "2019",
+              "42,150 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_swift_vxi",
+            "savings": "Save 38k",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "swift_vxi",
+                "name": "Maruti Swift VXi",
+                "price": "Rs 5.24 L",
+                "emi": "Rs 11,400/mo",
+                "specs": "2019 | 42,150 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_i20_sportz_all",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai i20 Sportz",
+            "price": "Rs 6.85 L",
+            "emi": "Rs 14,820/mo",
+            "specs": [
+              "2020",
+              "31,900 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i20_sportz",
+            "badge": "Popular",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "i20_sportz",
+                "name": "Hyundai i20 Sportz",
+                "price": "Rs 6.85 L",
+                "emi": "Rs 14,820/mo",
+                "specs": "2020 | 31,900 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_nexon_xz_all",
+          "type": "car_card",
+          "props": {
+            "name": "Tata Nexon XZ+",
+            "price": "Rs 7.95 L",
+            "emi": "Rs 17,190/mo",
+            "specs": [
+              "2019",
+              "55,600 km",
+              "Diesel",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_nexon_xz"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "nexon_xz",
+                "name": "Tata Nexon XZ+",
+                "price": "Rs 7.95 L",
+                "emi": "Rs 17,190/mo",
+                "specs": "2019 | 55,600 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_wagonr_lxi_all",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti WagonR LXi",
+            "price": "Rs 4.60 L",
+            "emi": "Rs 9,950/mo",
+            "specs": [
+              "2021",
+              "28,400 km",
+              "CNG",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_wagonr_lxi",
+            "badge": "Low km"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "wagonr_lxi",
+                "name": "Maruti WagonR LXi",
+                "price": "Rs 4.60 L",
+                "emi": "Rs 9,950/mo",
+                "specs": "2021 | 28,400 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "rail_petrol",
+      "type": "carousel",
+      "props": {
+        "itemSpacing": 12
+      },
+      "visibleWhen": {
+        "key": "fuel",
+        "equals": "petrol"
+      },
+      "children": [
+        {
+          "id": "card_swift_vxi_petrol",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Swift VXi",
+            "price": "Rs 5.24 L",
+            "emi": "Rs 11,400/mo",
+            "specs": [
+              "2019",
+              "42,150 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_swift_vxi",
+            "savings": "Save 38k",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "swift_vxi",
+                "name": "Maruti Swift VXi",
+                "price": "Rs 5.24 L",
+                "emi": "Rs 11,400/mo",
+                "specs": "2019 | 42,150 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_i20_sportz_petrol",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai i20 Sportz",
+            "price": "Rs 6.85 L",
+            "emi": "Rs 14,820/mo",
+            "specs": [
+              "2020",
+              "31,900 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i20_sportz",
+            "badge": "Popular",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "i20_sportz",
+                "name": "Hyundai i20 Sportz",
+                "price": "Rs 6.85 L",
+                "emi": "Rs 14,820/mo",
+                "specs": "2020 | 31,900 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_baleno_zeta_petrol",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Baleno Zeta",
+            "price": "Rs 6.40 L",
+            "emi": "Rs 13,850/mo",
+            "specs": [
+              "2020",
+              "36,800 km",
+              "Petrol",
+              "AMT"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_baleno_zeta",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "baleno_zeta",
+                "name": "Maruti Baleno Zeta",
+                "price": "Rs 6.40 L",
+                "emi": "Rs 13,850/mo",
+                "specs": "2020 | 36,800 km | Petrol | AMT",
+                "image": "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_i10_nios_petrol",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Grand i10 Nios",
+            "price": "Rs 5.10 L",
+            "emi": "Rs 11,040/mo",
+            "specs": [
+              "2021",
+              "22,300 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_i10_nios",
+            "badge": "Low km"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "i10_nios",
+                "name": "Hyundai Grand i10 Nios",
+                "price": "Rs 5.10 L",
+                "emi": "Rs 11,040/mo",
+                "specs": "2021 | 22,300 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "rail_diesel",
+      "type": "carousel",
+      "props": {
+        "itemSpacing": 12
+      },
+      "visibleWhen": {
+        "key": "fuel",
+        "equals": "diesel"
+      },
+      "children": [
+        {
+          "id": "card_nexon_xz_diesel",
+          "type": "car_card",
+          "props": {
+            "name": "Tata Nexon XZ+",
+            "price": "Rs 7.95 L",
+            "emi": "Rs 17,190/mo",
+            "specs": [
+              "2019",
+              "55,600 km",
+              "Diesel",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_nexon_xz"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "nexon_xz",
+                "name": "Tata Nexon XZ+",
+                "price": "Rs 7.95 L",
+                "emi": "Rs 17,190/mo",
+                "specs": "2019 | 55,600 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_ecosport_titanium_diesel",
+          "type": "car_card",
+          "props": {
+            "name": "Ford EcoSport Titanium",
+            "price": "Rs 6.75 L",
+            "emi": "Rs 14,600/mo",
+            "specs": [
+              "2018",
+              "68,200 km",
+              "Diesel",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_ecosport_titanium",
+            "savings": "Save 52k"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "ecosport_titanium",
+                "name": "Ford EcoSport Titanium",
+                "price": "Rs 6.75 L",
+                "emi": "Rs 14,600/mo",
+                "specs": "2018 | 68,200 km | Diesel | Manual",
+                "image": "https://images.unsplash.com/photo-1550355291-bbee04a92027?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "rail_cng",
+      "type": "carousel",
+      "props": {
+        "itemSpacing": 12
+      },
+      "visibleWhen": {
+        "key": "fuel",
+        "equals": "cng"
+      },
+      "children": [
+        {
+          "id": "card_wagonr_lxi_cng",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti WagonR LXi",
+            "price": "Rs 4.60 L",
+            "emi": "Rs 9,950/mo",
+            "specs": [
+              "2021",
+              "28,400 km",
+              "CNG",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_wagonr_lxi",
+            "badge": "Low km"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "wagonr_lxi",
+                "name": "Maruti WagonR LXi",
+                "price": "Rs 4.60 L",
+                "emi": "Rs 9,950/mo",
+                "specs": "2021 | 28,400 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_alto_k10_cng",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Alto K10 VXi",
+            "price": "Rs 3.85 L",
+            "emi": "Rs 8,330/mo",
+            "specs": [
+              "2022",
+              "19,700 km",
+              "CNG",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_alto_k10",
+            "assured": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "alto_k10",
+                "name": "Maruti Alto K10 VXi",
+                "price": "Rs 3.85 L",
+                "emi": "Rs 8,330/mo",
+                "specs": "2022 | 19,700 km | CNG | Manual",
+                "image": "https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_after_rails",
+      "type": "spacer",
+      "props": {
+        "size": 28
+      }
+    },
+    {
+      "id": "emi_header",
+      "type": "section_header",
+      "props": {
+        "title": "Plan your EMI",
+        "subtitle": "On a Rs 6.85 L car with Rs 1.2 L down payment"
+      }
+    },
+    {
+      "id": "gap_before_tenure",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "tenure_chips",
+      "type": "chip_group",
+      "props": {
+        "stateKey": "tenure",
+        "scrollable": false,
+        "options": [
+          {
+            "label": "36 mo",
+            "value": "36",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "36"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 18,240"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 6,56,640"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "36 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "36"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "label": "48 mo",
+            "value": "48",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "48"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 14,820"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 7,11,360"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "48 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "48"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "label": "60 mo",
+            "value": "60",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "60"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 12,410"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 7,44,600"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "60 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "60"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "label": "72 mo",
+            "value": "72",
+            "action": {
+              "type": "set_state",
+              "params": {
+                "key": "tenure",
+                "value": "72"
+              },
+              "then": [
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_monthly",
+                    "value": "Rs 10,780"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_total",
+                    "value": "Rs 7,76,160"
+                  }
+                },
+                {
+                  "type": "set_state",
+                  "params": {
+                    "key": "emi_tenure_label",
+                    "value": "72 mo"
+                  }
+                },
+                {
+                  "type": "track_event",
+                  "params": {
+                    "name": "emi_tenure_selected",
+                    "tenure": "72"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      }
+    },
+    {
+      "id": "gap_after_tenure",
+      "type": "spacer",
+      "props": {
+        "size": 16
+      }
+    },
+    {
+      "id": "emi_card",
+      "type": "emi_summary",
+      "props": {
+        "heading": "Your monthly EMI",
+        "monthly": "{{state.emi_monthly}}",
+        "monthlyCaption": "for {{state.emi_tenure_label}}",
+        "rows": [
+          {
+            "label": "Total payable",
+            "value": "{{state.emi_total}}"
+          },
+          {
+            "label": "Interest rate",
+            "value": "9.7% p.a."
+          },
+          {
+            "label": "Down payment",
+            "value": "Rs 1,20,000"
+          }
+        ],
+        "ctaLabel": "See full breakdown"
+      },
+      "actions": {
+        "onClick": {
+          "type": "open_bottom_sheet",
+          "params": {
+            "sheetId": "emi_breakdown",
+            "title": "EMI breakdown"
+          },
+          "content": [
+            {
+              "id": "sheet_title",
+              "type": "text",
+              "props": {
+                "value": "EMI breakdown",
+                "style": "headline_small"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "top": 4
+                }
+              }
+            },
+            {
+              "id": "sheet_sub",
+              "type": "text",
+              "props": {
+                "value": "For {{state.emi_tenure_label}} at 9.7% p.a.",
+                "style": "body_small",
+                "color": "text_secondary"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20,
+                  "top": 4
+                }
+              }
+            },
+            {
+              "id": "sheet_gap_1",
+              "type": "spacer",
+              "props": {
+                "size": 20
+              }
+            },
+            {
+              "id": "sheet_rows",
+              "type": "emi_summary",
+              "props": {
+                "heading": "Monthly instalment",
+                "monthly": "{{state.emi_monthly}}",
+                "monthlyCaption": "x {{state.emi_tenure_label}}",
+                "rows": [
+                  {
+                    "label": "Total payable",
+                    "value": "{{state.emi_total}}"
+                  },
+                  {
+                    "label": "Down payment",
+                    "value": "Rs 1,20,000"
+                  },
+                  {
+                    "label": "Interest rate",
+                    "value": "9.7% p.a."
+                  },
+                  {
+                    "label": "Processing fee",
+                    "value": "Rs 3,499"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sheet_gap_2",
+              "type": "spacer",
+              "props": {
+                "size": 16
+              }
+            },
+            {
+              "id": "sheet_note",
+              "type": "text",
+              "props": {
+                "value": "Rates are indicative and depend on your credit profile. Final terms are shared by the lending partner before you sign.",
+                "style": "label_small",
+                "color": "text_tertiary"
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20
+                }
+              }
+            },
+            {
+              "id": "sheet_gap_3",
+              "type": "spacer",
+              "props": {
+                "size": 16
+              }
+            },
+            {
+              "id": "sheet_cta",
+              "type": "button",
+              "props": {
+                "label": "Apply for this loan",
+                "variant": "accent",
+                "fillWidth": true
+              },
+              "style": {
+                "padding": {
+                  "horizontal": 20
+                }
+              },
+              "actions": {
+                "onClick": {
+                  "type": "navigate",
+                  "params": {
+                    "route": "loan_application"
+                  },
+                  "then": [
+                    {
+                      "type": "dismiss_bottom_sheet"
+                    }
+                  ]
+                }
+              }
+            },
+            {
+              "id": "sheet_gap_4",
+              "type": "spacer",
+              "props": {
+                "size": 12
+              }
+            }
+          ],
+          "then": [
+            {
+              "type": "track_event",
+              "params": {
+                "name": "emi_sheet_opened"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gap_after_emi",
+      "type": "spacer",
+      "props": {
+        "size": 28
+      }
+    },
+    {
+      "id": "trust_strip",
+      "type": "value_props",
+      "props": {
+        "heading": "This heading was changed in the JSON",
+        "items": [
+          {
+            "title": "140-point",
+            "caption": "inspection",
+            "icon": "inspection"
+          },
+          {
+            "title": "7-day",
+            "caption": "money back",
+            "icon": "return"
+          },
+          {
+            "title": "Free RC",
+            "caption": "transfer",
+            "icon": "paperwork"
+          },
+          {
+            "title": "1-year",
+            "caption": "warranty",
+            "icon": "warranty"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gap_after_trust",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "saved_entry",
+      "type": "column",
+      "props": {
+        "spacing": 4
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 4
+        },
+        "background": "surface",
+        "cornerRadius": 16,
+        "borderWidth": 1,
+        "borderColor": "divider"
+      },
+      "children": [
+        {
+          "id": "saved_row",
+          "type": "list_item",
+          "props": {
+            "title": "Saved cars",
+            "subtitle": "Everything you tapped the heart on",
+            "icon": "check",
+            "showChevron": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "wishlist"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_after_saved",
+      "type": "spacer",
+      "props": {
+        "size": 28
+      }
+    },
+    {
+      "id": "assured_header",
+      "type": "section_header",
+      "props": {
+        "title": "Assured cars near you",
+        "subtitle": "Inspected, serviced and ready for delivery",
+        "actionLabel": "See all"
+      },
+      "actions": {
+        "onClick": {
+          "type": "navigate",
+          "params": {
+            "route": "buy_listing",
+            "filter": "assured"
+          }
+        }
+      }
+    },
+    {
+      "id": "gap_before_grid",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "assured_grid",
+      "type": "grid",
+      "props": {
+        "columns": 2,
+        "itemSpacing": 12,
+        "rowSpacing": 12
+      },
+      "style": {
+        "padding": {
+          "horizontal": 16
+        }
+      },
+      "children": [
+        {
+          "id": "card_creta_sx_grid",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Creta SX",
+            "price": "Rs 11.40 L",
+            "emi": "Rs 24,650/mo",
+            "specs": [
+              "2020",
+              "44,100 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_creta_sx",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "creta_sx",
+                "name": "Hyundai Creta SX",
+                "price": "Rs 11.40 L",
+                "emi": "Rs 24,650/mo",
+                "specs": "2020 | 44,100 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_venue_s_grid",
+          "type": "car_card",
+          "props": {
+            "name": "Hyundai Venue S",
+            "price": "Rs 8.20 L",
+            "emi": "Rs 17,740/mo",
+            "specs": [
+              "2021",
+              "29,600 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1517672651691-24622a91b550?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_venue_s",
+            "badge": "New",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "venue_s",
+                "name": "Hyundai Venue S",
+                "price": "Rs 8.20 L",
+                "emi": "Rs 17,740/mo",
+                "specs": "2021 | 29,600 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1517672651691-24622a91b550?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_brezza_zxi_grid",
+          "type": "car_card",
+          "props": {
+            "name": "Maruti Brezza ZXi",
+            "price": "Rs 9.65 L",
+            "emi": "Rs 20,880/mo",
+            "specs": [
+              "2020",
+              "38,500 km",
+              "Petrol",
+              "AMT"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_brezza_zxi",
+            "assured": true,
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "brezza_zxi",
+                "name": "Maruti Brezza ZXi",
+                "price": "Rs 9.65 L",
+                "emi": "Rs 20,880/mo",
+                "specs": "2020 | 38,500 km | Petrol | AMT",
+                "image": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        },
+        {
+          "id": "card_kwid_rxt_grid",
+          "type": "car_card",
+          "props": {
+            "name": "Renault Kwid RXT",
+            "price": "Rs 3.40 L",
+            "emi": "Rs 7,360/mo",
+            "specs": [
+              "2019",
+              "51,200 km",
+              "Petrol",
+              "Manual"
+            ],
+            "imageUrl": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=640&q=72&auto=format&fit=crop",
+            "wishKey": "wish_kwid_rxt",
+            "savings": "Save 24k",
+            "fillWidth": true
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "car_detail",
+                "carId": "kwid_rxt",
+                "name": "Renault Kwid RXT",
+                "price": "Rs 3.40 L",
+                "emi": "Rs 7,360/mo",
+                "specs": "2019 | 51,200 km | Petrol | Manual",
+                "image": "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=900&q=72&auto=format&fit=crop"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_after_grid",
+      "type": "spacer",
+      "props": {
+        "size": 28
+      }
+    },
+    {
+      "id": "showroom_360",
+      "type": "ar_showroom_360",
+      "props": {
+        "carId": "creta_sx",
+        "hotspots": [
+          "interior",
+          "boot",
+          "engine"
+        ]
+      }
+    },
+    {
+      "id": "loyalty_tier",
+      "type": "loyalty_tier_card",
+      "props": {
+        "tier": "gold",
+        "points": 4820
+      },
+      "minSchemaVersion": 5,
+      "fallback": {
+        "id": "loyalty_tier_fb",
+        "type": "value_props",
+        "props": {
+          "heading": "Cars24 rewards",
+          "items": [
+            {
+              "title": "Update",
+              "caption": "to see rewards",
+              "icon": "warranty"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "gap_after_experiments",
+      "type": "spacer",
+      "props": {
+        "size": 28
+      }
+    },
+    {
+      "id": "faq_header",
+      "type": "section_header",
+      "props": {
+        "title": "Questions, answered"
+      }
+    },
+    {
+      "id": "gap_before_faq",
+      "type": "spacer",
+      "props": {
+        "size": 12
+      }
+    },
+    {
+      "id": "faq_1",
+      "type": "faq_item",
+      "props": {
+        "question": "How does the 7-day money back work?",
+        "answer": "Drive the car for up to 7 days or 350 km. If it is not right for you, return it at any Cars24 hub and we refund the full amount, no questions asked.",
+        "startExpanded": true
+      }
+    },
+    {
+      "id": "faq_gap_1",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "faq_2",
+      "type": "faq_item",
+      "props": {
+        "question": "Is the RC transfer really free?",
+        "answer": "Yes. We handle the paperwork end to end and absorb the transfer fee. You get an SMS from the RTO once it completes, usually within 45 days.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "faq_gap_2",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "faq_3",
+      "type": "faq_item",
+      "props": {
+        "question": "Can I get a loan without a credit history?",
+        "answer": "Often yes. We work with 15 lending partners and some approve first-time borrowers against income proof. The EMI above is indicative until a partner quotes you.",
+        "startExpanded": false
+      }
+    },
+    {
+      "id": "faq_gap_3",
+      "type": "spacer",
+      "props": {
+        "size": 8
+      }
+    },
+    {
+      "id": "gap_before_footer",
+      "type": "spacer",
+      "props": {
+        "size": 20
+      }
+    },
+    {
+      "id": "sell_cta",
+      "type": "column",
+      "props": {
+        "spacing": 12,
+        "align": "center"
+      },
+      "style": {
+        "margin": {
+          "horizontal": 16
+        },
+        "padding": {
+          "all": 24
+        },
+        "gradient": [
+          "#11144B",
+          "#2E3A8C"
+        ],
+        "cornerRadius": 20
+      },
+      "children": [
+        {
+          "id": "sell_cta_title",
+          "type": "text",
+          "props": {
+            "value": "Sell your car in a single visit",
+            "style": "title_large",
+            "color": "white",
+            "align": "center"
+          }
+        },
+        {
+          "id": "sell_cta_body",
+          "type": "text",
+          "props": {
+            "value": "Free evaluation, instant payment, and we take care of the paperwork.",
+            "style": "body_small",
+            "color": "white",
+            "align": "center"
+          }
+        },
+        {
+          "id": "sell_cta_button",
+          "type": "button",
+          "props": {
+            "label": "Get a free quote",
+            "variant": "accent"
+          },
+          "actions": {
+            "onClick": {
+              "type": "navigate",
+              "params": {
+                "route": "sell_flow",
+                "source": "home_footer"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "gap_footer_bottom",
+      "type": "spacer",
+      "props": {
+        "size": 32
+      }
+    }
+  ]
+}

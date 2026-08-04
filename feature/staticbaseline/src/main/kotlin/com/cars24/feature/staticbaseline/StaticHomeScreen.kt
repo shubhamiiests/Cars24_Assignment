@@ -187,6 +187,7 @@ fun StaticHomeScreen(modifier: Modifier = Modifier) {
     LaunchedEffect(Unit) {
         snapshotFlow { listState.layoutInfo.visibleItemsInfo.isNotEmpty() }.first { it }
         StartupTrace.mark(StartupTrace.MARK_FIRST_SECTION_DRAWN)
+        snapshotFlow { listState.canScrollForward }.first { it }
         StartupTrace.mark(StartupTrace.MARK_INTERACTIVE)
         snapshotFlow { listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1 }
             .first { it >= listState.layoutInfo.totalItemsCount - 1 }

@@ -26,6 +26,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -105,6 +106,10 @@ fun SduiPageScreen(
 
             PagePhase.Content -> {
                 val page = state.page ?: return@Box
+                PullToRefreshBox(
+                    isRefreshing = state.isRefreshing,
+                    onRefresh = { onIntent(PageIntent.Refresh) },
+                ) {
                 SduiPageHost(
                     page = page,
                     scope = scope,
@@ -126,6 +131,7 @@ fun SduiPageScreen(
                         }
                     },
                 )
+                }
             }
         }
     }

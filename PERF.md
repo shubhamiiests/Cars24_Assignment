@@ -2,9 +2,11 @@
 
 SDUI versus a hardcoded build of the same screen.
 
-**Headline: the SDUI page costs about +128 ms (+31%) to first content and +170 ms (+17%)
-to full display on the device I had. JSON parsing is ~16 ms of that. The rest is view
-build.** Details, caveats and the one number that looks good but is not, below.
+**Headline: the SDUI page costs +128 ms (+31%) to first content and to interactive, and
++170 ms (+17%) to full display. JSON parsing is ~16 ms of that; the rest is view build.
+Scroll jank is unmeasured because the emulator could not produce frame timings.** All five
+metrics from the brief are in §3, including the two that need caveats and the one that
+flatters SDUI for the wrong reason.
 
 
 
@@ -73,40 +75,83 @@ fallback paths were not being exercised in the measured run.
 
 ## 3. Results
 
-### Time to first content (TTR)
+### The five metrics the brief asks for
 
-Measured in-app from `Process.getStartUptimeMillis()` to the frame where the first section
-has been laid out, via `StartupTrace`. **This is the number I trust most**, because it is
-measured identically in both variants and it is measured from real process start rather
-than from `Activity.onCreate`.
+| Metric | Static | SDUI | Overhead | How measured |
+|---|---|---|---|---|
+| **TTR** — cold open → above the fold rendered | **410 ms** | **538 ms** | **+128 ms (+31.3%)** | `StartupTrace` mark on first laid-out section, n=10 |
+| **TTI** — cold open → scrollable and tappable | **410 ms** | **538 ms** | **+128 ms (+31.3%)** | Separate mark on `canScrollForward`; lands 0-6 ms after TTR in every run |
+| **Full page** — open → all sections rendered | **3,502 ms** | **3,852 ms** | **+350 ms (+10.0%)** | Fling to the last section, mark fires when its index is visible, n=6 |
+| **SDUI breakdown** — fetch/parse vs view-build | n/a | fetch ~1-3 ms · **parse 15.8 ms** · view-build ~110 ms | — | `sdui_json_parse` atrace section via `TraceSectionMetric` |
+| **Scroll perf** — dropped frames / jank | — | — | **not measured** | `FrameTimingMetric` returned zero samples on this emulator — see §5 |
 
-10 cold launches each, `pm clear` between every run so nothing is cached:
+Two of those rows need caveats before you use them, and both caveats cut against me.
+
+### TTI is not a separate number, and I am not going to pretend it is
+
+TTI is measured by a genuinely different signal — a second mark that waits for
+`listState.canScrollForward`, i.e. the list has laid out enough to accept a scroll — rather
+than by re-reporting the TTR timestamp under a second name.
+
+It lands **0-6 ms after TTR in all 22 runs** (median delta 0 ms). That is not a measurement
+failure, it is how Compose works: once a `LazyColumn` has measured and placed its first
+items it is already scrollable and already hit-testable, so there is no meaningful window
+between "there are pixels" and "you can touch them".
+
+I am reporting it as its own row because the brief asks for it, but **the honest statement is
+that TTR and TTI are the same event in a Compose app**, and a table showing them 40 ms apart
+would mean somebody had picked two arbitrary signals to make the table look richer.
+
+### "Full page" is mostly a measurement of how fast I swiped
+
+The page is a lazy list, so sections below the fold genuinely are not rendered until they
+scroll into view. There is no honest way to report "all sections rendered" without reaching
+the bottom, so the mark fires when the last section's index becomes visible after a scripted
+fling (12 swipes, identical gesture for both builds).
+
+That means **the bulk of those 3.5 seconds is gesture and fling-settle time, not rendering
+cost.** The +350 ms delta is the part attributable to the build, and it is the noisiest
+number in this document — the SDUI range was 3,586-4,417 ms against 3,401-3,614 ms for
+static, so the ranges overlap. Treat +10% as directional at best.
+
+An eager `Column` would give a clean full-page number and a much worse TTR. That trade is the
+right way round for a page like this, and it is why the metric is awkward rather than the
+implementation being wrong.
+
+### TTR distribution (the number I trust)
+
+10 cold launches each, `pm clear` between every run so nothing is cached, and no scrolling
+during the measurement:
 
 | | min | median | p90 | max |
 |---|---|---|---|---|
 | Static | 274 ms | **410 ms** | 591 ms | 761 ms |
 | SDUI | 407 ms | **538 ms** | 851 ms | 891 ms |
-| **Overhead** | | **+128 ms (+31.3%)** | | |
 
-### Macrobenchmark
+### Macrobenchmark, as an independent cross-check
 
-| Metric | Static (median) | SDUI (median) | Overhead                                  |
-|---|---|---|-------------------------------------------|
-| `timeToInitialDisplay` | 972.7 ms | 616.1 ms | **-37% - do not believe this, see below** |
-| `timeToFullDisplay` | 1008.3 ms | 1177.9 ms | **+169.6 ms (+16.8%)**                    |
-| `sdui_json_parse` (sum) | n/a | **15.8 ms** (min 4.1, max 69.9) | -                                         |
+Different harness, different definitions, same conclusion on the comparable metric:
+
+| Metric | Static (median) | SDUI (median) | Overhead |
+|---|---|---|---|
+| `timeToInitialDisplay` | 972.7 ms | 616.1 ms | **-37% — do not believe this, see below** |
+| `timeToFullDisplay` | 1008.3 ms | 1177.9 ms | **+169.6 ms (+16.8%)** |
+| `sdui_json_parse` (sum) | n/a | **15.8 ms** (min 4.1, max 69.9) | — |
+
+`timeToFullDisplay` here is driven by explicit `ReportDrawnWhen` calls in both builds and
+means "the page is up", not "you have scrolled to the end" — which is why it is ~1.2 s and
+the full-page row above is ~3.9 s. They measure different things and both are in the table.
 
 ### The number that looks good and is not
 
 `timeToInitialDisplay` says SDUI is 37% *faster*. It is not. TTID stops at the first frame
-with content, and the SDUI build's first frame is the **shimmer skeleton**, which it can
-draw before the payload has even been read. The static build has nothing to draw until it
-draws the real thing.
+with content, and the SDUI build's first frame is the **shimmer skeleton**, which it can draw
+before the payload has been read. The static build has nothing to draw until it draws the
+real thing.
 
-So SDUI genuinely feels faster to first pixel, and that is a real product benefit worth
-having - but it is not the same measurement, and reporting it as a 37% win would be
-dishonest. `timeToFullDisplay` (driven by explicit `ReportDrawnWhen` calls in both
-variants) and the in-app TTR mark are the comparable numbers, and both say SDUI is slower.
+SDUI genuinely feels faster to first pixel, and that is a real product benefit. But it is not
+the same measurement, and reporting it as a 37% win would be dishonest. The in-app TTR mark
+and `timeToFullDisplay` are the comparable numbers, and both say SDUI is slower.
 
 ### Fetch versus parse versus view-build
 
@@ -117,16 +162,15 @@ variants) and the in-app TTR mark are the comparable numbers, and both say SDUI 
 | View build | **remainder, ~110 ms of the 128 ms TTR gap** | by subtraction |
 
 The useful conclusion: **parsing is not the problem.** Roughly 12% of the overhead is
-deserialisation; the rest is the renderer's own work - registry lookup, per-node props
-decode, building a `Modifier` chain from `SduiStyle`, and the extra `Box` wrapper each node
-carries. Optimisation effort belongs there, not in the parser.
+deserialisation; the rest is the renderer's own work — registry lookup, per-node props decode,
+building a `Modifier` chain from `SduiStyle`, and the extra `Box` wrapper each node carries.
+Optimisation effort belongs there, not in the parser.
 
-`fetch` is an asset read, not a network call, because the mock server is a bundled JSON
-file. **A real network fetch would add its own latency, but it would add the same latency
-to any client architecture**, so leaving it out isolates the SDUI-specific cost rather than
-hiding it. What is not simulated is a fake delay - padding the read with a `sleep` and
-reporting that as "fetch time" would make this whole section fiction.
-
+`fetch` is an asset read, not a network call, because the mock server is a bundled JSON file.
+**A real network fetch would add its own latency, but it would add the same latency to any
+client architecture**, so leaving it out isolates the SDUI-specific cost rather than hiding
+it. What is not simulated is a fake delay — padding the read with a `sleep` and reporting
+that as "fetch time" would make this section fiction.
 
 ## 4. Measure, then optimise: what I tried
 

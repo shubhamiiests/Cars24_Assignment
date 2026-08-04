@@ -69,6 +69,9 @@ private fun RecordRenderMarks(listState: LazyListState, sectionCount: Int) {
 
         snapshotFlow { listState.layoutInfo.visibleItemsInfo.isNotEmpty() }.first { it }
         StartupTrace.mark(StartupTrace.MARK_FIRST_SECTION_DRAWN)
+
+        snapshotFlow { listState.canScrollForward || !listState.canScrollBackward }
+            .first { listState.canScrollForward }
         StartupTrace.mark(StartupTrace.MARK_INTERACTIVE)
 
         snapshotFlow { listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: -1 }
