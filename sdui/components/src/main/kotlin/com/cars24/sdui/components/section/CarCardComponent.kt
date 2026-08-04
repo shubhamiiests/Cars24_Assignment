@@ -32,7 +32,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.component.Cars24Card
@@ -70,7 +69,6 @@ data class CarCardProps(
 )
 
 private val CardTopShape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
-private val SavedHeart = Color(0xFFFF4D5E)
 private const val WISHLISTED = "1"
 
 class CarCardComponent : SduiComponent {
@@ -150,7 +148,7 @@ private fun CarThumbnail(
             Surface(
                 modifier = Modifier.padding(Spacing.sm),
                 shape = Radii.sm,
-                color = Color.White.copy(alpha = 0.92f),
+                color = Cars24.colors.photoBadgeSurface,
             ) {
                 Text(
                     text = props.badge,
@@ -168,7 +166,7 @@ private fun CarThumbnail(
                     .padding(Spacing.xs)
                     .size(36.dp)
                     .clip(CircleShape)
-                    .background(Color.Black.copy(alpha = 0.22f))
+                    .background(Cars24.colors.photoScrim)
                     .clickable(onClick = onWishlistTap),
                 contentAlignment = Alignment.Center,
             ) {
@@ -178,7 +176,7 @@ private fun CarThumbnail(
                         if (saved) R.string.cmp_cd_remove_from_wishlist
                         else R.string.cmp_cd_save_to_wishlist,
                     ),
-                    tint = if (saved) SavedHeart else Color.White,
+                    tint = if (saved) Cars24.colors.savedHeart else Cars24.colors.onBrand,
                     modifier = Modifier.size(20.dp),
                 )
             }

@@ -27,6 +27,13 @@ internal val Neutral600 = Color(0xFF616B84)
 internal val Neutral800 = Color(0xFF2B3247)
 internal val Neutral900 = Color(0xFF151A28)
 
+internal val SavedHeartRed = Color(0xFFFF4D5E)
+
+internal val OnBrandMuted = Color(0xFFFFFFFF).copy(alpha = 0.75f)
+internal val OnBrandSubtle = Color(0xFFFFFFFF).copy(alpha = 0.22f)
+internal val PhotoScrim = Color(0xFF000000).copy(alpha = 0.22f)
+internal val PhotoBadgeSurface = Color(0xFFFFFFFF).copy(alpha = 0.92f)
+
 internal val Dark0 = Color(0xFF0B0E19)
 internal val Dark50 = Color(0xFF131728)
 internal val Dark100 = Color(0xFF1B2136)
@@ -48,6 +55,12 @@ data class Cars24Colors(
     val textSecondary: Color,
     val textTertiary: Color,
     val shimmer: List<Color>,
+    val onBrand: Color,
+    val onBrandMuted: Color,
+    val onBrandSubtle: Color,
+    val photoScrim: Color,
+    val photoBadgeSurface: Color,
+    val savedHeart: Color,
     val isDark: Boolean,
 )
 
@@ -67,6 +80,12 @@ internal val LightCars24Colors = Cars24Colors(
     textSecondary = Neutral600,
     textTertiary = Neutral400,
     shimmer = listOf(Neutral100, Neutral200, Neutral100),
+    onBrand = Neutral0,
+    onBrandMuted = OnBrandMuted,
+    onBrandSubtle = OnBrandSubtle,
+    photoScrim = PhotoScrim,
+    photoBadgeSurface = PhotoBadgeSurface,
+    savedHeart = SavedHeartRed,
     isDark = false,
 )
 
@@ -86,5 +105,31 @@ internal val DarkCars24Colors = Cars24Colors(
     textSecondary = Color(0xFFA8B0C6),
     textTertiary = Color(0xFF6C7590),
     shimmer = listOf(Dark100, Dark200, Dark100),
+    onBrand = Neutral0,
+    onBrandMuted = OnBrandMuted,
+    onBrandSubtle = OnBrandSubtle,
+    photoScrim = PhotoScrim,
+    photoBadgeSurface = PhotoBadgeSurface,
+    savedHeart = SavedHeartRed,
     isDark = true,
 )
+
+val CarPhotoPlaceholderPalettes: List<List<Color>> = listOf(
+    listOf(Color(0xFF3E4A8A), Color(0xFF7A86C7)),
+    listOf(Color(0xFF1F6F63), Color(0xFF63BFAE)),
+    listOf(Color(0xFF7A4A1C), Color(0xFFD79B5A)),
+    listOf(Color(0xFF4A2A5E), Color(0xFF9A76B4)),
+    listOf(Color(0xFF25405E), Color(0xFF6D93B8)),
+    listOf(Color(0xFF5E2A34), Color(0xFFB4747F)),
+    listOf(Color(0xFF2F5E3A), Color(0xFF77B487)),
+    listOf(Color(0xFF6B2F4E), Color(0xFFC17FA0)),
+    listOf(Color(0xFF404A55), Color(0xFF8D9AA8)),
+    listOf(Color(0xFF1B5C6E), Color(0xFF63A9BC)),
+)
+
+object PromoGradients {
+    val ZeroDownPayment = listOf(Color(0xFF1B2065), Color(0xFF5865C4))
+    val SellInOneVisit = listOf(Color(0xFF0B8A6B), Color(0xFF3FCFA8))
+    val MoneyBack = listOf(Color(0xFFE8890C), Color(0xFFFFC46B))
+    val SellFooter = listOf(Color(0xFF11144B), Color(0xFF2E3A8C))
+}

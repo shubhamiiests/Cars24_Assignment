@@ -3,6 +3,7 @@ package com.cars24.core.designsystem.component
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -15,14 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.theme.Cars24
+import com.cars24.core.designsystem.theme.Cars24Theme
+import com.cars24.core.designsystem.theme.ChipLabelSelectedStyle
+import com.cars24.core.designsystem.theme.ChipLabelStyle
 import com.cars24.core.designsystem.theme.Radii
 import com.cars24.core.designsystem.theme.Spacing
-import androidx.compose.ui.tooling.preview.Preview
-import com.cars24.core.designsystem.theme.Cars24Theme
-import androidx.compose.foundation.layout.Column
+
 
 @Composable
 fun Cars24Chip(
@@ -57,8 +59,7 @@ fun Cars24Chip(
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelLarge,
-                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
+                style = if (selected) ChipLabelSelectedStyle else ChipLabelStyle,
             )
             if (supporting != null) {
                 Spacer(Modifier.width(Spacing.xs))

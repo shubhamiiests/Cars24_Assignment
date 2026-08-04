@@ -280,8 +280,12 @@ tap "72 mo"   -> EMI reads Rs 10,780, total Rs 7,76,160, caption "for 72 mo"
 tap city, "Mumbai" -> header shows Mumbai; buy_listing title shows "12,400 cars in Mumbai"
 ```
 
-**4. Kill the process and check the disk.** The persistence requirement is only met if it
-survives a real kill, so:
+**4. Kill the process and check the disk.** Persistence is only met if it survives a real
+kill - and, as it turned out, only if the *right things* survive it. My first version persisted
+scroll position, so launching from the launcher dropped the user halfway down the page. The
+test that caught it was walking all three cases rather than just one: fresh launch, background
+and return, force-stop and reopen. Scroll now resets on a cold launch and is kept on a
+background return, while the city and the selected tab survive both.
 
 ```
 $ adb shell run-as com.cars24.sdui.debug cat .../sdui_ui_state.preferences_pb | strings

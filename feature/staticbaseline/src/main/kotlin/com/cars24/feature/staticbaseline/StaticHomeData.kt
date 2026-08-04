@@ -1,5 +1,8 @@
 package com.cars24.feature.staticbaseline
 
+import androidx.compose.ui.graphics.Color
+import com.cars24.core.designsystem.theme.PromoGradients
+
 internal data class StaticCar(
     val name: String,
     val price: String,
@@ -15,8 +18,7 @@ internal data class StaticBanner(
     val title: String,
     val subtitle: String,
     val cta: String,
-    val from: Long,
-    val to: Long,
+    val gradient: List<Color>,
 )
 
 internal data class StaticValueProp(val title: String, val caption: String)
@@ -48,22 +50,19 @@ internal object StaticHomeData {
             title = "Zero down payment",
             subtitle = "On 2,000+ assured cars this month",
             cta = "Check eligibility",
-            from = 0xFF1B2065,
-            to = 0xFF5865C4,
+            gradient = PromoGradients.ZeroDownPayment,
         ),
         StaticBanner(
             title = "Sell in a single visit",
             subtitle = "Instant payment, free RC transfer",
             cta = "Get a quote",
-            from = 0xFF0B8A6B,
-            to = 0xFF3FCFA8,
+            gradient = PromoGradients.SellInOneVisit,
         ),
         StaticBanner(
             title = "7-day money back",
             subtitle = "Not in love with it? Return it.",
             cta = "How it works",
-            from = 0xFFE8890C,
-            to = 0xFFFFC46B,
+            gradient = PromoGradients.MoneyBack,
         ),
     )
 

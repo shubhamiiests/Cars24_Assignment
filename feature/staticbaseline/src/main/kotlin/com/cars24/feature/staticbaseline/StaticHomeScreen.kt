@@ -66,6 +66,7 @@ import com.cars24.core.designsystem.component.Cars24Tag
 import com.cars24.core.designsystem.component.NetworkImage
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.PriceTextStyle
+import com.cars24.core.designsystem.theme.PromoGradients
 import com.cars24.core.designsystem.theme.Radii
 import com.cars24.core.designsystem.theme.Spacing
 import androidx.compose.runtime.LaunchedEffect
@@ -212,41 +213,41 @@ private fun StaticHeader(modifier: Modifier = Modifier) {
             .padding(start = Spacing.lg, end = Spacing.lg, top = Spacing.lg, bottom = Spacing.xl),
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Filled.LocationOn, null, tint = Color.White, modifier = Modifier.size(18.dp))
+            Icon(Icons.Filled.LocationOn, null, tint = Cars24.colors.onBrand, modifier = Modifier.size(18.dp))
             Spacer(Modifier.width(Spacing.xs))
             Column {
                 Text(
                     stringResource(com.cars24.sdui.components.R.string.cmp_delivering_to),
                     style = MaterialTheme.typography.labelSmall,
-                    color = Color.White.copy(alpha = 0.7f),
+                    color = Cars24.colors.onBrandMuted,
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
                         StaticHomeData.CITY,
                         style = MaterialTheme.typography.titleSmall,
-                        color = Color.White,
+                        color = Cars24.colors.onBrand,
                     )
                     Icon(
                         Icons.Filled.KeyboardArrowRight,
                         null,
-                        tint = Color.White,
+                        tint = Cars24.colors.onBrand,
                         modifier = Modifier.size(16.dp),
                     )
                 }
             }
             Spacer(Modifier.weight(1f))
-            Text("CARS24", style = MaterialTheme.typography.titleLarge, color = Color.White)
+            Text("CARS24", style = MaterialTheme.typography.titleLarge, color = Cars24.colors.onBrand)
         }
 
         Spacer(Modifier.height(Spacing.lg))
         Text(
             StaticHomeData.GREETING,
             style = MaterialTheme.typography.headlineSmall,
-            color = Color.White,
+            color = Cars24.colors.onBrand,
         )
         Spacer(Modifier.height(Spacing.lg))
 
-        Surface(modifier = Modifier.fillMaxWidth(), shape = Radii.md, color = Color.White) {
+        Surface(modifier = Modifier.fillMaxWidth(), shape = Radii.md, color = Cars24.colors.cardSurface) {
             Row(
                 modifier = Modifier.padding(horizontal = Spacing.lg, vertical = Spacing.md),
                 verticalAlignment = Alignment.CenterVertically,
@@ -336,28 +337,26 @@ private fun StaticBanners() {
                         .height(150.dp)
                         .clip(Radii.lg)
                         .background(
-                            Brush.horizontalGradient(
-                                listOf(Color(banner.from), Color(banner.to)),
-                            ),
+                            Brush.horizontalGradient(banner.gradient),
                         )
                         .padding(Spacing.xl),
                     verticalArrangement = Arrangement.Center,
                 ) {
-                    Text(banner.title, style = MaterialTheme.typography.titleLarge, color = Color.White)
+                    Text(banner.title, style = MaterialTheme.typography.titleLarge, color = Cars24.colors.onBrand)
                     Spacer(Modifier.height(Spacing.xs))
                     Text(
                         banner.subtitle,
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.White.copy(alpha = 0.85f),
+                        color = Cars24.colors.onBrandMuted,
                     )
                     Spacer(Modifier.height(Spacing.md))
                     Text(
                         banner.cta,
                         style = MaterialTheme.typography.labelLarge,
-                        color = Color.White,
+                        color = Cars24.colors.onBrand,
                         modifier = Modifier
                             .clip(Radii.pill)
-                            .background(Color.White.copy(alpha = 0.22f))
+                            .background(Cars24.colors.onBrandSubtle)
                             .padding(horizontal = Spacing.lg, vertical = Spacing.sm),
                     )
                 }
@@ -497,7 +496,7 @@ private fun StaticCarCard(car: StaticCar, fillWidth: Boolean = false) {
                     Surface(
                         modifier = Modifier.padding(Spacing.sm),
                         shape = Radii.sm,
-                        color = Color.White.copy(alpha = 0.92f),
+                        color = Cars24.colors.photoBadgeSurface,
                     ) {
                         Text(
                             car.badge,
@@ -510,7 +509,7 @@ private fun StaticCarCard(car: StaticCar, fillWidth: Boolean = false) {
                 Icon(
                     Icons.Filled.FavoriteBorder,
                     stringResource(com.cars24.sdui.components.R.string.cmp_cd_save_to_wishlist),
-                    tint = Color.White,
+                    tint = Cars24.colors.onBrand,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(Spacing.sm)
@@ -579,16 +578,16 @@ private fun StaticEmiCard(tenure: StaticTenure, onCta: () -> Unit) {
         Text(
             "Your monthly EMI",
             style = MaterialTheme.typography.labelMedium,
-            color = Color.White.copy(alpha = 0.75f),
+            color = Cars24.colors.onBrandMuted,
         )
         Spacer(Modifier.height(Spacing.xs))
         Row(verticalAlignment = Alignment.Bottom) {
-            Text(tenure.monthly, style = MaterialTheme.typography.displaySmall, color = Color.White)
+            Text(tenure.monthly, style = MaterialTheme.typography.displaySmall, color = Cars24.colors.onBrand)
             Spacer(Modifier.width(Spacing.sm))
             Text(
                 "for ${tenure.label}",
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.White.copy(alpha = 0.75f),
+                color = Cars24.colors.onBrandMuted,
                 modifier = Modifier.padding(bottom = 4.dp),
             )
         }
@@ -612,8 +611,8 @@ private fun StaticEmiRow(label: String, value: String) {
         modifier = Modifier.fillMaxWidth().padding(vertical = Spacing.xxs),
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Text(label, style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.75f))
-        Text(value, style = MaterialTheme.typography.labelLarge, color = Color.White)
+        Text(label, style = MaterialTheme.typography.bodySmall, color = Cars24.colors.onBrandMuted)
+        Text(value, style = MaterialTheme.typography.labelLarge, color = Cars24.colors.onBrand)
     }
 }
 
@@ -721,7 +720,7 @@ private fun StaticFooterCta() {
         modifier = Modifier
             .padding(horizontal = Spacing.lg)
             .clip(Radii.xl)
-            .background(Brush.verticalGradient(listOf(Color(0xFF11144B), Color(0xFF2E3A8C))))
+            .background(Brush.verticalGradient(PromoGradients.SellFooter))
             .padding(Spacing.xxl),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(Spacing.md),
@@ -729,13 +728,13 @@ private fun StaticFooterCta() {
         Text(
             "Sell your car in a single visit",
             style = MaterialTheme.typography.titleLarge,
-            color = Color.White,
+            color = Cars24.colors.onBrand,
             textAlign = TextAlign.Center,
         )
         Text(
             "Free evaluation, instant payment, and we take care of the paperwork.",
             style = MaterialTheme.typography.bodySmall,
-            color = Color.White,
+            color = Cars24.colors.onBrand,
             textAlign = TextAlign.Center,
         )
         Cars24Button(

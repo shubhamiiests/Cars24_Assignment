@@ -10,7 +10,6 @@ import com.cars24.data.page.PageEnvelope
 import com.cars24.data.page.PageLoadResult
 import com.cars24.data.page.StaleReason
 import com.cars24.data.page.PageStateStore
-import com.cars24.data.page.PersistedPageState
 import com.cars24.data.page.SduiPageRepository
 import com.cars24.sdui.runtime.action.SduiActionParser
 import com.cars24.sdui.runtime.action.SduiCommand
@@ -59,11 +58,6 @@ class SduiPageViewModel(
 
             is PageIntent.UnsupportedComponent -> onUnsupportedComponent(intent.type)
 
-            is PageIntent.ScrollChanged -> {
-                setState { copy(scrollIndex = intent.index, scrollOffset = intent.offset) }
-                schedulePersist()
-            }
-
             PageIntent.DismissSheet -> {
                 setState { copy(openSheet = null) }
                 schedulePersist()
@@ -96,7 +90,7 @@ class SduiPageViewModel(
 
     private fun applyPage(
         envelope: PageEnvelope,
-        restored: PersistedPageState,
+        restored: Map<String, String>,
         shared: Map<String, String>,
         staleReason: StaleReason?,
     ) {
@@ -104,7 +98,7 @@ class SduiPageViewModel(
         sharedKeys = page.sharedStateKeys.toSet()
 
         val mergedState = page.initialState +
-            restored.localState +
+            restored +
             routeParams +
             shared.filterKeys { it in sharedKeys }
 
@@ -113,9 +107,6 @@ class SduiPageViewModel(
                 phase = PagePhase.Content,
                 page = page,
                 pageState = mergedState,
-                openSheet = restored.openSheetId?.let { findSheet(page, it, mergedState) },
-                scrollIndex = restored.scrollIndex,
-                scrollOffset = restored.scrollOffset,
                 staleReason = staleReason,
                 failure = null,
                 origin = envelope.origin,
@@ -216,12 +207,7 @@ class SduiPageViewModel(
             val snapshot = currentState
             pageStateStore.write(
                 pageId,
-                PersistedPageState(
-                    localState = snapshot.pageState.filterKeys { it !in sharedKeys },
-                    scrollIndex = snapshot.scrollIndex,
-                    scrollOffset = snapshot.scrollOffset,
-                    openSheetId = snapshot.openSheet?.sheetId,
-                ),
+                snapshot.pageState.filterKeys { it !in sharedKeys },
             )
             if (sharedKeys.isNotEmpty()) {
                 pageStateStore.writeShared(
@@ -237,35 +223,3 @@ class SduiPageViewModel(
     }
 }
 
-private fun findSheet(page: SduiPage, sheetId: String, state: Map<String, String>): OpenSheet? {
-    fun search(nodes: List<SduiNode>): OpenSheet? {
-        for (node in nodes) {
-            node.actions.values.forEach { action ->
-                findInAction(action, sheetId, state)?.let { return it }
-            }
-            search(node.children)?.let { return it }
-            node.fallback?.let { search(listOf(it)) }?.let { return it }
-        }
-        return null
-    }
-    return search(page.sections)
-}
-
-private fun findInAction(
-    action: SduiAction,
-    sheetId: String,
-    state: Map<String, String>,
-): OpenSheet? {
-    val command = SduiActionParser.parse(action, state)
-    flatten(command).forEach { candidate ->
-        if (candidate is SduiCommand.OpenSheet && candidate.sheetId == sheetId) {
-            return OpenSheet(candidate.sheetId, candidate.title, candidate.content)
-        }
-    }
-    return null
-}
-
-private fun flatten(command: SduiCommand): List<SduiCommand> = when (command) {
-    is SduiCommand.Batch -> command.commands.flatMap(::flatten)
-    else -> listOf(command)
-}

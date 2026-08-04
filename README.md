@@ -323,6 +323,13 @@ path), not to hit a letter.
 
 ## Trade-offs I made, and would defend
 
+**Every colour and text style lives in two files.** `theme/Color.kt` holds the raw palette,
+the `Cars24Colors` token set (including `onBrand`, `photoScrim`, `photoBadgeSurface`,
+`savedHeart` so nothing draws `Color.White` at a call site), the car-photo placeholder
+gradients and the promo gradients. `theme/AppFontStyle.kt` holds every `TextStyle`. There are
+no colour or font literals anywhere else in the codebase - `grep -rn "Color(0x\\|Color.White"`
+outside those files returns nothing.
+
 **No convention plugins.** Ten near-identical module build files instead of a `build-logic`
 included build. AGP 9's built-in-Kotlin DSL is new enough that I would have been
 reverse-engineering an unstable API; ten readable build files cost more lines and less risk.

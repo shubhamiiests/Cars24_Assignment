@@ -44,3 +44,6 @@ val Cars24Typography = Typography(
 )
 
 val PriceTextStyle = style(20, 26, FontWeight.Bold, -0.4)
+
+val ChipLabelStyle = style(14, 20, FontWeight.Medium, 0.1)
+val ChipLabelSelectedStyle = style(14, 20, FontWeight.SemiBold, 0.1)

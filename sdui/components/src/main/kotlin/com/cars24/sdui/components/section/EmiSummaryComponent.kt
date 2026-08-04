@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.component.Cars24Button
 import com.cars24.core.designsystem.component.Cars24ButtonStyle
@@ -64,21 +63,21 @@ class EmiSummaryComponent : SduiComponent {
             Text(
                 text = props.heading,
                 style = MaterialTheme.typography.labelMedium,
-                color = Color.White.copy(alpha = 0.75f),
+                color = colors.onBrandMuted,
             )
             Spacer(Modifier.height(Spacing.xs))
             Row(verticalAlignment = Alignment.Bottom) {
                 Text(
                     text = props.monthly,
                     style = MaterialTheme.typography.displaySmall,
-                    color = Color.White,
+                    color = colors.onBrand,
                 )
                 if (props.monthlyCaption != null) {
                     Spacer(Modifier.width(Spacing.sm))
                     Text(
                         text = props.monthlyCaption,
                         style = MaterialTheme.typography.bodySmall,
-                        color = Color.White.copy(alpha = 0.75f),
+                        color = colors.onBrandMuted,
                         modifier = Modifier.padding(bottom = 4.dp),
                     )
                 }
@@ -96,12 +95,12 @@ class EmiSummaryComponent : SduiComponent {
                         Text(
                             text = row.label,
                             style = MaterialTheme.typography.bodySmall,
-                            color = Color.White.copy(alpha = 0.75f),
+                            color = colors.onBrandMuted,
                         )
                         Text(
                             text = row.value,
                             style = MaterialTheme.typography.labelLarge,
-                            color = Color.White,
+                            color = colors.onBrand,
                         )
                     }
                 }

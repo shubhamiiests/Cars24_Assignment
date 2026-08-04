@@ -6,42 +6,29 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.cars24.sdui.schema.SduiJson
 import kotlinx.coroutines.flow.first
-import kotlinx.serialization.Serializable
-
-@Serializable
-data class PersistedPageState(
-    val localState: Map<String, String> = emptyMap(),
-    val scrollIndex: Int = 0,
-    val scrollOffset: Int = 0,
-    val openSheetId: String? = null,
-)
 
 class PageStateStore(private val dataStore: DataStore<Preferences>) {
 
-    suspend fun read(pageId: String): PersistedPageState {
-        val raw = dataStore.data.first()[keyFor(pageId)] ?: return PersistedPageState()
-        return runCatching { SduiJson.format.decodeFromString<PersistedPageState>(raw) }
-            .getOrDefault(PersistedPageState())
-    }
+    suspend fun read(pageId: String): Map<String, String> = decode(keyFor(pageId))
 
-    suspend fun write(pageId: String, state: PersistedPageState) {
-        val encoded = SduiJson.format.encodeToString(state)
-        dataStore.edit { it[keyFor(pageId)] = encoded }
+    suspend fun write(pageId: String, localState: Map<String, String>) {
+        dataStore.edit { it[keyFor(pageId)] = SduiJson.format.encodeToString(localState) }
     }
 
     suspend fun clear(pageId: String) {
         dataStore.edit { it.remove(keyFor(pageId)) }
     }
 
-    suspend fun readShared(): Map<String, String> {
-        val raw = dataStore.data.first()[SHARED_KEY] ?: return emptyMap()
-        return runCatching { SduiJson.format.decodeFromString<Map<String, String>>(raw) }
-            .getOrDefault(emptyMap())
-    }
+    suspend fun readShared(): Map<String, String> = decode(SHARED_KEY)
 
     suspend fun writeShared(state: Map<String, String>) {
-        val encoded = SduiJson.format.encodeToString(state)
-        dataStore.edit { it[SHARED_KEY] = encoded }
+        dataStore.edit { it[SHARED_KEY] = SduiJson.format.encodeToString(state) }
+    }
+
+    private suspend fun decode(key: Preferences.Key<String>): Map<String, String> {
+        val raw = dataStore.data.first()[key] ?: return emptyMap()
+        return runCatching { SduiJson.format.decodeFromString<Map<String, String>>(raw) }
+            .getOrDefault(emptyMap())
     }
 
     private fun keyFor(pageId: String) = stringPreferencesKey("ui_state_$pageId")

@@ -17,7 +17,6 @@ sealed interface PageIntent : MviIntent {
     data object Refresh : PageIntent
     data class Command(val command: SduiCommand) : PageIntent
     data class UnsupportedComponent(val type: String) : PageIntent
-    data class ScrollChanged(val index: Int, val offset: Int) : PageIntent
     data object DismissSheet : PageIntent
 }
 
@@ -28,8 +27,6 @@ data class PageUiState(
     val page: SduiPage? = null,
     val pageState: Map<String, String> = emptyMap(),
     val openSheet: OpenSheet? = null,
-    val scrollIndex: Int = 0,
-    val scrollOffset: Int = 0,
     val isRefreshing: Boolean = false,
     val staleReason: StaleReason? = null,
     val failure: PageFailure? = null,

@@ -29,7 +29,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Radii
@@ -57,7 +56,8 @@ class SearchHeaderComponent : SduiComponent {
     @Composable
     override fun Render(node: SduiNode, scope: SduiScope) {
         val props = rememberProps<SearchHeaderProps>(node, scope) ?: return
-        val gradient = Cars24.colors.brandGradient
+        val colors = Cars24.colors
+        val gradient = colors.brandGradient
 
         Column(
             modifier = Modifier
@@ -81,7 +81,7 @@ class SearchHeaderComponent : SduiComponent {
                 Icon(
                     imageVector = Icons.Filled.LocationOn,
                     contentDescription = null,
-                    tint = Color.White,
+                    tint = colors.onBrand,
                     modifier = Modifier.size(18.dp),
                 )
                 Spacer(Modifier.width(Spacing.xs))
@@ -89,18 +89,18 @@ class SearchHeaderComponent : SduiComponent {
                     Text(
                         text = stringResource(R.string.cmp_delivering_to),
                         style = MaterialTheme.typography.labelSmall,
-                        color = Color.White.copy(alpha = 0.7f),
+                        color = colors.onBrandMuted,
                     )
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text(
                             text = props.city,
                             style = MaterialTheme.typography.titleSmall,
-                            color = Color.White,
+                            color = colors.onBrand,
                         )
                         Icon(
                             imageVector = Icons.Filled.KeyboardArrowDown,
                             contentDescription = stringResource(R.string.cmp_cd_change_city),
-                            tint = Color.White,
+                            tint = colors.onBrand,
                             modifier = Modifier.size(16.dp),
                         )
                     }
@@ -110,7 +110,7 @@ class SearchHeaderComponent : SduiComponent {
                 Text(
                     text = props.brandName,
                     style = MaterialTheme.typography.titleLarge,
-                    color = Color.White,
+                    color = colors.onBrand,
                 )
             }
 
@@ -119,7 +119,7 @@ class SearchHeaderComponent : SduiComponent {
                 Text(
                     text = props.greeting,
                     style = MaterialTheme.typography.headlineSmall,
-                    color = Color.White,
+                    color = colors.onBrand,
                 )
             }
 
@@ -130,7 +130,7 @@ class SearchHeaderComponent : SduiComponent {
                     .fillMaxWidth()
                     .clickable { scope.dispatch(node, SduiTriggers.ON_CLICK) },
                 shape = Radii.md,
-                color = Color.White,
+                color = colors.onBrand,
             ) {
                 Row(
                     modifier = Modifier.padding(horizontal = Spacing.lg, vertical = Spacing.md),

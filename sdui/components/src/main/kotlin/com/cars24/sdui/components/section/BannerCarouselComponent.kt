@@ -137,14 +137,14 @@ private fun BannerSlideCard(
         Text(
             text = slide.title,
             style = MaterialTheme.typography.titleLarge,
-            color = Color.White,
+            color = colors.onBrand,
         )
         if (slide.subtitle != null) {
             Spacer(Modifier.height(Spacing.xs))
             Text(
                 text = slide.subtitle,
                 style = MaterialTheme.typography.bodySmall,
-                color = Color.White.copy(alpha = 0.85f),
+                color = colors.onBrandMuted,
             )
         }
         if (slide.ctaLabel != null) {
@@ -152,10 +152,10 @@ private fun BannerSlideCard(
             Text(
                 text = slide.ctaLabel,
                 style = MaterialTheme.typography.labelLarge,
-                color = Color.White,
+                color = colors.onBrand,
                 modifier = Modifier
                     .clip(Radii.pill)
-                    .background(Color.White.copy(alpha = 0.22f))
+                    .background(colors.onBrandSubtle)
                     .padding(horizontal = Spacing.lg, vertical = Spacing.sm),
             )
         }

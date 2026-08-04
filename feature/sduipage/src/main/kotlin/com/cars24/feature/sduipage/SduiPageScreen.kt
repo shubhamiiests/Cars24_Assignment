@@ -79,18 +79,7 @@ fun SduiPageScreen(
         )
     }
 
-    LaunchedEffect(state.page?.pageId, state.scrollIndex) {
-        if (state.page != null && state.scrollIndex > 0 && listState.firstVisibleItemIndex == 0) {
-            listState.scrollToItem(state.scrollIndex, state.scrollOffset)
-        }
-    }
 
-    LaunchedEffect(listState) {
-        snapshotFlow { listState.firstVisibleItemIndex to listState.firstVisibleItemScrollOffset }
-            .distinctUntilChanged()
-            .debounce(SCROLL_PERSIST_DEBOUNCE_MS)
-            .collect { (index, offset) -> onIntent(PageIntent.ScrollChanged(index, offset)) }
-    }
 
     Box(modifier = modifier.fillMaxSize()) {
         when (state.phase) {
@@ -199,7 +188,6 @@ private fun PageTopBar(title: String?, onBack: () -> Unit) {
     }
 }
 
-private const val SCROLL_PERSIST_DEBOUNCE_MS = 300L
 
 @Preview(showBackground = true, device = "spec:width=411dp,height=1200dp")
 @Preview(showBackground = true, device = "spec:width=411dp,height=1200dp", uiMode = 0x20)
