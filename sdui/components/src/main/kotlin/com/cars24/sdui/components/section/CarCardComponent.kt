@@ -50,6 +50,8 @@ import com.cars24.sdui.runtime.render.sduiStateValue
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class CarCardProps(
@@ -241,3 +243,56 @@ private fun CarDetails(props: CarCardProps) {
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 260)
+@Preview(showBackground = true, widthDp = 260, uiMode = 0x20)
+@Composable
+private fun CarCardVerticalPreview() = SduiNodePreview(
+    """
+    { "id": "p", "type": "column", "children": [
+      { "id": "c", "type": "car_card", "props": { "name": "Maruti Swift VXi", "price": "Rs 5.24 L",
+        "emi": "Rs 11,400/mo", "specs": ["2019", "42,150 km", "Petrol", "Manual"],
+        "savings": "Save 38k", "assured": true, "wishKey": "wish_swift" } } ] }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 260)
+@Composable
+private fun CarCardSavedPreview() = SduiNodePreview(
+    json = """
+    { "id": "p", "type": "column", "children": [
+      { "id": "c", "type": "car_card", "props": { "name": "Maruti Swift VXi", "price": "Rs 5.24 L",
+        "emi": "Rs 11,400/mo", "specs": ["2019", "42,150 km", "Petrol", "Manual"],
+        "savings": "Save 38k", "assured": true, "wishKey": "wish_swift" } } ] }
+    """,
+    state = mapOf("wish_swift" to "1"),
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun CarCardHorizontalPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "car_card",
+      "props": { "name": "Ford EcoSport Titanium", "price": "Rs 6.75 L", "emi": "Rs 14,600/mo",
+                 "specs": ["2018", "68,200 km", "Diesel"], "savings": "Save 52k",
+                 "layout": "horizontal", "wishKey": "wish_eco" },
+      "style": { "margin": { "horizontal": 16 } }
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun CarCardMalformedPropsPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 8 },
+      "style": { "padding": { "horizontal": 16 } },
+      "children": [
+        { "id": "broken", "type": "car_card", "props": { "colour": "blue" } },
+        { "id": "ok", "type": "text", "props": { "value": "The card above has malformed props. This text still rendered.", "style": "body_small", "color": "text_secondary" } }
+      ]
+    }
+    """,
+)

@@ -20,6 +20,9 @@ import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Radii
 import com.cars24.core.designsystem.theme.Spacing
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.core.designsystem.theme.Cars24Theme
+import androidx.compose.foundation.layout.Column
 
 @Composable
 fun Cars24Chip(
@@ -83,5 +86,27 @@ fun Cars24Tag(
             style = MaterialTheme.typography.labelSmall,
             modifier = Modifier.padding(horizontal = Spacing.sm, vertical = Spacing.xxs),
         )
+    }
+}
+
+@Preview(showBackground = true, widthDp = 340)
+@Preview(showBackground = true, widthDp = 340, uiMode = 0x20)
+@Composable
+private fun Cars24ChipPreview() {
+    Cars24Theme {
+        Column(
+            modifier = Modifier.padding(Spacing.lg),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                Cars24Chip("All", selected = true, onClick = {}, supporting = "412")
+                Cars24Chip("Petrol", selected = false, onClick = {}, supporting = "268")
+                Cars24Chip("Diesel", selected = false, onClick = {}, supporting = "91")
+            }
+            Row(horizontalArrangement = Arrangement.spacedBy(Spacing.sm)) {
+                Cars24Tag("Rs 11,400/mo")
+                Cars24Tag("Cars24 Assured", emphasised = true)
+            }
+        }
     }
 }

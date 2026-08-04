@@ -38,6 +38,8 @@ import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiAction
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class QuickAction(
@@ -132,3 +134,18 @@ private fun iconFor(name: String): ImageVector = when (name) {
     "insurance" -> Icons.Filled.Lock
     else -> Icons.Filled.ShoppingCart
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun QuickActionsComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "quick_actions",
+      "props": { "actions": [
+        { "label": "Buy car", "icon": "buy", "caption": "12,400 cars" },
+        { "label": "Sell car", "icon": "sell", "caption": "Best price" },
+        { "label": "Car loan", "icon": "loan", "caption": "From 9.7%" },
+        { "label": "Insurance", "icon": "insurance", "caption": "Renew fast" } ] }
+    }
+    """,
+)

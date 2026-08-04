@@ -16,6 +16,12 @@ import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Elevations
 import com.cars24.core.designsystem.theme.Radii
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.core.designsystem.theme.Cars24Theme
+import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import com.cars24.core.designsystem.theme.Spacing
 
 @Composable
 fun Cars24Card(
@@ -77,4 +83,14 @@ private fun paletteFor(seed: String): List<Color> {
     hash *= 0x7feb352d
     hash = hash xor (hash ushr 15)
     return PlaceholderPalettes[(hash and Int.MAX_VALUE) % PlaceholderPalettes.size]
+}
+
+@Preview(showBackground = true, widthDp = 340)
+@Composable
+private fun Cars24CardPreview() {
+    Cars24Theme {
+        Cars24Card(modifier = Modifier.fillMaxWidth().padding(Spacing.lg)) {
+            Text("Every section sits on one of these", modifier = Modifier.padding(Spacing.lg))
+        }
+    }
 }

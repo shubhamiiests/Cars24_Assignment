@@ -33,6 +33,8 @@ import com.cars24.sdui.runtime.render.resolveColor
 import com.cars24.sdui.schema.SduiAction
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class TextProps(
@@ -199,3 +201,95 @@ class TagRowComponent : SduiComponent {
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Preview(showBackground = true, widthDp = 380, uiMode = 0x20)
+@Composable
+private fun TextComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 6 },
+      "style": { "padding": { "horizontal": 16 } },
+      "children": [
+        { "id": "t1", "type": "text", "props": { "value": "display_small", "style": "display_small" } },
+        { "id": "t2", "type": "text", "props": { "value": "headline_small", "style": "headline_small" } },
+        { "id": "t3", "type": "text", "props": { "value": "title_large", "style": "title_large" } },
+        { "id": "t4", "type": "text", "props": { "value": "body_medium", "style": "body_medium" } },
+        { "id": "t5", "type": "text", "props": { "value": "label_small on a token colour", "style": "label_small", "color": "text_tertiary" } },
+        { "id": "t6", "type": "text", "props": { "value": "Rs 5.24 L", "style": "price", "color": "price" } },
+        { "id": "t7", "type": "text", "props": { "value": "accent, bold, centred", "style": "title_medium", "color": "accent", "weight": "bold", "align": "center" } }
+      ]
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ImageComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "image",
+      "props": { "seed": "Maruti Swift VXi", "cornerRadius": 16, "height": 160 },
+      "style": { "margin": { "horizontal": 16 } }
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ButtonComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 10 },
+      "style": { "padding": { "horizontal": 16 } },
+      "children": [
+        { "id": "b1", "type": "button", "props": { "label": "Primary", "fillWidth": true } },
+        { "id": "b2", "type": "button", "props": { "label": "Accent", "variant": "accent", "fillWidth": true } },
+        { "id": "b3", "type": "button", "props": { "label": "Outline", "variant": "outline", "fillWidth": true } }
+      ]
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ChipGroupComponentPreview() = SduiNodePreview(
+    json = """
+    {
+      "id": "p", "type": "chip_group",
+      "props": { "stateKey": "fuel", "options": [
+        { "label": "All", "value": "all", "supporting": "412" },
+        { "label": "Petrol", "value": "petrol", "supporting": "268" },
+        { "label": "Diesel", "value": "diesel", "supporting": "91" },
+        { "label": "CNG", "value": "cng", "supporting": "53" } ] }
+    }
+    """,
+    state = mapOf("fuel" to "diesel"),
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ChipGroupFixedWidthPreview() = SduiNodePreview(
+    json = """
+    {
+      "id": "p", "type": "chip_group",
+      "props": { "stateKey": "tenure", "scrollable": false, "options": [
+        { "label": "36 mo", "value": "36" }, { "label": "48 mo", "value": "48" },
+        { "label": "60 mo", "value": "60" }, { "label": "72 mo", "value": "72" } ] },
+      "style": { "padding": { "horizontal": 16 } }
+    }
+    """,
+    state = mapOf("tenure" to "48"),
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun TagRowComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "tag_row",
+      "props": { "tags": ["Cars24 Assured", "Fixed price", "Free RC transfer"], "emphasisedFirst": true },
+      "style": { "padding": { "horizontal": 16 } }
+    }
+    """,
+)

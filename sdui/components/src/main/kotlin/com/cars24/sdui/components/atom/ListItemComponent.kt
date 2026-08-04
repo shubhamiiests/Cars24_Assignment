@@ -35,6 +35,8 @@ import com.cars24.sdui.runtime.render.sduiStateValue
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class ListItemProps(
@@ -131,3 +133,24 @@ private fun listItemIcon(name: String?): ImageVector? = when (name) {
     "check" -> Icons.Filled.Check
     else -> null
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ListItemComponentPreview() = SduiNodePreview(
+    json = """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 0 },
+      "style": { "margin": { "horizontal": 16 }, "background": "surface", "cornerRadius": 16,
+                 "borderWidth": 1, "borderColor": "divider", "padding": { "vertical": 4 } },
+      "children": [
+        { "id": "l1", "type": "list_item", "props": { "title": "Title only" } },
+        { "id": "l2", "type": "list_item", "props": { "title": "With a subtitle", "subtitle": "Explaining the row" } },
+        { "id": "l3", "type": "list_item", "props": { "title": "With trailing text", "trailing": "9.7% p.a." } },
+        { "id": "l4", "type": "list_item", "props": { "title": "With a chevron", "icon": "buy", "showChevron": true } },
+        { "id": "l5", "type": "list_item", "props": { "title": "Mumbai", "icon": "location", "selectedWhenKey": "city", "selectedWhenValue": "Mumbai" } },
+        { "id": "l6", "type": "list_item", "props": { "title": "Gurgaon", "icon": "location", "selectedWhenKey": "city", "selectedWhenValue": "Gurgaon" } }
+      ]
+    }
+    """,
+    state = mapOf("city" to "Mumbai"),
+)

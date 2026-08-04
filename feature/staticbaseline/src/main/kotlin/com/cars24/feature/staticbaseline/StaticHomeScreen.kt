@@ -71,6 +71,8 @@ import com.cars24.core.designsystem.theme.Spacing
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
 import kotlinx.coroutines.flow.first
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.core.designsystem.theme.Cars24Theme
 
 @Composable
 fun StaticHomeScreen(modifier: Modifier = Modifier) {
@@ -775,4 +777,17 @@ private fun StaticEmiSheet(tenure: StaticTenure, onDismiss: () -> Unit) {
             )
         }
     }
+}
+
+@Preview(showBackground = true, device = "spec:width=411dp,height=1200dp")
+@Preview(showBackground = true, device = "spec:width=411dp,height=1200dp", uiMode = 0x20)
+@Composable
+private fun StaticHomeScreenPreview() {
+    Cars24Theme { StaticHomeScreen() }
+}
+
+@Preview(showBackground = true, device = "spec:width=360dp,height=800dp")
+@Composable
+private fun StaticHomeScreenSmallPreview() {
+    Cars24Theme { StaticHomeScreen() }
 }

@@ -35,6 +35,8 @@ import com.cars24.sdui.runtime.render.resolveColor
 import com.cars24.sdui.schema.SduiAction
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class BannerSlide(
@@ -159,3 +161,18 @@ private fun BannerSlideCard(
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun BannerCarouselComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "banner_carousel",
+      "props": { "height": 150, "slides": [
+        { "title": "Zero down payment", "subtitle": "On 2,000+ assured cars this month",
+          "ctaLabel": "Check eligibility", "gradient": ["#1B2065", "#5865C4"] },
+        { "title": "Sell in a single visit", "subtitle": "Instant payment, free RC transfer",
+          "ctaLabel": "Get a quote", "gradient": ["#0B8A6B", "#3FCFA8"] } ] }
+    }
+    """,
+)

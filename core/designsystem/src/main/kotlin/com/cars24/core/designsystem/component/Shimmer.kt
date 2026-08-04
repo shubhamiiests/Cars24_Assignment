@@ -16,6 +16,16 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Shape
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Radii
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.core.designsystem.theme.Cars24Theme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.unit.dp
+import com.cars24.core.designsystem.theme.Spacing
 
 
 @Composable
@@ -47,4 +57,18 @@ fun ShimmerBlock(
             .clip(shape)
             .background(brush),
     )
+}
+
+@Preview(showBackground = true, widthDp = 340)
+@Composable
+private fun ShimmerBlockPreview() {
+    Cars24Theme {
+        Column(
+            modifier = Modifier.padding(Spacing.lg),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
+            ShimmerBlock(Modifier.fillMaxWidth().height(48.dp), Radii.md)
+            ShimmerBlock(Modifier.width(180.dp).height(20.dp), Radii.sm)
+        }
+    }
 }

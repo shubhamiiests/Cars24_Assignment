@@ -22,6 +22,9 @@ import com.cars24.sdui.components.section.SectionHeaderComponent
 import com.cars24.sdui.components.section.ValuePropsComponent
 import com.cars24.sdui.runtime.registry.ComponentRegistry
 import com.cars24.sdui.runtime.registry.SduiComponent
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
+import androidx.compose.runtime.Composable
 
 object Cars24Components {
 
@@ -55,3 +58,23 @@ object Cars24Components {
 
     fun registry(): ComponentRegistry = ComponentRegistry(all)
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun UnknownComponentTypePreview() = SduiNodePreview(
+    """{ "id": "p", "type": "ar_showroom_360", "props": { "carId": "creta_sx" } }""",
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun SchemaTooNewFallbackPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "loyalty_tier_card", "minSchemaVersion": 99,
+      "props": { "tier": "gold" },
+      "fallback": { "id": "fb", "type": "value_props",
+        "props": { "heading": "Cars24 rewards",
+                   "items": [ { "title": "Update", "caption": "to see rewards", "icon": "warranty" } ] } }
+    }
+    """,
+)

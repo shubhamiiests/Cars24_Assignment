@@ -22,6 +22,11 @@ import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Radii
 import com.cars24.core.designsystem.theme.Spacing
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.core.designsystem.theme.Cars24Theme
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 
 enum class Cars24ButtonStyle { Primary, Accent, Outline }
 
@@ -83,5 +88,21 @@ private fun ButtonBody(text: String, leadingIcon: ImageVector?) {
             Spacer(Modifier.width(Spacing.sm))
         }
         Text(text, style = MaterialTheme.typography.labelLarge)
+    }
+}
+
+@Preview(showBackground = true, widthDp = 320)
+@Composable
+private fun Cars24ButtonPreview() {
+    Cars24Theme {
+        Column(
+            modifier = Modifier.padding(Spacing.lg),
+            verticalArrangement = Arrangement.spacedBy(Spacing.sm),
+        ) {
+            Cars24Button("Primary", {}, Modifier.fillMaxWidth(), Cars24ButtonStyle.Primary)
+            Cars24Button("Accent", {}, Modifier.fillMaxWidth(), Cars24ButtonStyle.Accent)
+            Cars24Button("Outline", {}, Modifier.fillMaxWidth(), Cars24ButtonStyle.Outline)
+            Cars24Button("Disabled", {}, Modifier.fillMaxWidth(), enabled = false)
+        }
     }
 }

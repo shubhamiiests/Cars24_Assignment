@@ -26,6 +26,8 @@ import com.cars24.sdui.runtime.render.SduiScope
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class StackProps(
@@ -170,3 +172,83 @@ class DividerComponent : SduiComponent {
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ColumnComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 8 },
+      "style": { "margin": { "horizontal": 16 }, "padding": { "all": 16 },
+                 "background": "surface", "cornerRadius": 16,
+                 "borderWidth": 1, "borderColor": "divider" },
+      "children": [
+        { "id": "a", "type": "text", "props": { "value": "A styled column", "style": "title_medium" } },
+        { "id": "b", "type": "text", "props": { "value": "Padding, background, corners and border come from the universal style block.", "style": "body_small", "color": "text_secondary" } }
+      ]
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun RowComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "row",
+      "props": { "arrangement": "space_between", "align": "center" },
+      "style": { "padding": { "horizontal": 16 } },
+      "children": [
+        { "id": "l", "type": "text", "props": { "value": "Total payable", "style": "body_small", "color": "text_secondary" } },
+        { "id": "r", "type": "text", "props": { "value": "Rs 7,11,360", "style": "label_large" } }
+      ]
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun CarouselComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "carousel", "props": { "itemSpacing": 12 },
+      "children": [
+        { "id": "c1", "type": "car_card", "props": { "name": "Maruti Swift VXi", "price": "Rs 5.24 L", "emi": "Rs 11,400/mo", "specs": ["2019", "42,150 km", "Petrol"], "savings": "Save 38k", "assured": true, "wishKey": "w1" } },
+        { "id": "c2", "type": "car_card", "props": { "name": "Hyundai i20 Sportz", "price": "Rs 6.85 L", "emi": "Rs 14,820/mo", "specs": ["2020", "31,900 km", "Petrol"], "badge": "Popular", "assured": true, "wishKey": "w2" } }
+      ]
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380, heightDp = 600)
+@Composable
+private fun GridComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "grid", "props": { "columns": 2, "itemSpacing": 12, "rowSpacing": 12 },
+      "style": { "padding": { "horizontal": 16 } },
+      "children": [
+        { "id": "g1", "type": "car_card", "props": { "name": "Hyundai Creta SX", "price": "Rs 11.40 L", "emi": "Rs 24,650/mo", "specs": ["2020", "44,100 km"], "assured": true, "fillWidth": true, "wishKey": "w1" } },
+        { "id": "g2", "type": "car_card", "props": { "name": "Hyundai Venue S", "price": "Rs 8.20 L", "emi": "Rs 17,740/mo", "specs": ["2021", "29,600 km"], "badge": "New", "fillWidth": true, "wishKey": "w2" } },
+        { "id": "g3", "type": "car_card", "props": { "name": "Maruti Brezza ZXi", "price": "Rs 9.65 L", "emi": "Rs 20,880/mo", "specs": ["2020", "38,500 km"], "assured": true, "fillWidth": true, "wishKey": "w3" } }
+      ]
+    }
+    """,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun SpacerAndDividerPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 0 },
+      "children": [
+        { "id": "t1", "type": "text", "props": { "value": "Above" }, "style": { "padding": { "horizontal": 16 } } },
+        { "id": "s1", "type": "spacer", "props": { "size": 24 } },
+        { "id": "d", "type": "divider", "props": { "thickness": 1, "insetStart": 16, "insetEnd": 16 } },
+        { "id": "s2", "type": "spacer", "props": { "size": 24 } },
+        { "id": "t2", "type": "text", "props": { "value": "Below" }, "style": { "padding": { "horizontal": 16 } } }
+      ]
+    }
+    """,
+)

@@ -40,6 +40,8 @@ import com.cars24.sdui.runtime.render.SduiTriggers
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class SearchHeaderProps(
@@ -212,3 +214,29 @@ class SectionHeaderComponent : SduiComponent {
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun SearchHeaderComponentPreview() = SduiNodePreview(
+    json = """
+    {
+      "id": "p", "type": "search_header",
+      "props": { "city": "{{state.city|Gurgaon}}", "greeting": "Find your next car",
+                 "searchHint": "Search Swift, Baleno, i20, Nexon..." }
+    }
+    """,
+    state = mapOf("city" to "Mumbai"),
+    padded = false,
+)
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun SectionHeaderComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "section_header",
+      "props": { "title": "Cars in your budget", "subtitle": "Under 8 lakh, ready to drive",
+                 "actionLabel": "View all" }
+    }
+    """,
+)

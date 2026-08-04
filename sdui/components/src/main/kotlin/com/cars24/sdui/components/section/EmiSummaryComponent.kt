@@ -30,6 +30,8 @@ import com.cars24.sdui.runtime.render.SduiTriggers
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class EmiRow(val label: String, val value: String)
@@ -117,3 +119,28 @@ class EmiSummaryComponent : SduiComponent {
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun EmiSummaryComponentPreview() = SduiNodePreview(
+    json = """
+    {
+      "id": "p", "type": "emi_summary",
+      "props": {
+        "heading": "Your monthly EMI",
+        "monthly": "{{state.emi_monthly}}",
+        "monthlyCaption": "for {{state.emi_tenure_label}}",
+        "rows": [
+          { "label": "Total payable", "value": "{{state.emi_total}}" },
+          { "label": "Interest rate", "value": "9.7% p.a." }
+        ],
+        "ctaLabel": "See full breakdown"
+      }
+    }
+    """,
+    state = mapOf(
+        "emi_monthly" to "Rs 10,780",
+        "emi_total" to "Rs 7,76,160",
+        "emi_tenure_label" to "72 mo",
+    ),
+)

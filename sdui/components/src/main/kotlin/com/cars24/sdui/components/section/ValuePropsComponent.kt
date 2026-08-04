@@ -35,6 +35,8 @@ import com.cars24.sdui.runtime.render.SduiScope
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class ValueProp(
@@ -121,3 +123,18 @@ private fun valuePropIcon(name: String?): ImageVector = when (name) {
     "warranty" -> Icons.Filled.Build
     else -> Icons.Filled.CheckCircle
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun ValuePropsComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "value_props",
+      "props": { "heading": "Every Cars24 car comes with", "items": [
+        { "title": "140-point", "caption": "inspection", "icon": "inspection" },
+        { "title": "7-day", "caption": "money back", "icon": "return" },
+        { "title": "Free RC", "caption": "transfer", "icon": "paperwork" },
+        { "title": "1-year", "caption": "warranty", "icon": "warranty" } ] }
+    }
+    """,
+)

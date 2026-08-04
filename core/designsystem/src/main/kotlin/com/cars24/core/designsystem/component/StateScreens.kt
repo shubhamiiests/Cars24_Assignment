@@ -31,6 +31,8 @@ import androidx.compose.ui.unit.dp
 import com.cars24.core.designsystem.theme.Cars24
 import com.cars24.core.designsystem.theme.Radii
 import com.cars24.core.designsystem.theme.Spacing
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.core.designsystem.theme.Cars24Theme
 
 @Composable
 fun OfflineState(
@@ -166,4 +168,32 @@ fun PageSkeleton(modifier: Modifier = Modifier) {
             }
         }
     }
+}
+
+@Preview(showBackground = true, heightDp = 620)
+@Preview(showBackground = true, heightDp = 620, uiMode = 0x20)
+@Composable
+private fun OfflineStatePreview() {
+    Cars24Theme { OfflineState(onRetry = {}) }
+}
+
+@Preview(showBackground = true, heightDp = 620)
+@Composable
+private fun ErrorStatePreview() {
+    Cars24Theme { ErrorState(onRetry = {}) }
+}
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun StaleBannerPreview() {
+    Cars24Theme {
+        StaleBanner(text = "You are offline - showing the last saved layout", onRetry = {})
+    }
+}
+
+@Preview(showBackground = true, heightDp = 780)
+@Preview(showBackground = true, heightDp = 780, uiMode = 0x20)
+@Composable
+private fun PageSkeletonPreview() {
+    Cars24Theme { PageSkeleton() }
 }

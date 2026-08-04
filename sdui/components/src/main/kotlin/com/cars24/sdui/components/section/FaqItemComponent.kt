@@ -36,6 +36,8 @@ import com.cars24.sdui.runtime.render.SduiScope
 import com.cars24.sdui.runtime.render.rememberProps
 import com.cars24.sdui.schema.SduiNode
 import kotlinx.serialization.Serializable
+import androidx.compose.ui.tooling.preview.Preview
+import com.cars24.sdui.components.preview.SduiNodePreview
 
 @Serializable
 data class FaqItemProps(
@@ -96,3 +98,17 @@ class FaqItemComponent : SduiComponent {
         }
     }
 }
+
+@Preview(showBackground = true, widthDp = 380)
+@Composable
+private fun FaqItemComponentPreview() = SduiNodePreview(
+    """
+    {
+      "id": "p", "type": "column", "props": { "spacing": 8 },
+      "children": [
+        { "id": "f1", "type": "faq_item", "props": { "question": "How does the 7-day money back work?", "answer": "Drive the car for up to 7 days or 350 km. If it is not right for you, return it at any Cars24 hub and we refund the full amount.", "startExpanded": true } },
+        { "id": "f2", "type": "faq_item", "props": { "question": "Is the RC transfer really free?", "answer": "Yes. We handle the paperwork end to end and absorb the transfer fee." } }
+      ]
+    }
+    """,
+)
